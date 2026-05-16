@@ -1,0 +1,928 @@
+
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <title>InterFex Games — SAMURAI | Official Site</title>
+    <!-- Fonts & Icons -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&family=Orbitron:wght@400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: #000000;
+            color: #eee;
+            font-family: 'Inter', 'Noto Sans JP', sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Japanese & French support */
+        .jp-text { font-family: 'Noto Sans JP', 'Inter', sans-serif; }
+        .fr-text { font-family: 'Inter', 'Noto Sans JP', sans-serif; }
+
+        /* Glowing Background */
+        .glow-bg {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            z-index: -2;
+            background: radial-gradient(circle at 20% 30%, #0a0000, #000000);
+        }
+
+        .glow-bg::before {
+            content: '';
+            position: absolute;
+            width: 200%;
+            height: 200%;
+            top: -50%;
+            left: -50%;
+            background: repeating-linear-gradient(45deg, rgba(255,0,0,0.05) 0px, rgba(255,0,0,0.05) 2px, rgba(0,0,255,0.03) 2px, rgba(0,0,255,0.03) 8px);
+            animation: shiftBg 20s linear infinite;
+        }
+
+        @keyframes shiftBg {
+            0% { transform: translate(0,0); }
+            100% { transform: translate(30px,30px); }
+        }
+
+        /* Floating Neon Orbs */
+        .floating-neon {
+            position: fixed;
+            border-radius: 50%;
+            filter: blur(100px);
+            opacity: 0.2;
+            pointer-events: none;
+            z-index: -1;
+            animation: float 20s infinite alternate;
+        }
+        .floating-neon:nth-child(1) { width: 500px; height: 500px; background: #ff0033; top: 5%; left: -10%; animation-duration: 18s; }
+        .floating-neon:nth-child(2) { width: 600px; height: 600px; background: #0033ff; bottom: -10%; right: -10%; animation-duration: 25s; }
+        .floating-neon:nth-child(3) { width: 350px; height: 350px; background: #ff00ff; top: 40%; left: 60%; animation-duration: 22s; opacity: 0.15; }
+        .floating-neon:nth-child(4) { width: 400px; height: 400px; background: #cc0000; bottom: 20%; left: 0%; animation-duration: 28s; }
+        .floating-neon:nth-child(5) { width: 300px; height: 300px; background: #0044cc; top: 70%; left: 80%; animation-duration: 19s; }
+
+        @keyframes float {
+            0% { transform: translate(0, 0) scale(1); }
+            100% { transform: translate(80px, -80px) scale(1.3); }
+        }
+
+        /* Scan Line Effect */
+        .scan-line {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(to bottom, transparent 50%, rgba(255,0,0,0.05) 50%);
+            background-size: 100% 4px;
+            pointer-events: none;
+            z-index: 999;
+            opacity: 0.4;
+            animation: scan 6s linear infinite;
+        }
+
+        @keyframes scan {
+            0% { background-position: 0 0; }
+            100% { background-position: 0 30px; }
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        /* Navbar */
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1.2rem 0;
+            flex-wrap: wrap;
+            border-bottom: 2px solid rgba(255,0,51,0.4);
+            background: rgba(0,0,0,0.7);
+            backdrop-filter: blur(15px);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .logo-area {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            cursor: pointer;
+        }
+
+        .logo-text {
+            font-family: 'Orbitron', monospace;
+            font-weight: 900;
+            font-size: 1.8rem;
+            letter-spacing: 4px;
+            background: linear-gradient(135deg, #fff, #ff0033, #0033ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            text-shadow: 0 0 10px rgba(255,0,51,0.3);
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            align-items: center;
+        }
+
+        .nav-btn {
+            background: none;
+            border: none;
+            color: #ccc;
+            padding: 0.7rem 1.3rem;
+            font-weight: 600;
+            font-size: 0.9rem;
+            transition: all 0.3s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            border-radius: 40px;
+            cursor: pointer;
+            font-family: inherit;
+            position: relative;
+            letter-spacing: 0.5px;
+        }
+
+        .nav-btn i { transition: transform 0.2s; }
+        .nav-btn:hover { color: #ff0033; background: rgba(255,0,51,0.15); transform: translateY(-2px); }
+        .nav-btn.active { color: #ff0033; background: rgba(255,0,51,0.2); border: 1px solid rgba(255,0,51,0.5); box-shadow: 0 0 15px rgba(255,0,51,0.3); }
+
+        .user-panel {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-left: 1rem;
+            padding-left: 1rem;
+            border-left: 1px solid rgba(255,0,51,0.4);
+        }
+        .user-greeting { color: #ff0033; font-size: 0.85rem; font-weight: 500; }
+        .user-avatar {
+            width: 40px; height: 40px;
+            background: linear-gradient(135deg, #ff0033, #0033ff);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .user-avatar:hover { transform: scale(1.1); box-shadow: 0 0 20px #ff0033; }
+        .logout-btn {
+            background: none;
+            border: 1px solid rgba(255,255,255,0.3);
+            color: #ccc;
+            padding: 0.4rem 1rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-size: 0.7rem;
+            transition: all 0.2s;
+        }
+        .logout-btn:hover { background: rgba(255,0,0,0.3); border-color: #ff0033; color: #ff0033; }
+
+        /* Language Switch 4 languages */
+        .lang-switch {
+            display: flex;
+            background: rgba(255,0,51,0.15);
+            border: 1px solid #ff0033;
+            border-radius: 40px;
+            overflow: hidden;
+            margin-left: 0.5rem;
+        }
+        .lang-option {
+            padding: 0.4rem 0.9rem;
+            font-size: 0.7rem;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.2s;
+            color: #ff6666;
+        }
+        .lang-option.active { background: #ff0033; color: #000; }
+        .lang-option:not(:last-child) { border-right: 1px solid #ff0033; }
+        .lang-option:hover:not(.active) { background: rgba(255,0,51,0.3); transform: scale(1.02); }
+
+        /* Modals */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.98);
+            backdrop-filter: blur(12px);
+            z-index: 2000;
+            justify-content: center;
+            align-items: center;
+        }
+        .modal.active { display: flex; animation: fadeInModal 0.3s ease; }
+        @keyframes fadeInModal { from { opacity: 0; transform: scale(0.95); } to { opacity: 1; transform: scale(1); } }
+        .modal-content {
+            background: rgba(8,8,20,0.98);
+            border: 2px solid #ff0033;
+            border-radius: 32px;
+            padding: 2rem;
+            width: 90%;
+            max-width: 450px;
+            text-align: center;
+            box-shadow: 0 0 50px rgba(255,0,51,0.3);
+        }
+        .modal-content h2 { margin-bottom: 1.5rem; color: #ff0033; font-family: 'Orbitron', monospace; }
+        .modal-content input {
+            width: 100%;
+            padding: 0.9rem;
+            margin: 0.5rem 0;
+            background: rgba(0,0,0,0.8);
+            border: 1px solid rgba(255,0,51,0.4);
+            border-radius: 16px;
+            color: #fff;
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+        .modal-content input:focus { border-color: #ff0033; outline: none; box-shadow: 0 0 15px rgba(255,0,51,0.3); }
+        .modal-content button {
+            width: 100%;
+            padding: 0.9rem;
+            margin-top: 1rem;
+            background: linear-gradient(135deg, #ff0033, #0033ff);
+            border: none;
+            border-radius: 50px;
+            color: #fff;
+            font-weight: bold;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.2s;
+        }
+        .modal-content button:hover { transform: scale(1.02); box-shadow: 0 0 20px rgba(255,0,51,0.5); }
+        .switch-form { margin-top: 1rem; color: #aaa; cursor: pointer; transition: color 0.2s; }
+        .switch-form:hover { color: #ff0033; }
+
+        /* Pages */
+        .page { display: none; animation: pageFadeIn 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1); padding: 2rem 0 3rem; }
+        .page.active { display: block; }
+        @keyframes pageFadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+        .section-title {
+            font-size: 2.2rem;
+            margin: 1rem 0 2rem;
+            border-left: 5px solid #ff0033;
+            padding-left: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-family: 'Orbitron', monospace;
+        }
+        .hero { text-align: center; padding: 4rem 0; }
+        .hero h1 {
+            font-size: 5rem;
+            font-weight: 900;
+            background: linear-gradient(135deg, #fff, #ff0033, #0033ff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: titlePulse 2s infinite alternate;
+            letter-spacing: -2px;
+        }
+        @keyframes titlePulse { 0% { filter: drop-shadow(0 0 0 rgba(255,0,51,0)); } 100% { filter: drop-shadow(0 0 25px rgba(255,0,51,0.5)); } }
+        .hero .tagline { font-size: 1.3rem; color: #888; margin-top: 1rem; }
+
+        /* Game Card */
+        .game-card {
+            background: rgba(0,0,0,0.85);
+            backdrop-filter: blur(12px);
+            border-radius: 32px;
+            padding: 2rem;
+            border: 2px solid rgba(255,0,51,0.4);
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+        }
+        .game-card::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,0,51,0.15), transparent); transition: 0.6s; }
+        .game-card:hover::before { left: 100%; }
+        .game-card:hover { transform: translateY(-10px); border-color: #ff0033; box-shadow: 0 0 45px rgba(255,0,51,0.4); }
+        .game-icon { font-size: 5rem; color: #ff0033; text-align: center; text-shadow: 0 0 20px rgba(255,0,51,0.5); }
+        .game-title { font-size: 2.5rem; font-weight: 800; text-align: center; font-family: 'Orbitron', monospace; background: linear-gradient(135deg, #fff, #ff0033); -webkit-background-clip: text; background-clip: text; color: transparent; margin: 0.5rem 0; }
+        .game-badge { display: inline-block; background: rgba(255,0,51,0.2); border: 1px solid #ff0033; border-radius: 30px; padding: 0.3rem 1.5rem; font-size: 0.9rem; font-weight: bold; color: #ff6666; margin: 0.5rem 0; }
+        .game-desc { color: #bbb; margin: 1rem 0; line-height: 1.6; font-size: 1rem; }
+        .game-features { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin: 1.5rem 0; }
+        .feature { background: rgba(255,0,51,0.1); border-radius: 30px; padding: 0.5rem 1.2rem; font-size: 0.85rem; color: #ff8888; transition: all 0.2s; }
+        .feature:hover { background: rgba(255,0,51,0.25); transform: translateY(-2px); }
+
+        /* Gallery */
+        .gallery-section { margin: 3rem 0; }
+        .gallery-title { font-size: 1.5rem; margin: 1rem 0; color: #ff0033; font-family: 'Orbitron', monospace; }
+        .screenshots-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.8rem; margin: 1.5rem 0; }
+        .screenshot-card { background: rgba(0,0,0,0.6); border-radius: 20px; overflow: hidden; border: 1px solid rgba(255,0,51,0.3); transition: all 0.3s ease; cursor: pointer; }
+        .screenshot-card:hover { transform: translateY(-8px); border-color: #ff0033; box-shadow: 0 0 30px rgba(255,0,51,0.4); }
+        .screenshot-img { width: 100%; height: 200px; object-fit: cover; transition: transform 0.3s; }
+        .screenshot-card:hover .screenshot-img { transform: scale(1.03); }
+        .screenshot-label { padding: 1rem; text-align: center; font-size: 0.85rem; color: #ccc; background: rgba(0,0,0,0.5); font-weight: 500; }
+
+        /* Timeline */
+        .timeline { position: relative; padding: 2rem 0; }
+        .timeline::before { content: ''; position: absolute; left: 20px; top: 0; bottom: 0; width: 3px; background: linear-gradient(180deg, #ff0033, #0033ff); border-radius: 3px; }
+        .timeline-item { position: relative; padding-left: 55px; margin-bottom: 2rem; animation: slideIn 0.5s ease forwards; opacity: 0; transform: translateX(-20px); }
+        .timeline-item:nth-child(1) { animation-delay: 0.1s; }
+        .timeline-item:nth-child(2) { animation-delay: 0.2s; }
+        .timeline-item:nth-child(3) { animation-delay: 0.3s; }
+        @keyframes slideIn { to { opacity: 1; transform: translateX(0); } }
+        .timeline-dot { position: absolute; left: 12px; top: 5px; width: 16px; height: 16px; background: #ff0033; border-radius: 50%; border: 2px solid #000; box-shadow: 0 0 10px #ff0033; z-index: 1; }
+        .timeline-content { background: rgba(0,0,0,0.6); border-radius: 20px; padding: 1.2rem; border-left: 3px solid #ff0033; transition: all 0.3s; }
+        .timeline-content:hover { background: rgba(20,0,0,0.7); transform: translateX(5px); }
+        .timeline-date { color: #ff0033; font-size: 0.75rem; letter-spacing: 2px; margin-bottom: 0.3rem; }
+        .timeline-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.3rem; color: #fff; }
+        .timeline-text { color: #bbb; font-size: 0.9rem; line-height: 1.5; }
+
+        /* Studio */
+        .studio-content { background: rgba(0,0,0,0.7); border-radius: 28px; padding: 2rem; line-height: 1.7; }
+        .studio-stats { display: flex; justify-content: center; gap: 2rem; margin-top: 2rem; flex-wrap: wrap; }
+        .stat-card { text-align: center; padding: 1rem; background: rgba(255,0,51,0.08); border-radius: 20px; min-width: 120px; border: 1px solid rgba(255,0,51,0.2); }
+        .stat-number { font-size: 2rem; font-weight: 800; color: #ff0033; }
+
+        /* Profile & Dev */
+        .stats-grid { display: flex; justify-content: center; gap: 2rem; margin: 1.5rem 0; flex-wrap: wrap; }
+        .stat-item { text-align: center; padding: 0.8rem; background: rgba(255,0,51,0.08); border-radius: 20px; min-width: 100px; }
+        .stat-value { font-size: 1.8rem; font-weight: 800; color: #ff0033; }
+        .info-row { display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid rgba(255,0,51,0.1); font-size: 0.85rem; }
+        .achievements-grid { display: flex; flex-wrap: wrap; gap: 0.8rem; justify-content: center; margin-top: 1rem; }
+        .achievement { background: rgba(255,0,51,0.1); border: 1px solid rgba(255,0,51,0.3); border-radius: 40px; padding: 0.4rem 1rem; font-size: 0.7rem; display: flex; align-items: center; gap: 6px; }
+
+        .dev-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
+        .dev-stat-card { background: rgba(255,0,51,0.08); border: 1px solid rgba(255,0,51,0.2); border-radius: 16px; padding: 1rem; text-align: center; }
+        .dev-stat-value { font-size: 2rem; font-weight: 800; color: #ff0033; }
+        .users-list { max-height: 300px; overflow-y: auto; margin-top: 1rem; }
+        .user-item { display: flex; justify-content: space-between; align-items: center; padding: 0.8rem; border-bottom: 1px solid rgba(255,0,51,0.1); }
+        .delete-user-btn { background: rgba(255,0,0,0.2); border: 1px solid #ff0033; color: #ff6666; padding: 0.2rem 0.6rem; border-radius: 20px; cursor: pointer; }
+
+        .trailer-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255,0,0,0.2);
+            border: 1px solid #ff0033;
+            color: #ff6666;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            margin-top: 1rem;
+            font-weight: 600;
+            transition: all 0.2s;
+        }
+        .trailer-btn:hover { background: #ff0033; color: #000; transform: scale(1.02); }
+
+        .footer {
+            margin-top: 4rem;
+            background: #000000cc;
+            border-top: 1px solid #ff0033;
+            padding: 2rem 0;
+            text-align: center;
+        }
+        .footer-social {
+            display: flex;
+            justify-content: center;
+            gap: 1.5rem;
+            margin-bottom: 1rem;
+        }
+        .footer-social a {
+            color: #888;
+            font-size: 1.5rem;
+            transition: all 0.2s;
+            text-decoration: none;
+        }
+        .footer-social a:hover {
+            color: #ff0033;
+            transform: translateY(-3px);
+            display: inline-block;
+        }
+
+        .toast {
+            position: fixed;
+            bottom: 20px;
+            right: 20px;
+            padding: 12px 24px;
+            border-radius: 40px;
+            z-index: 9999;
+            font-weight: bold;
+            animation: fadeOut 3s forwards;
+        }
+        .toast.success { background: #0033ff; color: #fff; }
+        .toast.error { background: #ff0033; color: #fff; }
+        .toast.info { background: #1a1a2e; color: #ff0033; border: 1px solid #ff0033; }
+        @keyframes fadeOut {
+            0% { opacity: 1; transform: translateX(0); }
+            70% { opacity: 1; }
+            100% { opacity: 0; transform: translateX(100px); display: none; }
+        }
+
+        @media (max-width: 800px) {
+            .hero h1 { font-size: 2.5rem; }
+            .navbar { flex-direction: column; gap: 1rem; }
+            .container { padding: 0 1rem; }
+            .section-title { font-size: 1.5rem; }
+            .timeline::before { left: 12px; }
+            .timeline-item { padding-left: 40px; }
+            .timeline-dot { left: 5px; width: 12px; height: 12px; }
+            .lang-option { padding: 0.3rem 0.6rem; font-size: 0.6rem; }
+        }
+    </style>
+</head>
+<body>
+<div class="glow-bg"></div>
+<div class="floating-neon"></div><div class="floating-neon"></div><div class="floating-neon"></div><div class="floating-neon"></div><div class="floating-neon"></div>
+<div class="scan-line"></div>
+
+<div class="container">
+    <div class="navbar">
+        <div class="logo-area" onclick="showPage('home')">
+            <span class="logo-text">INTERFEX</span>
+        </div>
+        <div class="nav-links">
+            <button class="nav-btn" data-page="home"><i class="fas fa-home"></i> <span class="nav-text">ГЛАВНАЯ</span></button>
+            <button class="nav-btn" data-page="games"><i class="fas fa-gamepad"></i> <span class="nav-text">ИГРА</span></button>
+            <button class="nav-btn" data-page="news"><i class="fas fa-newspaper"></i> <span class="nav-text">НОВОСТИ</span></button>
+            <button class="nav-btn" data-page="studio"><i class="fas fa-building"></i> <span class="nav-text">СТУДИЯ</span></button>
+            <button class="nav-btn" id="devPanelBtn" style="display: none;"><i class="fas fa-code"></i> <span class="nav-text">DEV</span></button>
+            
+            <div class="lang-switch">
+                <div class="lang-option" data-lang="ru">RU</div>
+                <div class="lang-option" data-lang="en">EN</div>
+                <div class="lang-option" data-lang="fr">FR</div>
+                <div class="lang-option" data-lang="jp">日本語</div>
+            </div>
+            
+            <div id="authButtons" class="user-panel">
+                <button id="loginBtn" class="nav-btn"><i class="fas fa-sign-in-alt"></i> <span class="nav-text">ВХОД</span></button>
+                <button id="registerBtn" class="nav-btn"><i class="fas fa-user-plus"></i> <span class="nav-text">РЕГ</span></button>
+            </div>
+            <div id="userPanel" class="user-panel" style="display: none;">
+                <span class="user-greeting" id="userGreeting"></span>
+                <div class="user-avatar" id="profileBtn"><i class="fas fa-user"></i></div>
+                <button id="logoutBtn" class="logout-btn"><i class="fas fa-sign-out-alt"></i></button>
+            </div>
+        </div>
+    </div>
+
+    <!-- MODALS (same structure, translatable) -->
+    <div id="authModal" class="modal"><div class="modal-content"><h2 id="modalTitle"><i class="fas fa-key"></i> ВХОД</h2><input type="text" id="authLogin" placeholder="Логин"><input type="password" id="authPassword" placeholder="Пароль"><div id="authError" class="error-msg"></div><button id="authSubmitBtn">Войти</button><div class="switch-form" id="switchFormBtn">Нет аккаунта? Регистрация</div><div class="switch-form" id="closeModalBtn">Закрыть</div></div></div>
+    <div id="profileModal" class="modal"><div class="modal-content"><h2><i class="fas fa-user-circle"></i> <span class="profile-title">ПРОФИЛЬ</span></h2><div class="stats-grid"><div class="stat-item"><div class="stat-value" id="profileLevel">1</div><div class="stat-label-level">Уровень</div></div><div class="stat-item"><div class="stat-value" id="profileXp">0</div><div class="stat-label-xp">XP</div></div><div class="stat-item"><div class="stat-value" id="profileHours">0</div><div class="stat-label-hours">Часов</div></div></div><div class="info-row"><span class="info-reg-label">📅 Регистрация:</span><span id="profileRegDate"></span></div><div class="info-row"><span class="info-visit-label">🕐 Последний визит:</span><span id="profileLastVisit"></span></div><div class="info-row"><span class="info-logins-label">🔑 Входов:</span><span id="profileLogins"></span></div><div class="achievements-grid" id="achievementsList"></div><button id="closeProfileBtn">Закрыть</button></div></div>
+    <div id="devModal" class="modal"><div class="modal-content"><h2><i class="fas fa-code"></i> <span class="dev-title">DEV ПАНЕЛЬ</span></h2><div class="dev-stats"><div class="dev-stat-card"><div class="dev-stat-value" id="devTotalUsers">0</div><div class="dev-stat-users-label">Пользователей</div></div><div class="dev-stat-card"><div class="dev-stat-value" id="devTotalLogins">0</div><div class="dev-stat-logins-label">Входов</div></div><div class="dev-stat-card"><div class="dev-stat-value" id="devAvgLevel">0</div><div class="dev-stat-avg-label">Ср. уровень</div></div></div><div class="users-list" id="usersList"></div><button id="closeDevBtn">Закрыть</button></div></div>
+
+    <!-- HOME PAGE -->
+    <div id="home-page" class="page active">
+        <div class="hero"><h1>SAMURAI</h1><div class="tagline tagline-text">Последний самурай. Наследник. ⚔️</div></div>
+        <div class="section-title"><i class="fas fa-crown"></i> <span class="game-section-title">Игра</span></div>
+        <div class="game-card">
+            <div class="game-icon"><i class="fas fa-khanda"></i></div>
+            <div class="game-title">SAMURAI</div>
+            <div class="game-badge game-badge-text">В РАЗРАБОТКЕ | КОНЕЦ 2026 🚀</div>
+            <div class="game-desc home-desc-text">Ты — самурай, попавший в мир андров, где каждый выбор — последствия. Сражайся и отомсти за павших друзей, будь достойным самураем</div>
+            <div class="game-features"><div class="feature"><i class="fas fa-skull"></i> <span class="feature-boss">5+ боссов</span></div><div class="feature"><i class="fas fa-fist-raised"></i> <span class="feature-duel">Дуэль смерти</span></div><div class="feature"><i class="fas fa-theater-masks"></i> <span class="feature-ending">3 концовки</span></div></div>
+            <div style="text-align:center;"><button class="trailer-btn" id="mainTrailerBtn"><i class="fab fa-youtube"></i> <span class="trailer-btn-text">СМОТРЕТЬ ТИЗЕР-ТРЕЙЛЕР</span></button></div>
+        </div>
+    </div>
+
+    <!-- GAMES PAGE -->
+    <div id="games-page" class="page">
+        <div class="section-title"><i class="fas fa-gamepad"></i> <span class="games-title">SAMURAI</span></div>
+        <div class="game-card">
+            <div class="game-icon"><i class="fas fa-khanda"></i></div>
+            <div class="game-title">SAMURAI</div>
+            <div class="game-badge games-badge-text">В РАЗРАБОТКЕ | КОНЕЦ 2026 🔥</div>
+            <div class="game-desc games-desc-text">Ты — последний самурай. Возьми катану и пройди путь мести через мир андров и стань легендой.</div>
+            <div class="game-features"><div class="feature">⚔️ <span class="games-feature1">5+ уникальных боссов</span></div><div class="feature">🎮 <span class="games-feature2">Необычные механики</span></div><div class="feature">🎌 <span class="games-feature3">Имбовый сюжет</span></div><div class="feature">🎵 <span class="games-feature4">Крутой саундтрек</span></div><div class="feature">📖 <span class="games-feature5">3 концовки</span></div><div class="feature">🌆 <span class="games-feature6">Атмосфера японии</span></div></div>
+            <div style="text-align:center;"><button class="trailer-btn" id="gameTrailerBtn"><i class="fab fa-youtube"></i> <span class="games-trailer-btn">СМОТРЕТЬ ТРЕЙЛЕР</span></button></div>
+        </div>
+        <div class="gallery-section"><div class="gallery-title"><i class="fas fa-images"></i> <span class="gallery-title-text">ГАЛЕРЕЯ 🖼️</span></div><div class="screenshots-grid"><div class="screenshot-card"><img class="screenshot-img" src="https://s10.iimage.su/s/16/gXDRR9lxo3N5ybBG4YzqHiU6H7H7tAIuYlGDV0Dsm.png"><div class="screenshot-label screenshot-label1">Начало 🌅</div></div><div class="screenshot-card"><img class="screenshot-img" src="https://s10.iimage.su/s/16/gXJ7cmDxhdcTAMK4fbUyzBp2rPiVFA2CysEXDbaKS.png"><div class="screenshot-label screenshot-label2">Сено 🌾</div></div></div></div>
+    </div>
+
+    <!-- NEWS PAGE -->
+    <div id="news-page" class="page">
+        <div class="section-title"><i class="fas fa-newspaper"></i> <span class="news-title-text">История</span></div>
+        <div class="timeline"><div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><div class="timeline-date">17 МАЯ 2026</div><div class="timeline-title timeline-title1">🚀 ЗАПУСК САЙТА INTERFEX</div><div class="timeline-text timeline-text1">Мы выпустили сайт InterFex!</div></div></div><div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><div class="timeline-date">12 МАРТА 2026</div><div class="timeline-title timeline-title2">🔥 НОВЫЕ СКРИНШОТЫ</div><div class="timeline-text timeline-text2">Опубликовали свежие скриншоты игры в разделе галереи.</div></div></div><div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><div class="timeline-date">22 НОЯБРЯ 2025</div><div class="timeline-title timeline-title3">⚔️ ВЫШЕЛ ТИЗЕР-ТРЕЙЛЕР SAMURAI</div><div class="timeline-text timeline-text3">Мы выпустили первый тизер-трейлер нашей игры! Ссылка на YouTube в разделе игры</div></div></div></div>
+    </div>
+
+    <!-- STUDIO PAGE -->
+    <div id="studio-page" class="page">
+        <div class="section-title"><i class="fas fa-building"></i> <span class="studio-title-text">О СТУДИИ</span></div>
+        <div class="studio-content"><p class="studio-desc1"><strong>InterFex Games</strong> — независимая студия, основанная в 2025 году <strong style="color:#ff0033">двумя школьниками</strong>. Мы делаем игры с проработанным открытым миром и упором на сюжет и свободу действия. 🎮</p><p class="studio-desc2"><strong>Каждая игра</strong>  — новый, огромный мир. Мы делаем упор на сюжет, графику и интерес к прохождению.</p><p class="studio-desc3"><strong>Samurai</strong> — первая большая игра, которую вы увидите достаточно скоро ⚡</p><div class="studio-stats"><div class="stat-card"><div class="stat-number">4</div><div class="stat-label-dev">РАЗРАБОТЧИКА 👨‍💻</div></div><div class="stat-card"><div class="stat-number">1</div><div class="stat-label-project">ПРОЕКТ 🎯</div></div><div class="stat-card"><div class="stat-number">2026</div><div class="stat-label-year">ГОД РЕЛИЗА 📅</div></div></div></div>
+    </div>
+
+    <!-- FOOTER (with VK instead of Twitter) -->
+    <div class="footer">
+        <div class="footer-social">
+            <a href="https://t.me/interfexgames" target="_blank"><i class="fab fa-telegram"></i></a>
+            <a href="https://vk.com/interfex" target="_blank"><i class="fab fa-vk"></i></a>
+            <a href="https://www.youtube.com/watch?v=wk-pG71oGyE" target="_blank"><i class="fab fa-youtube"></i></a>
+            <a href="#"><i class="fab fa-discord"></i></a>
+        </div>
+        <div class="footer-copyright">
+            <p>© 2026 InterFex Games | <span class="footer-emoji">⚔️🎮🌆</span> | <span class="footer-lang">侍</span></p>
+        </div>
+    </div>
+</div>
+
+<script>
+    // ==================== MULTILINGUAL TRANSLATIONS (RU, EN, FR, JP) ====================
+    const translations = {
+        ru: {
+            navHome: "ГЛАВНАЯ", navGame: "ИГРА", navNews: "НОВОСТИ", navStudio: "СТУДИЯ", navDev: "DEV",
+            loginBtn: "ВХОД", registerBtn: "РЕГ",
+            tagline: "Последний самурай. Наследник. ⚔️",
+            gameSection: "Игра",
+            homeDesc: "Ты — самурай, попавший в мир андров, где каждый выбор — последствия. Сражайся и отомсти за павших друзей, будь достойным самураем",
+            featureBoss: "5+ боссов", featureDuel: "Дуэль смерти", featureEnding: "3 концовки",
+            trailerBtn: "СМОТРЕТЬ ТИЗЕР-ТРЕЙЛЕР",
+            gameBadge: "В РАЗРАБОТКЕ | КОНЕЦ 2026 🚀",
+            gamesBadge: "В РАЗРАБОТКЕ | КОНЕЦ 2026 🔥",
+            gamesTitle: "SAMURAI",
+            gamesDesc: "Ты — последний самурай. Возьми катану и пройди путь мести через мир андров и стань легендой.",
+            gamesFeature1: "5+ уникальных боссов", gamesFeature2: "Необычные механики", gamesFeature3: "Имбовый сюжет",
+            gamesFeature4: "Крутой саундтрек", gamesFeature5: "3 концовки", gamesFeature6: "Атмосфера японии",
+            gamesTrailerBtn: "СМОТРЕТЬ ТРЕЙЛЕР",
+            galleryTitle: "ГАЛЕРЕЯ 🖼️",
+            screenshot1: "Начало 🌅", screenshot2: "Сено 🌾",
+            newsTitle: "История",
+            newsTitle1: "🚀 ЗАПУСК САЙТА INTERFEX",
+            newsText1: "Мы выпустили сайт InterFex!",
+            newsTitle2: "🔥 НОВЫЕ СКРИНШОТЫ",
+            newsText2: "Опубликовали свежие скриншоты игры в разделе галереи.",
+            newsTitle3: "⚔️ ВЫШЕЛ ТИЗЕР-ТРЕЙЛЕР SAMURAI",
+            newsText3: "Мы выпустили первый тизер-трейлер нашей игры! Ссылка на YouTube в разделе игры",
+            studioTitle: "О СТУДИИ",
+            studioDesc1: "<strong>InterFex Games</strong> — независимая студия, основанная в 2025 году <strong style='color:#ff0033'>двумя школьниками</strong>. Мы делаем игры с проработанным открытым миром и упором на сюжет и свободу действия. 🎮",
+            studioDesc2: "<strong>Каждая игра</strong>  — новый, огромный мир. Мы делаем упор на сюжет, графику и интерес к прохождению.",
+            studioDesc3: "<strong>Samurai</strong> — первая большая игра, которую вы увидите достаточно скоро ⚡",
+            studioStat1: "РАЗРАБОТЧИКА 👨‍💻", studioStat2: "ПРОЕКТ 🎯", studioStat3: "ГОД РЕЛИЗА 📅",
+            loginModalTitle: "ВХОД", registerModalTitle: "РЕГИСТРАЦИЯ",
+            loginSubmit: "Войти", registerSubmit: "Зарегистрироваться",
+            switchToRegister: "Нет аккаунта? Регистрация", switchToLogin: "Уже есть аккаунт? Вход",
+            closeModal: "Закрыть",
+            profile: "ПРОФИЛЬ", level: "Уровень", xp: "XP", hours: "Часов",
+            regDate: "📅 Регистрация:", lastVisit: "🕐 Последний визит:", loginsCount: "🔑 Входов:",
+            closeProfile: "Закрыть",
+            devPanel: "DEV ПАНЕЛЬ", totalUsers: "Пользователей", totalLogins: "Входов", avgLevel: "Ср. уровень", closeDev: "Закрыть"
+        },
+        en: {
+            navHome: "HOME", navGame: "GAME", navNews: "NEWS", navStudio: "STUDIO", navDev: "DEV",
+            loginBtn: "LOGIN", registerBtn: "SIGN UP",
+            tagline: "Last samurai. The heir. ⚔️",
+            gameSection: "Game",
+            homeDesc: "You are a samurai who has fallen into a world of Androvs, where every choice has consequences. Fight and avenge your fallen friends, be a worthy samurai",
+            featureBoss: "5+ bosses", featureDuel: "Death duel", featureEnding: "3 endings",
+            trailerBtn: "WATCH TEASER TRAILER",
+            gameBadge: "IN DEVELOPMENT | END OF 2026 🚀",
+            gamesBadge: "IN DEVELOPMENT | END OF 2026 🔥",
+            gamesTitle: "SAMURAI",
+            gamesDesc: "You are the last samurai. Take your katana and walk the path of revenge through the world of Androvs and become a legend.",
+            gamesFeature1: "5+ unique bosses", gamesFeature2: "Unique mechanics", gamesFeature3: "Imba story",
+            gamesFeature4: "Cool soundtrack", gamesFeature5: "3 endings", gamesFeature6: "Atmosphere of Japan",
+            gamesTrailerBtn: "WATCH TRAILER",
+            galleryTitle: "GALLERY 🖼️",
+            screenshot1: "Beginning 🌅", screenshot2: "Hay 🌾",
+            newsTitle: "History",
+            newsTitle1: "🚀 INTERFEX SITE LAUNCH",
+            newsText1: "We launched the InterFex website!",
+            newsTitle2: "🔥 NEW SCREENSHOTS",
+            newsText2: "Published fresh game screenshots in the gallery section.",
+            newsTitle3: "⚔️ SAMURAI TEASER TRAILER RELEASED",
+            newsText3: "We released the first teaser trailer for our game! Link to YouTube in the game section",
+            studioTitle: "ABOUT THE STUDIO",
+            studioDesc1: "<strong>InterFex Games</strong> is an independent studio founded in 2025 by <strong style='color:#ff0033'>two school students</strong>. We create games with a developed open world and a focus on story and freedom of action. 🎮",
+            studioDesc2: "<strong>Each game</strong> is a new, huge world. We focus on story, graphics, and engagement.",
+            studioDesc3: "<strong>Samurai</strong> is the first big game you'll see soon ⚡",
+            studioStat1: "DEVELOPERS 👨‍💻", studioStat2: "PROJECT 🎯", studioStat3: "RELEASE YEAR 📅",
+            loginModalTitle: "LOGIN", registerModalTitle: "REGISTER",
+            loginSubmit: "Login", registerSubmit: "Register",
+            switchToRegister: "No account? Register", switchToLogin: "Already have an account? Login",
+            closeModal: "Close",
+            profile: "PROFILE", level: "Level", xp: "XP", hours: "Hours",
+            regDate: "📅 Registered:", lastVisit: "🕐 Last visit:", loginsCount: "🔑 Logins:",
+            closeProfile: "Close",
+            devPanel: "DEV PANEL", totalUsers: "Users", totalLogins: "Logins", avgLevel: "Avg level", closeDev: "Close"
+        },
+        fr: {
+            navHome: "ACCUEIL", navGame: "JEU", navNews: "ACTUS", navStudio: "STUDIO", navDev: "DEV",
+            loginBtn: "CONNEXION", registerBtn: "INSCRIPTION",
+            tagline: "Dernier samouraï. L'héritier. ⚔️",
+            gameSection: "Jeu",
+            homeDesc: "Vous êtes un samouraï tombé dans un monde d'Androvs, où chaque choix a des conséquences. Combattez et vengez vos amis tombés, soyez un samouraï digne",
+            featureBoss: "5+ boss", featureDuel: "Duel mortel", featureEnding: "3 fins",
+            trailerBtn: "REGARDER LA BANDE-ANNONCE",
+            gameBadge: "EN DÉVELOPPEMENT | FIN 2026 🚀",
+            gamesBadge: "EN DÉVELOPPEMENT | FIN 2026 🔥",
+            gamesTitle: "SAMURAI",
+            gamesDesc: "Vous êtes le dernier samouraï. Prenez votre katana et marchez sur le chemin de la vengeance à travers le monde des Androvs et devenez une légende.",
+            gamesFeature1: "5+ boss uniques", gamesFeature2: "Mécaniques uniques", gamesFeature3: "Histoire imbattable",
+            gamesFeature4: "Bande-son cool", gamesFeature5: "3 fins", gamesFeature6: "Ambiance du Japon",
+            gamesTrailerBtn: "REGARDER LA BANDE-ANNONCE",
+            galleryTitle: "GALERIE 🖼️",
+            screenshot1: "Début 🌅", screenshot2: "Foin 🌾",
+            newsTitle: "Histoire",
+            newsTitle1: "🚀 LANCEMENT DU SITE INTERFEX",
+            newsText1: "Nous avons lancé le site InterFex !",
+            newsTitle2: "🔥 NOUVELLES CAPTURES D'ÉCRAN",
+            newsText2: "Publication de nouvelles captures d'écran du jeu dans la section galerie.",
+            newsTitle3: "⚔️ BANDE-ANNONCE TEASER DE SAMURAI",
+            newsText3: "Nous avons publié la première bande-annonce teaser de notre jeu ! Lien YouTube dans la section jeu",
+            studioTitle: "À PROPOS DU STUDIO",
+            studioDesc1: "<strong>InterFex Games</strong> est un studio indépendant fondé en 2025 par <strong style='color:#ff0033'>deux étudiants</strong>. Nous créons des jeux avec un monde ouvert développé et un accent sur l'histoire et la liberté d'action. 🎮",
+            studioDesc2: "<strong>Chaque jeu</strong> est un monde nouveau et immense. Nous mettons l'accent sur l'histoire, les graphismes et l'engagement.",
+            studioDesc3: "<strong>Samurai</strong> est le premier grand jeu que vous verrez bientôt ⚡",
+            studioStat1: "DÉVELOPPEURS 👨‍💻", studioStat2: "PROJET 🎯", studioStat3: "ANNÉE DE SORTIE 📅",
+            loginModalTitle: "CONNEXION", registerModalTitle: "INSCRIPTION",
+            loginSubmit: "Se connecter", registerSubmit: "S'inscrire",
+            switchToRegister: "Pas de compte ? S'inscrire", switchToLogin: "Déjà un compte ? Se connecter",
+            closeModal: "Fermer",
+            profile: "PROFIL", level: "Niveau", xp: "XP", hours: "Heures",
+            regDate: "📅 Inscription :", lastVisit: "🕐 Dernière visite :", loginsCount: "🔑 Connexions :",
+            closeProfile: "Fermer",
+            devPanel: "PANEL DEV", totalUsers: "Utilisateurs", totalLogins: "Connexions", avgLevel: "Niveau moy.", closeDev: "Fermer"
+        },
+        jp: {
+            navHome: "ホーム", navGame: "ゲーム", navNews: "ニュース", navStudio: "スタジオ", navDev: "開発",
+            loginBtn: "ログイン", registerBtn: "登録",
+            tagline: "最後の侍。継承者。⚔️",
+            gameSection: "ゲーム",
+            homeDesc: "あなたはアンドロフの世界に落ちた侍です。すべての選択には結果が伴います。戦い、倒れた友のために復讐し、誇り高き侍であれ",
+            featureBoss: "5+ ボス", featureDuel: "死の決闘", featureEnding: "3 つの結末",
+            trailerBtn: "ティーザー予告編を見る",
+            gameBadge: "開発中 | 2026年末 🚀",
+            gamesBadge: "開発中 | 2026年末 🔥",
+            gamesTitle: "侍",
+            gamesDesc: "あなたは最後の侍です。刀を手に取り、アンドロフの世界で復讐の道を歩み、伝説となれ。",
+            gamesFeature1: "5+ ユニークボス", gamesFeature2: "ユニークなメカニクス", gamesFeature3: "壮大なストーリー",
+            gamesFeature4: "クールなサウンドトラック", gamesFeature5: "3 つの結末", gamesFeature6: "日本の雰囲気",
+            gamesTrailerBtn: "予告編を見る",
+            galleryTitle: "ギャラリー 🖼️",
+            screenshot1: "始まり 🌅", screenshot2: "干し草 🌾",
+            newsTitle: "歴史",
+            newsTitle1: "🚀 INTERFEX サイトローンチ",
+            newsText1: "InterFexウェブサイトを公開しました！",
+            newsTitle2: "🔥 新しいスクリーンショット",
+            newsText2: "ギャラリーセクションでゲームの新しいスクリーンショットを公開しました。",
+            newsTitle3: "⚔️ 侍 ティーザー予告編公開",
+            newsText3: "ゲームの最初のティーザー予告編を公開しました！YouTubeリンクはゲームセクションにあります",
+            studioTitle: "スタジオについて",
+            studioDesc1: "<strong>InterFex Games</strong> は2025年に <strong style='color:#ff0033'>2人の学生</strong>によって設立された独立スタジオです。私たちは、ストーリーと自由な行動に重点を置いた、開発されたオープンワールドのゲームを作成しています。🎮",
+            studioDesc2: "<strong>すべてのゲーム</strong>は新しく広大な世界です。私たちはストーリー、グラフィック、没入感に重点を置いています。",
+            studioDesc3: "<strong>Samurai</strong> は、もうすぐお目見えする最初の大作ゲームです ⚡",
+            studioStat1: "開発者 👨‍💻", studioStat2: "プロジェクト 🎯", studioStat3: "リリース年 📅",
+            loginModalTitle: "ログイン", registerModalTitle: "登録",
+            loginSubmit: "ログイン", registerSubmit: "登録",
+            switchToRegister: "アカウントがない？登録", switchToLogin: "すでにアカウントをお持ちですか？ログイン",
+            closeModal: "閉じる",
+            profile: "プロフィール", level: "レベル", xp: "経験値", hours: "時間",
+            regDate: "📅 登録日:", lastVisit: "🕐 最終訪問:", loginsCount: "🔑 ログイン数:",
+            closeProfile: "閉じる",
+            devPanel: "開発パネル", totalUsers: "ユーザー数", totalLogins: "ログイン数", avgLevel: "平均レベル", closeDev: "閉じる"
+        }
+    };
+
+    let currentLang = 'ru';
+
+    function updateUILang() {
+        const t = translations[currentLang];
+        // Navigation
+        document.querySelector('.nav-btn[data-page="home"] .nav-text').textContent = t.navHome;
+        document.querySelector('.nav-btn[data-page="games"] .nav-text').textContent = t.navGame;
+        document.querySelector('.nav-btn[data-page="news"] .nav-text').textContent = t.navNews;
+        document.querySelector('.nav-btn[data-page="studio"] .nav-text').textContent = t.navStudio;
+        const devBtnSpan = document.querySelector('#devPanelBtn .nav-text');
+        if (devBtnSpan) devBtnSpan.textContent = t.navDev;
+        document.querySelector('#loginBtn .nav-text').textContent = t.loginBtn;
+        document.querySelector('#registerBtn .nav-text').textContent = t.registerBtn;
+        // Home
+        document.querySelector('.tagline-text').textContent = t.tagline;
+        document.querySelector('.game-section-title').textContent = t.gameSection;
+        document.querySelector('.home-desc-text').textContent = t.homeDesc;
+        document.querySelector('.feature-boss').textContent = t.featureBoss;
+        document.querySelector('.feature-duel').textContent = t.featureDuel;
+        document.querySelector('.feature-ending').textContent = t.featureEnding;
+        document.querySelector('#mainTrailerBtn .trailer-btn-text').textContent = t.trailerBtn;
+        document.querySelector('.game-badge-text').textContent = t.gameBadge;
+        // Games page
+        document.querySelector('.games-title').textContent = t.gamesTitle;
+        document.querySelector('.games-badge-text').textContent = t.gamesBadge;
+        document.querySelector('.games-desc-text').textContent = t.gamesDesc;
+        document.querySelector('.games-feature1').textContent = t.gamesFeature1;
+        document.querySelector('.games-feature2').textContent = t.gamesFeature2;
+        document.querySelector('.games-feature3').textContent = t.gamesFeature3;
+        document.querySelector('.games-feature4').textContent = t.gamesFeature4;
+        document.querySelector('.games-feature5').textContent = t.gamesFeature5;
+        document.querySelector('.games-feature6').textContent = t.gamesFeature6;
+        document.querySelector('#gameTrailerBtn .games-trailer-btn').textContent = t.gamesTrailerBtn;
+        document.querySelector('.gallery-title-text').textContent = t.galleryTitle;
+        document.querySelector('.screenshot-label1').textContent = t.screenshot1;
+        document.querySelector('.screenshot-label2').textContent = t.screenshot2;
+        // News
+        document.querySelector('.news-title-text').textContent = t.newsTitle;
+        document.querySelector('.timeline-title1').textContent = t.newsTitle1;
+        document.querySelector('.timeline-text1').textContent = t.newsText1;
+        document.querySelector('.timeline-title2').textContent = t.newsTitle2;
+        document.querySelector('.timeline-text2').textContent = t.newsText2;
+        document.querySelector('.timeline-title3').textContent = t.newsTitle3;
+        document.querySelector('.timeline-text3').textContent = t.newsText3;
+        // Studio
+        document.querySelector('.studio-title-text').textContent = t.studioTitle;
+        document.querySelector('.studio-desc1').innerHTML = t.studioDesc1;
+        document.querySelector('.studio-desc2').innerHTML = t.studioDesc2;
+        document.querySelector('.studio-desc3').innerHTML = t.studioDesc3;
+        document.querySelector('.stat-label-dev').textContent = t.studioStat1;
+        document.querySelector('.stat-label-project').textContent = t.studioStat2;
+        document.querySelector('.stat-label-year').textContent = t.studioStat3;
+        // Modals
+        document.querySelector('#modalTitle').innerHTML = (isLoginMode ? '<i class="fas fa-key"></i> ' : '<i class="fas fa-user-plus"></i> ') + (isLoginMode ? t.loginModalTitle : t.registerModalTitle);
+        document.querySelector('#authSubmitBtn').textContent = isLoginMode ? t.loginSubmit : t.registerSubmit;
+        document.querySelector('#switchFormBtn').textContent = isLoginMode ? t.switchToRegister : t.switchToLogin;
+        document.querySelector('#closeModalBtn').textContent = t.closeModal;
+        document.querySelector('.profile-title').textContent = t.profile;
+        document.querySelector('.stat-label-level').textContent = t.level;
+        document.querySelector('.stat-label-xp').textContent = t.xp;
+        document.querySelector('.stat-label-hours').textContent = t.hours;
+        document.querySelector('.info-reg-label').textContent = t.regDate;
+        document.querySelector('.info-visit-label').textContent = t.lastVisit;
+        document.querySelector('.info-logins-label').textContent = t.loginsCount;
+        document.querySelector('#closeProfileBtn').textContent = t.closeProfile;
+        document.querySelector('.dev-title').textContent = t.devPanel;
+        document.querySelector('.dev-stat-users-label').textContent = t.totalUsers;
+        document.querySelector('.dev-stat-logins-label').textContent = t.totalLogins;
+        document.querySelector('.dev-stat-avg-label').textContent = t.avgLevel;
+        document.querySelector('#closeDevBtn').textContent = t.closeDev;
+    }
+
+    function setLanguage(lang) {
+        currentLang = lang;
+        localStorage.setItem('interfex_language', lang);
+        updateUILang();
+        document.querySelectorAll('.lang-option').forEach(opt => {
+            opt.classList.toggle('active', opt.getAttribute('data-lang') === lang);
+        });
+    }
+
+    function detectLanguage() {
+        const saved = localStorage.getItem('interfex_language');
+        if (saved && ['ru','en','fr','jp'].includes(saved)) return saved;
+        const browserLang = navigator.language || navigator.userLanguage;
+        if (browserLang.startsWith('ru')) return 'ru';
+        if (browserLang.startsWith('fr')) return 'fr';
+        if (browserLang.startsWith('ja')) return 'jp';
+        return 'en';
+    }
+
+    // --- User System (unchanged, fully functional) ---
+    const GAME = { trailerUrl: 'https://www.youtube.com/watch?v=wk-pG71oGyE' };
+    const ACHIEVEMENTS = [
+        { id: 'first', name: 'Первый шаг', icon: 'fa-user-plus', check: () => true },
+        { id: 'veteran', name: 'Ветеран', icon: 'fa-star', check: (u) => (u.level || 1) >= 5 },
+        { id: 'legend', name: 'Легенда', icon: 'fa-crown', check: (u) => (u.level || 1) >= 10 }
+    ];
+
+    let currentUser = null;
+    function loadUsers() {
+        const data = localStorage.getItem('interfex_users_v2');
+        if (data) return JSON.parse(data);
+        const now = new Date().toISOString();
+        return [
+            { login: 'admin', password: 'admin123', level: 10, xp: 1000, totalHours: 120, isAdmin: true, registeredAt: now, lastVisit: now, loginCount: 1 },
+            { login: 'test', password: '123', level: 3, xp: 150, totalHours: 12, isAdmin: false, registeredAt: now, lastVisit: now, loginCount: 1 }
+        ];
+    }
+    function saveUsers(users) { localStorage.setItem('interfex_users_v2', JSON.stringify(users)); }
+    function showToast(msg, type = 'info') {
+        const toast = document.createElement('div');
+        toast.className = `toast ${type}`;
+        toast.textContent = msg;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 3000);
+    }
+    function login(loginVal, passVal) {
+        let users = loadUsers();
+        const idx = users.findIndex(u => u.login === loginVal && u.password === passVal);
+        if (idx !== -1) {
+            users[idx].lastVisit = new Date().toISOString();
+            users[idx].loginCount++;
+            saveUsers(users);
+            const forStorage = { ...users[idx] };
+            delete forStorage.password;
+            localStorage.setItem('interfex_current_user', JSON.stringify(forStorage));
+            currentUser = forStorage;
+            updateUI();
+            showToast(`Добро пожаловать, ${loginVal}!`, 'success');
+            return true;
+        }
+        return false;
+    }
+    function register(loginVal, passVal) {
+        let users = loadUsers();
+        if (users.find(u => u.login === loginVal)) return false;
+        const now = new Date().toISOString();
+        const newUser = { login: loginVal, password: passVal, level: 1, xp: 0, totalHours: 0, isAdmin: false, registeredAt: now, lastVisit: now, loginCount: 1 };
+        users.push(newUser);
+        saveUsers(users);
+        const forStorage = { ...newUser };
+        delete forStorage.password;
+        localStorage.setItem('interfex_current_user', JSON.stringify(forStorage));
+        currentUser = forStorage;
+        updateUI();
+        showToast(`Регистрация успешна! Добро пожаловать, ${loginVal}!`, 'success');
+        return true;
+    }
+    function logout() {
+        localStorage.removeItem('interfex_current_user');
+        currentUser = null;
+        updateUI();
+        showToast('Вы вышли из аккаунта', 'info');
+    }
+    function updateUI() {
+        const saved = localStorage.getItem('interfex_current_user');
+        if (saved) {
+            currentUser = JSON.parse(saved);
+            document.getElementById('authButtons').style.display = 'none';
+            document.getElementById('userPanel').style.display = 'flex';
+            document.getElementById('userGreeting').innerHTML = `<i class="fas fa-user-circle"></i> ${currentUser.login} (${currentUser.level || 1} lvl)`;
+            document.getElementById('devPanelBtn').style.display = currentUser.isAdmin ? 'flex' : 'none';
+        } else {
+            currentUser = null;
+            document.getElementById('authButtons').style.display = 'flex';
+            document.getElementById('userPanel').style.display = 'none';
+            document.getElementById('devPanelBtn').style.display = 'none';
+        }
+        updateUILang();
+    }
+    function showProfile() {
+        if (!currentUser) return;
+        document.getElementById('profileLevel').innerText = currentUser.level || 1;
+        document.getElementById('profileXp').innerText = currentUser.xp || 0;
+        document.getElementById('profileHours').innerText = currentUser.totalHours || 0;
+        document.getElementById('profileRegDate').innerText = currentUser.registeredAt ? new Date(currentUser.registeredAt).toLocaleDateString() : '—';
+        document.getElementById('profileLastVisit').innerText = currentUser.lastVisit ? new Date(currentUser.lastVisit).toLocaleDateString() : '—';
+        document.getElementById('profileLogins').innerText = currentUser.loginCount || 0;
+        document.getElementById('achievementsList').innerHTML = ACHIEVEMENTS.map(ach => `<div class="achievement"><i class="fas ${ach.icon}"></i> ${ach.name}</div>`).join('');
+        openModal('profileModal');
+    }
+    function showDevPanel() {
+        if (!currentUser || !currentUser.isAdmin) return;
+        const users = loadUsers();
+        document.getElementById('devTotalUsers').innerText = users.length;
+        let logins = 0, levels = 0;
+        users.forEach(u => { logins += (u.loginCount || 0); levels += (u.level || 1); });
+        document.getElementById('devTotalLogins').innerText = logins;
+        document.getElementById('devAvgLevel').innerText = (levels / users.length).toFixed(1);
+        document.getElementById('usersList').innerHTML = users.map(u => `<div class="user-item"><div><strong>${u.login}</strong><br><span style="font-size:0.7rem;">ур.${u.level || 1} | входов:${u.loginCount || 0}</span></div><button class="delete-user-btn" data-login="${u.login}" ${u.login === 'admin' ? 'disabled' : ''}>Удалить</button></div>`).join('');
+        document.querySelectorAll('.delete-user-btn').forEach(btn => { if (!btn.disabled) btn.onclick = () => { let newUsers = users.filter(u => u.login !== btn.dataset.login); saveUsers(newUsers); if (currentUser.login === btn.dataset.login) logout(); else showDevPanel(); showToast('Пользователь удалён', 'success'); }; });
+        openModal('devModal');
+    }
+    function openModal(id) { document.getElementById(id).classList.add('active'); }
+    function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+    const pages = { home: document.getElementById('home-page'), games: document.getElementById('games-page'), news: document.getElementById('news-page'), studio: document.getElementById('studio-page') };
+    function showPage(pageId) { Object.values(pages).forEach(p => p.classList.remove('active')); if (pages[pageId]) pages[pageId].classList.add('active'); document.querySelectorAll('.nav-btn[data-page]').forEach(btn => btn.classList.toggle('active', btn.getAttribute('data-page') === pageId)); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+
+    let isLoginMode = true;
+    document.getElementById('loginBtn').onclick = () => { isLoginMode = true; updateUILang(); openModal('authModal'); };
+    document.getElementById('registerBtn').onclick = () => { isLoginMode = false; updateUILang(); openModal('authModal'); };
+    document.getElementById('switchFormBtn').onclick = () => { isLoginMode = !isLoginMode; updateUILang(); };
+    document.getElementById('closeModalBtn').onclick = () => closeModal('authModal');
+    document.getElementById('closeProfileBtn').onclick = () => closeModal('profileModal');
+    document.getElementById('closeDevBtn').onclick = () => closeModal('devModal');
+    document.getElementById('profileBtn').onclick = showProfile;
+    document.getElementById('logoutBtn').onclick = logout;
+    document.getElementById('devPanelBtn').onclick = showDevPanel;
+    document.querySelectorAll('#mainTrailerBtn, #gameTrailerBtn').forEach(btn => btn && (btn.onclick = () => window.open(GAME.trailerUrl, '_blank')));
+
+    document.getElementById('authSubmitBtn').onclick = () => {
+        const loginVal = document.getElementById('authLogin').value.trim();
+        const passVal = document.getElementById('authPassword').value.trim();
+        const errorDiv = document.getElementById('authError');
+        const t = translations[currentLang];
+        if (!loginVal || !passVal) { errorDiv.innerText = currentLang === 'ru' ? 'Заполните все поля' : (currentLang === 'en' ? 'Fill in all fields' : (currentLang === 'fr' ? 'Remplissez tous les champs' : 'すべての項目を入力してください')); return; }
+        if (isLoginMode) {
+            if (login(loginVal, passVal)) { closeModal('authModal'); errorDiv.innerText = ''; }
+            else errorDiv.innerText = currentLang === 'ru' ? 'Неверный логин или пароль' : (currentLang === 'en' ? 'Invalid login or password' : (currentLang === 'fr' ? 'Identifiant ou mot de passe invalide' : 'ログイン名またはパスワードが無効です'));
+        } else {
+            if (register(loginVal, passVal)) { closeModal('authModal'); errorDiv.innerText = ''; }
+            else errorDiv.innerText = currentLang === 'ru' ? 'Пользователь с таким логином уже существует' : (currentLang === 'en' ? 'User with this login already exists' : (currentLang === 'fr' ? 'Cet utilisateur existe déjà' : 'このログイン名は既に使用されています'));
+        }
+    };
+
+    document.querySelectorAll('[data-page]').forEach(btn => btn.addEventListener('click', () => showPage(btn.getAttribute('data-page'))));
+    document.querySelectorAll('.lang-option').forEach(opt => opt.addEventListener('click', () => setLanguage(opt.getAttribute('data-lang'))));
+    setLanguage(detectLanguage());
+    updateUI();
+</script>
+</body>
+</html>
