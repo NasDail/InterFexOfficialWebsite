@@ -1,11 +1,9 @@
-
 <!DOCTYPE html>
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>InterFex Games — SAMURAI | Official Site</title>
-    <!-- Fonts & Icons -->
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&family=Orbitron:wght@400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -22,11 +20,6 @@
             overflow-x: hidden;
         }
 
-        /* Japanese & French support */
-        .jp-text { font-family: 'Noto Sans JP', 'Inter', sans-serif; }
-        .fr-text { font-family: 'Inter', 'Noto Sans JP', sans-serif; }
-
-        /* Glowing Background */
         .glow-bg {
             position: fixed;
             top: 0;
@@ -53,7 +46,6 @@
             100% { transform: translate(30px,30px); }
         }
 
-        /* Floating Neon Orbs */
         .floating-neon {
             position: fixed;
             border-radius: 50%;
@@ -74,7 +66,6 @@
             100% { transform: translate(80px, -80px) scale(1.3); }
         }
 
-        /* Scan Line Effect */
         .scan-line {
             position: fixed;
             top: 0;
@@ -100,7 +91,6 @@
             padding: 0 2rem;
         }
 
-        /* Navbar */
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -196,28 +186,6 @@
         }
         .logout-btn:hover { background: rgba(255,0,0,0.3); border-color: #ff0033; color: #ff0033; }
 
-        /* Language Switch 4 languages */
-        .lang-switch {
-            display: flex;
-            background: rgba(255,0,51,0.15);
-            border: 1px solid #ff0033;
-            border-radius: 40px;
-            overflow: hidden;
-            margin-left: 0.5rem;
-        }
-        .lang-option {
-            padding: 0.4rem 0.9rem;
-            font-size: 0.7rem;
-            font-weight: bold;
-            cursor: pointer;
-            transition: all 0.2s;
-            color: #ff6666;
-        }
-        .lang-option.active { background: #ff0033; color: #000; }
-        .lang-option:not(:last-child) { border-right: 1px solid #ff0033; }
-        .lang-option:hover:not(.active) { background: rgba(255,0,51,0.3); transform: scale(1.02); }
-
-        /* Modals */
         .modal {
             display: none;
             position: fixed;
@@ -273,12 +241,11 @@
         .switch-form { margin-top: 1rem; color: #aaa; cursor: pointer; transition: color 0.2s; }
         .switch-form:hover { color: #ff0033; }
 
-        /* Pages */
         .page { display: none; animation: pageFadeIn 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1); padding: 2rem 0 3rem; }
         .page.active { display: block; }
         @keyframes pageFadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
         .section-title {
-            font-size: 2.2rem;
+            font-size: 2rem;
             margin: 1rem 0 2rem;
             border-left: 5px solid #ff0033;
             padding-left: 1.2rem;
@@ -287,9 +254,9 @@
             gap: 15px;
             font-family: 'Orbitron', monospace;
         }
-        .hero { text-align: center; padding: 4rem 0; }
+        .hero { text-align: center; padding: 3rem 0 2rem; }
         .hero h1 {
-            font-size: 5rem;
+            font-size: 4rem;
             font-weight: 900;
             background: linear-gradient(135deg, #fff, #ff0033, #0033ff);
             -webkit-background-clip: text;
@@ -299,14 +266,13 @@
             letter-spacing: -2px;
         }
         @keyframes titlePulse { 0% { filter: drop-shadow(0 0 0 rgba(255,0,51,0)); } 100% { filter: drop-shadow(0 0 25px rgba(255,0,51,0.5)); } }
-        .hero .tagline { font-size: 1.3rem; color: #888; margin-top: 1rem; }
+        .hero .tagline { font-size: 1.1rem; color: #888; margin-top: 1rem; }
 
-        /* Game Card */
         .game-card {
             background: rgba(0,0,0,0.85);
             backdrop-filter: blur(12px);
             border-radius: 32px;
-            padding: 2rem;
+            padding: 1.8rem;
             border: 2px solid rgba(255,0,51,0.4);
             transition: all 0.4s ease;
             position: relative;
@@ -315,92 +281,76 @@
         .game-card::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,0,51,0.15), transparent); transition: 0.6s; }
         .game-card:hover::before { left: 100%; }
         .game-card:hover { transform: translateY(-10px); border-color: #ff0033; box-shadow: 0 0 45px rgba(255,0,51,0.4); }
-        .game-icon { font-size: 5rem; color: #ff0033; text-align: center; text-shadow: 0 0 20px rgba(255,0,51,0.5); }
-        .game-title { font-size: 2.5rem; font-weight: 800; text-align: center; font-family: 'Orbitron', monospace; background: linear-gradient(135deg, #fff, #ff0033); -webkit-background-clip: text; background-clip: text; color: transparent; margin: 0.5rem 0; }
-        .game-badge { display: inline-block; background: rgba(255,0,51,0.2); border: 1px solid #ff0033; border-radius: 30px; padding: 0.3rem 1.5rem; font-size: 0.9rem; font-weight: bold; color: #ff6666; margin: 0.5rem 0; }
-        .game-desc { color: #bbb; margin: 1rem 0; line-height: 1.6; font-size: 1rem; }
-        .game-features { display: flex; flex-wrap: wrap; gap: 1rem; justify-content: center; margin: 1.5rem 0; }
-        .feature { background: rgba(255,0,51,0.1); border-radius: 30px; padding: 0.5rem 1.2rem; font-size: 0.85rem; color: #ff8888; transition: all 0.2s; }
-        .feature:hover { background: rgba(255,0,51,0.25); transform: translateY(-2px); }
+        .game-icon { font-size: 4rem; color: #ff0033; text-align: center; text-shadow: 0 0 20px rgba(255,0,51,0.5); }
+        .game-title { font-size: 2rem; font-weight: 800; text-align: center; font-family: 'Orbitron', monospace; background: linear-gradient(135deg, #fff, #ff0033); -webkit-background-clip: text; background-clip: text; color: transparent; margin: 0.5rem 0; }
+        .game-badge { display: inline-block; background: rgba(255,0,51,0.2); border: 1px solid #ff0033; border-radius: 30px; padding: 0.25rem 1.2rem; font-size: 0.8rem; font-weight: bold; color: #ff6666; margin: 0.5rem 0; }
+        .game-desc { color: #bbb; margin: 1rem 0; line-height: 1.6; font-size: 0.95rem; }
+        .game-features { display: flex; flex-wrap: wrap; gap: 0.8rem; justify-content: center; margin: 1rem 0; }
+        .feature { background: rgba(255,0,51,0.1); border-radius: 30px; padding: 0.4rem 1rem; font-size: 0.75rem; color: #ff8888; transition: all 0.2s; }
 
-        /* Gallery */
-        .gallery-section { margin: 3rem 0; }
-        .gallery-title { font-size: 1.5rem; margin: 1rem 0; color: #ff0033; font-family: 'Orbitron', monospace; }
-        .screenshots-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 1.8rem; margin: 1.5rem 0; }
+        .gallery-section { margin: 2rem 0; }
+        .gallery-title { font-size: 1.3rem; margin: 1rem 0; color: #ff0033; font-family: 'Orbitron', monospace; }
+        .screenshots-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; margin: 1rem 0; }
         .screenshot-card { background: rgba(0,0,0,0.6); border-radius: 20px; overflow: hidden; border: 1px solid rgba(255,0,51,0.3); transition: all 0.3s ease; cursor: pointer; }
-        .screenshot-card:hover { transform: translateY(-8px); border-color: #ff0033; box-shadow: 0 0 30px rgba(255,0,51,0.4); }
-        .screenshot-img { width: 100%; height: 200px; object-fit: cover; transition: transform 0.3s; }
-        .screenshot-card:hover .screenshot-img { transform: scale(1.03); }
-        .screenshot-label { padding: 1rem; text-align: center; font-size: 0.85rem; color: #ccc; background: rgba(0,0,0,0.5); font-weight: 500; }
+        .screenshot-card:hover { transform: translateY(-5px); border-color: #ff0033; box-shadow: 0 0 25px rgba(255,0,51,0.3); }
+        .screenshot-img { width: 100%; height: 180px; object-fit: cover; transition: transform 0.3s; }
+        .screenshot-card:hover .screenshot-img { transform: scale(1.02); }
+        .screenshot-label { padding: 0.8rem; text-align: center; font-size: 0.8rem; color: #ccc; background: rgba(0,0,0,0.5); }
 
-        /* Timeline */
-        .timeline { position: relative; padding: 2rem 0; }
-        .timeline::before { content: ''; position: absolute; left: 20px; top: 0; bottom: 0; width: 3px; background: linear-gradient(180deg, #ff0033, #0033ff); border-radius: 3px; }
-        .timeline-item { position: relative; padding-left: 55px; margin-bottom: 2rem; animation: slideIn 0.5s ease forwards; opacity: 0; transform: translateX(-20px); }
+        .timeline { position: relative; padding: 1rem 0; }
+        .timeline::before { content: ''; position: absolute; left: 16px; top: 0; bottom: 0; width: 3px; background: linear-gradient(180deg, #ff0033, #0033ff); border-radius: 3px; }
+        .timeline-item { position: relative; padding-left: 45px; margin-bottom: 1.5rem; animation: slideIn 0.5s ease forwards; opacity: 0; transform: translateX(-20px); }
         .timeline-item:nth-child(1) { animation-delay: 0.1s; }
         .timeline-item:nth-child(2) { animation-delay: 0.2s; }
         .timeline-item:nth-child(3) { animation-delay: 0.3s; }
         @keyframes slideIn { to { opacity: 1; transform: translateX(0); } }
-        .timeline-dot { position: absolute; left: 12px; top: 5px; width: 16px; height: 16px; background: #ff0033; border-radius: 50%; border: 2px solid #000; box-shadow: 0 0 10px #ff0033; z-index: 1; }
-        .timeline-content { background: rgba(0,0,0,0.6); border-radius: 20px; padding: 1.2rem; border-left: 3px solid #ff0033; transition: all 0.3s; }
+        .timeline-dot { position: absolute; left: 10px; top: 5px; width: 14px; height: 14px; background: #ff0033; border-radius: 50%; border: 2px solid #000; box-shadow: 0 0 8px #ff0033; z-index: 1; }
+        .timeline-content { background: rgba(0,0,0,0.6); border-radius: 18px; padding: 1rem; border-left: 3px solid #ff0033; transition: all 0.3s; }
         .timeline-content:hover { background: rgba(20,0,0,0.7); transform: translateX(5px); }
-        .timeline-date { color: #ff0033; font-size: 0.75rem; letter-spacing: 2px; margin-bottom: 0.3rem; }
-        .timeline-title { font-size: 1.2rem; font-weight: 700; margin-bottom: 0.3rem; color: #fff; }
-        .timeline-text { color: #bbb; font-size: 0.9rem; line-height: 1.5; }
+        .timeline-date { color: #ff0033; font-size: 0.7rem; letter-spacing: 1px; margin-bottom: 0.3rem; }
+        .timeline-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.3rem; color: #fff; }
+        .timeline-text { color: #bbb; font-size: 0.85rem; line-height: 1.4; }
 
-        /* Studio */
-        .studio-content { background: rgba(0,0,0,0.7); border-radius: 28px; padding: 2rem; line-height: 1.7; }
-        .studio-stats { display: flex; justify-content: center; gap: 2rem; margin-top: 2rem; flex-wrap: wrap; }
-        .stat-card { text-align: center; padding: 1rem; background: rgba(255,0,51,0.08); border-radius: 20px; min-width: 120px; border: 1px solid rgba(255,0,51,0.2); }
-        .stat-number { font-size: 2rem; font-weight: 800; color: #ff0033; }
-
-        /* Profile & Dev */
-        .stats-grid { display: flex; justify-content: center; gap: 2rem; margin: 1.5rem 0; flex-wrap: wrap; }
-        .stat-item { text-align: center; padding: 0.8rem; background: rgba(255,0,51,0.08); border-radius: 20px; min-width: 100px; }
-        .stat-value { font-size: 1.8rem; font-weight: 800; color: #ff0033; }
-        .info-row { display: flex; justify-content: space-between; padding: 0.5rem 0; border-bottom: 1px solid rgba(255,0,51,0.1); font-size: 0.85rem; }
-        .achievements-grid { display: flex; flex-wrap: wrap; gap: 0.8rem; justify-content: center; margin-top: 1rem; }
-        .achievement { background: rgba(255,0,51,0.1); border: 1px solid rgba(255,0,51,0.3); border-radius: 40px; padding: 0.4rem 1rem; font-size: 0.7rem; display: flex; align-items: center; gap: 6px; }
-
-        .dev-stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 1rem; margin: 1.5rem 0; }
-        .dev-stat-card { background: rgba(255,0,51,0.08); border: 1px solid rgba(255,0,51,0.2); border-radius: 16px; padding: 1rem; text-align: center; }
-        .dev-stat-value { font-size: 2rem; font-weight: 800; color: #ff0033; }
-        .users-list { max-height: 300px; overflow-y: auto; margin-top: 1rem; }
-        .user-item { display: flex; justify-content: space-between; align-items: center; padding: 0.8rem; border-bottom: 1px solid rgba(255,0,51,0.1); }
-        .delete-user-btn { background: rgba(255,0,0,0.2); border: 1px solid #ff0033; color: #ff6666; padding: 0.2rem 0.6rem; border-radius: 20px; cursor: pointer; }
+        .studio-content { background: rgba(0,0,0,0.7); border-radius: 24px; padding: 1.5rem; line-height: 1.6; }
+        .studio-stats { display: flex; justify-content: center; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap; }
+        .stat-card { text-align: center; padding: 0.8rem; background: rgba(255,0,51,0.08); border-radius: 18px; min-width: 100px; border: 1px solid rgba(255,0,51,0.2); }
+        .stat-number { font-size: 1.6rem; font-weight: 800; color: #ff0033; }
 
         .trailer-btn {
             display: inline-flex;
             align-items: center;
-            gap: 10px;
+            gap: 8px;
             background: rgba(255,0,0,0.2);
             border: 1px solid #ff0033;
             color: #ff6666;
-            padding: 0.8rem 2rem;
+            padding: 0.6rem 1.5rem;
             border-radius: 50px;
             cursor: pointer;
             margin-top: 1rem;
             font-weight: 600;
             transition: all 0.2s;
+            font-size: 0.85rem;
         }
         .trailer-btn:hover { background: #ff0033; color: #000; transform: scale(1.02); }
 
+        /* FOOTER - УМЕНЬШЕННЫЕ КНОПКИ ПЕРЕКЛЮЧЕНИЯ ЯЗЫКОВ */
         .footer {
-            margin-top: 4rem;
+            margin-top: 3rem;
             background: #000000cc;
             border-top: 1px solid #ff0033;
-            padding: 2rem 0;
+            padding: 1.5rem 0;
             text-align: center;
         }
         .footer-social {
             display: flex;
             justify-content: center;
             gap: 1.5rem;
-            margin-bottom: 1rem;
+            margin-bottom: 0.8rem;
+            flex-wrap: wrap;
         }
         .footer-social a {
             color: #888;
-            font-size: 1.5rem;
+            font-size: 1.3rem;
             transition: all 0.2s;
             text-decoration: none;
         }
@@ -409,16 +359,57 @@
             transform: translateY(-3px);
             display: inline-block;
         }
+        
+        /* Language Switcher - УМЕНЬШЕННЫЕ КНОПКИ */
+        .footer-lang-switch {
+            display: flex;
+            justify-content: center;
+            gap: 0.6rem;
+            margin: 0.8rem 0 0.8rem;
+        }
+        .footer-lang-option {
+            background: rgba(255,0,51,0.12);
+            border: 1px solid rgba(255,0,51,0.4);
+            border-radius: 30px;
+            padding: 0.25rem 0.7rem;
+            font-size: 0.75rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.2s;
+            min-width: 40px;
+            text-align: center;
+            letter-spacing: 0.5px;
+        }
+        .footer-lang-option.active {
+            background: #ff0033;
+            border-color: #ff0033;
+            color: #000;
+            box-shadow: 0 0 8px rgba(255,0,51,0.5);
+            transform: scale(1.02);
+        }
+        .footer-lang-option:hover:not(.active) {
+            background: rgba(255,0,51,0.3);
+            transform: translateY(-2px);
+        }
+        
+        .footer-copyright {
+            font-size: 0.7rem;
+            color: #666;
+            margin-top: 0.5rem;
+        }
 
         .toast {
             position: fixed;
             bottom: 20px;
             right: 20px;
-            padding: 12px 24px;
+            left: 20px;
+            padding: 10px 20px;
             border-radius: 40px;
             z-index: 9999;
             font-weight: bold;
             animation: fadeOut 3s forwards;
+            text-align: center;
+            font-size: 0.85rem;
         }
         .toast.success { background: #0033ff; color: #fff; }
         .toast.error { background: #ff0033; color: #fff; }
@@ -430,14 +421,66 @@
         }
 
         @media (max-width: 800px) {
-            .hero h1 { font-size: 2.5rem; }
-            .navbar { flex-direction: column; gap: 1rem; }
             .container { padding: 0 1rem; }
-            .section-title { font-size: 1.5rem; }
+            .hero h1 { font-size: 2.8rem; }
+            .hero { padding: 2rem 0 1rem; }
+            .hero .tagline { font-size: 1rem; }
+            .navbar { flex-direction: column; gap: 0.8rem; }
+            .nav-links { justify-content: center; width: 100%; }
+            .nav-btn { padding: 0.5rem 0.9rem; font-size: 0.8rem; }
+            .user-panel { margin-left: 0; padding-left: 0; border-left: none; gap: 0.5rem; }
+            .user-greeting { font-size: 0.75rem; }
+            .user-avatar { width: 32px; height: 32px; }
+            .logout-btn { padding: 0.3rem 0.7rem; font-size: 0.65rem; }
+            .section-title { font-size: 1.5rem; margin: 0.5rem 0 1rem; padding-left: 0.8rem; }
+            .game-card { padding: 1.2rem; }
+            .game-icon { font-size: 3rem; }
+            .game-title { font-size: 1.6rem; }
+            .game-badge { font-size: 0.7rem; padding: 0.2rem 1rem; }
+            .game-desc { font-size: 0.85rem; margin: 0.8rem 0; }
+            .game-features { gap: 0.5rem; }
+            .feature { padding: 0.3rem 0.8rem; font-size: 0.65rem; }
             .timeline::before { left: 12px; }
-            .timeline-item { padding-left: 40px; }
-            .timeline-dot { left: 5px; width: 12px; height: 12px; }
-            .lang-option { padding: 0.3rem 0.6rem; font-size: 0.6rem; }
+            .timeline-item { padding-left: 35px; margin-bottom: 1rem; }
+            .timeline-dot { left: 6px; width: 12px; height: 12px; }
+            .timeline-content { padding: 0.8rem; }
+            .timeline-date { font-size: 0.65rem; }
+            .timeline-title { font-size: 0.95rem; }
+            .timeline-text { font-size: 0.8rem; }
+            .studio-content { padding: 1.2rem; }
+            .studio-stats { gap: 0.8rem; }
+            .stat-card { min-width: 80px; padding: 0.5rem; }
+            .stat-number { font-size: 1.3rem; }
+            .trailer-btn { padding: 0.5rem 1.2rem; font-size: 0.75rem; }
+            .screenshots-grid { gap: 1rem; }
+            .screenshot-img { height: 150px; }
+            .screenshot-label { font-size: 0.7rem; padding: 0.5rem; }
+            .footer-social { gap: 1rem; }
+            .footer-social a { font-size: 1.1rem; }
+            .footer-lang-switch { gap: 0.5rem; }
+            .footer-lang-option { padding: 0.2rem 0.5rem; font-size: 0.65rem; min-width: 35px; }
+            .footer-copyright p { font-size: 0.65rem; }
+            .modal-content { padding: 1.2rem; width: 95%; }
+            .modal-content h2 { font-size: 1.2rem; margin-bottom: 1rem; }
+            .modal-content input { padding: 0.7rem; font-size: 0.9rem; }
+            .modal-content button { padding: 0.7rem; font-size: 0.9rem; }
+            .stats-grid { gap: 1rem; }
+            .stat-item { min-width: 70px; padding: 0.5rem; }
+            .stat-value { font-size: 1.3rem; }
+            .info-row { font-size: 0.75rem; }
+            .achievement { padding: 0.3rem 0.7rem; font-size: 0.6rem; }
+            .dev-stats { grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
+            .dev-stat-card { padding: 0.7rem; }
+            .dev-stat-value { font-size: 1.3rem; }
+        }
+
+        @media (max-width: 480px) {
+            .hero h1 { font-size: 2.2rem; }
+            .game-title { font-size: 1.3rem; }
+            .section-title { font-size: 1.2rem; }
+            .nav-btn { padding: 0.4rem 0.7rem; font-size: 0.7rem; }
+            .feature { font-size: 0.6rem; padding: 0.2rem 0.6rem; }
+            .footer-lang-option { padding: 0.15rem 0.4rem; font-size: 0.6rem; min-width: 30px; }
         }
     </style>
 </head>
@@ -458,13 +501,6 @@
             <button class="nav-btn" data-page="studio"><i class="fas fa-building"></i> <span class="nav-text">СТУДИЯ</span></button>
             <button class="nav-btn" id="devPanelBtn" style="display: none;"><i class="fas fa-code"></i> <span class="nav-text">DEV</span></button>
             
-            <div class="lang-switch">
-                <div class="lang-option" data-lang="ru">RU</div>
-                <div class="lang-option" data-lang="en">EN</div>
-                <div class="lang-option" data-lang="fr">FR</div>
-                <div class="lang-option" data-lang="jp">日本語</div>
-            </div>
-            
             <div id="authButtons" class="user-panel">
                 <button id="loginBtn" class="nav-btn"><i class="fas fa-sign-in-alt"></i> <span class="nav-text">ВХОД</span></button>
                 <button id="registerBtn" class="nav-btn"><i class="fas fa-user-plus"></i> <span class="nav-text">РЕГ</span></button>
@@ -477,14 +513,12 @@
         </div>
     </div>
 
-    <!-- MODALS (same structure, translatable) -->
     <div id="authModal" class="modal"><div class="modal-content"><h2 id="modalTitle"><i class="fas fa-key"></i> ВХОД</h2><input type="text" id="authLogin" placeholder="Логин"><input type="password" id="authPassword" placeholder="Пароль"><div id="authError" class="error-msg"></div><button id="authSubmitBtn">Войти</button><div class="switch-form" id="switchFormBtn">Нет аккаунта? Регистрация</div><div class="switch-form" id="closeModalBtn">Закрыть</div></div></div>
     <div id="profileModal" class="modal"><div class="modal-content"><h2><i class="fas fa-user-circle"></i> <span class="profile-title">ПРОФИЛЬ</span></h2><div class="stats-grid"><div class="stat-item"><div class="stat-value" id="profileLevel">1</div><div class="stat-label-level">Уровень</div></div><div class="stat-item"><div class="stat-value" id="profileXp">0</div><div class="stat-label-xp">XP</div></div><div class="stat-item"><div class="stat-value" id="profileHours">0</div><div class="stat-label-hours">Часов</div></div></div><div class="info-row"><span class="info-reg-label">📅 Регистрация:</span><span id="profileRegDate"></span></div><div class="info-row"><span class="info-visit-label">🕐 Последний визит:</span><span id="profileLastVisit"></span></div><div class="info-row"><span class="info-logins-label">🔑 Входов:</span><span id="profileLogins"></span></div><div class="achievements-grid" id="achievementsList"></div><button id="closeProfileBtn">Закрыть</button></div></div>
     <div id="devModal" class="modal"><div class="modal-content"><h2><i class="fas fa-code"></i> <span class="dev-title">DEV ПАНЕЛЬ</span></h2><div class="dev-stats"><div class="dev-stat-card"><div class="dev-stat-value" id="devTotalUsers">0</div><div class="dev-stat-users-label">Пользователей</div></div><div class="dev-stat-card"><div class="dev-stat-value" id="devTotalLogins">0</div><div class="dev-stat-logins-label">Входов</div></div><div class="dev-stat-card"><div class="dev-stat-value" id="devAvgLevel">0</div><div class="dev-stat-avg-label">Ср. уровень</div></div></div><div class="users-list" id="usersList"></div><button id="closeDevBtn">Закрыть</button></div></div>
 
-    <!-- HOME PAGE -->
     <div id="home-page" class="page active">
-        <div class="hero"><h1>SAMURAI</h1><div class="tagline tagline-text">Последний самурай. Наследник. ⚔️</div></div>
+        <div class="hero"><h1>SAMURAI</h1><div class="tagline tagline-text">Последний самурай. ⚔️</div></div>
         <div class="section-title"><i class="fas fa-crown"></i> <span class="game-section-title">Игра</span></div>
         <div class="game-card">
             <div class="game-icon"><i class="fas fa-khanda"></i></div>
@@ -496,7 +530,6 @@
         </div>
     </div>
 
-    <!-- GAMES PAGE -->
     <div id="games-page" class="page">
         <div class="section-title"><i class="fas fa-gamepad"></i> <span class="games-title">SAMURAI</span></div>
         <div class="game-card">
@@ -510,19 +543,16 @@
         <div class="gallery-section"><div class="gallery-title"><i class="fas fa-images"></i> <span class="gallery-title-text">ГАЛЕРЕЯ 🖼️</span></div><div class="screenshots-grid"><div class="screenshot-card"><img class="screenshot-img" src="https://s10.iimage.su/s/16/gXDRR9lxo3N5ybBG4YzqHiU6H7H7tAIuYlGDV0Dsm.png"><div class="screenshot-label screenshot-label1">Начало 🌅</div></div><div class="screenshot-card"><img class="screenshot-img" src="https://s10.iimage.su/s/16/gXJ7cmDxhdcTAMK4fbUyzBp2rPiVFA2CysEXDbaKS.png"><div class="screenshot-label screenshot-label2">Сено 🌾</div></div></div></div>
     </div>
 
-    <!-- NEWS PAGE -->
     <div id="news-page" class="page">
         <div class="section-title"><i class="fas fa-newspaper"></i> <span class="news-title-text">История</span></div>
         <div class="timeline"><div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><div class="timeline-date">17 МАЯ 2026</div><div class="timeline-title timeline-title1">🚀 ЗАПУСК САЙТА INTERFEX</div><div class="timeline-text timeline-text1">Мы выпустили сайт InterFex!</div></div></div><div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><div class="timeline-date">12 МАРТА 2026</div><div class="timeline-title timeline-title2">🔥 НОВЫЕ СКРИНШОТЫ</div><div class="timeline-text timeline-text2">Опубликовали свежие скриншоты игры в разделе галереи.</div></div></div><div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><div class="timeline-date">22 НОЯБРЯ 2025</div><div class="timeline-title timeline-title3">⚔️ ВЫШЕЛ ТИЗЕР-ТРЕЙЛЕР SAMURAI</div><div class="timeline-text timeline-text3">Мы выпустили первый тизер-трейлер нашей игры! Ссылка на YouTube в разделе игры</div></div></div></div>
     </div>
 
-    <!-- STUDIO PAGE -->
     <div id="studio-page" class="page">
         <div class="section-title"><i class="fas fa-building"></i> <span class="studio-title-text">О СТУДИИ</span></div>
         <div class="studio-content"><p class="studio-desc1"><strong>InterFex Games</strong> — независимая студия, основанная в 2025 году <strong style="color:#ff0033">двумя школьниками</strong>. Мы делаем игры с проработанным открытым миром и упором на сюжет и свободу действия. 🎮</p><p class="studio-desc2"><strong>Каждая игра</strong>  — новый, огромный мир. Мы делаем упор на сюжет, графику и интерес к прохождению.</p><p class="studio-desc3"><strong>Samurai</strong> — первая большая игра, которую вы увидите достаточно скоро ⚡</p><div class="studio-stats"><div class="stat-card"><div class="stat-number">4</div><div class="stat-label-dev">РАЗРАБОТЧИКА 👨‍💻</div></div><div class="stat-card"><div class="stat-number">1</div><div class="stat-label-project">ПРОЕКТ 🎯</div></div><div class="stat-card"><div class="stat-number">2026</div><div class="stat-label-year">ГОД РЕЛИЗА 📅</div></div></div></div>
     </div>
 
-    <!-- FOOTER (with VK instead of Twitter) -->
     <div class="footer">
         <div class="footer-social">
             <a href="https://t.me/interfexgames" target="_blank"><i class="fab fa-telegram"></i></a>
@@ -530,6 +560,15 @@
             <a href="https://www.youtube.com/watch?v=wk-pG71oGyE" target="_blank"><i class="fab fa-youtube"></i></a>
             <a href="#"><i class="fab fa-discord"></i></a>
         </div>
+        
+        <!-- Language Switcher - УМЕНЬШЕННЫЕ КНОПКИ (ТОЛЬКО БУКВЫ) -->
+        <div class="footer-lang-switch">
+            <div class="footer-lang-option" data-lang="ru">RUS</div>
+            <div class="footer-lang-option" data-lang="en">ENG</div>
+            <div class="footer-lang-option" data-lang="fr">FRA</div>
+            <div class="footer-lang-option" data-lang="jp">JPN</div>
+        </div>
+        
         <div class="footer-copyright">
             <p>© 2026 InterFex Games | <span class="footer-emoji">⚔️🎮🌆</span> | <span class="footer-lang">侍</span></p>
         </div>
@@ -537,12 +576,12 @@
 </div>
 
 <script>
-    // ==================== MULTILINGUAL TRANSLATIONS (RU, EN, FR, JP) ====================
+    // ==================== MULTILINGUAL TRANSLATIONS ====================
     const translations = {
         ru: {
             navHome: "ГЛАВНАЯ", navGame: "ИГРА", navNews: "НОВОСТИ", navStudio: "СТУДИЯ", navDev: "DEV",
             loginBtn: "ВХОД", registerBtn: "РЕГ",
-            tagline: "Последний самурай⚔️",
+            tagline: "Последний самурай. ⚔️",
             gameSection: "Игра",
             homeDesc: "Ты — самурай, попавший в мир андров, где каждый выбор — последствия. Сражайся и отомсти за павших друзей, будь достойным самураем",
             featureBoss: "5+ боссов", featureDuel: "Дуэль смерти", featureEnding: "3 концовки",
@@ -580,7 +619,7 @@
         en: {
             navHome: "HOME", navGame: "GAME", navNews: "NEWS", navStudio: "STUDIO", navDev: "DEV",
             loginBtn: "LOGIN", registerBtn: "SIGN UP",
-            tagline: "Last samurai⚔️",
+            tagline: "The last samurai. ⚔️",
             gameSection: "Game",
             homeDesc: "You are a samurai who has fallen into a world of Androvs, where every choice has consequences. Fight and avenge your fallen friends, be a worthy samurai",
             featureBoss: "5+ bosses", featureDuel: "Death duel", featureEnding: "3 endings",
@@ -618,7 +657,7 @@
         fr: {
             navHome: "ACCUEIL", navGame: "JEU", navNews: "ACTUS", navStudio: "STUDIO", navDev: "DEV",
             loginBtn: "CONNEXION", registerBtn: "INSCRIPTION",
-            tagline: "Dernier samouraï. L'héritier. ⚔️",
+            tagline: "Le dernier samouraï. ⚔️",
             gameSection: "Jeu",
             homeDesc: "Vous êtes un samouraï tombé dans un monde d'Androvs, où chaque choix a des conséquences. Combattez et vengez vos amis tombés, soyez un samouraï digne",
             featureBoss: "5+ boss", featureDuel: "Duel mortel", featureEnding: "3 fins",
@@ -656,7 +695,7 @@
         jp: {
             navHome: "ホーム", navGame: "ゲーム", navNews: "ニュース", navStudio: "スタジオ", navDev: "開発",
             loginBtn: "ログイン", registerBtn: "登録",
-            tagline: "最後の侍⚔️",
+            tagline: "最後の侍。⚔️",
             gameSection: "ゲーム",
             homeDesc: "あなたはアンドロフの世界に落ちた侍です。すべての選択には結果が伴います。戦い、倒れた友のために復讐し、誇り高き侍であれ",
             featureBoss: "5+ ボス", featureDuel: "死の決闘", featureEnding: "3 つの結末",
@@ -697,16 +736,14 @@
 
     function updateUILang() {
         const t = translations[currentLang];
-        // Navigation
         document.querySelector('.nav-btn[data-page="home"] .nav-text').textContent = t.navHome;
         document.querySelector('.nav-btn[data-page="games"] .nav-text').textContent = t.navGame;
         document.querySelector('.nav-btn[data-page="news"] .nav-text').textContent = t.navNews;
         document.querySelector('.nav-btn[data-page="studio"] .nav-text').textContent = t.navStudio;
-        const devBtnSpan = document.querySelector('#devPanelBtn .nav-text');
-        if (devBtnSpan) devBtnSpan.textContent = t.navDev;
+        const devSpan = document.querySelector('#devPanelBtn .nav-text');
+        if (devSpan) devSpan.textContent = t.navDev;
         document.querySelector('#loginBtn .nav-text').textContent = t.loginBtn;
         document.querySelector('#registerBtn .nav-text').textContent = t.registerBtn;
-        // Home
         document.querySelector('.tagline-text').textContent = t.tagline;
         document.querySelector('.game-section-title').textContent = t.gameSection;
         document.querySelector('.home-desc-text').textContent = t.homeDesc;
@@ -715,7 +752,6 @@
         document.querySelector('.feature-ending').textContent = t.featureEnding;
         document.querySelector('#mainTrailerBtn .trailer-btn-text').textContent = t.trailerBtn;
         document.querySelector('.game-badge-text').textContent = t.gameBadge;
-        // Games page
         document.querySelector('.games-title').textContent = t.gamesTitle;
         document.querySelector('.games-badge-text').textContent = t.gamesBadge;
         document.querySelector('.games-desc-text').textContent = t.gamesDesc;
@@ -729,7 +765,6 @@
         document.querySelector('.gallery-title-text').textContent = t.galleryTitle;
         document.querySelector('.screenshot-label1').textContent = t.screenshot1;
         document.querySelector('.screenshot-label2').textContent = t.screenshot2;
-        // News
         document.querySelector('.news-title-text').textContent = t.newsTitle;
         document.querySelector('.timeline-title1').textContent = t.newsTitle1;
         document.querySelector('.timeline-text1').textContent = t.newsText1;
@@ -737,7 +772,6 @@
         document.querySelector('.timeline-text2').textContent = t.newsText2;
         document.querySelector('.timeline-title3').textContent = t.newsTitle3;
         document.querySelector('.timeline-text3').textContent = t.newsText3;
-        // Studio
         document.querySelector('.studio-title-text').textContent = t.studioTitle;
         document.querySelector('.studio-desc1').innerHTML = t.studioDesc1;
         document.querySelector('.studio-desc2').innerHTML = t.studioDesc2;
@@ -745,7 +779,6 @@
         document.querySelector('.stat-label-dev').textContent = t.studioStat1;
         document.querySelector('.stat-label-project').textContent = t.studioStat2;
         document.querySelector('.stat-label-year').textContent = t.studioStat3;
-        // Modals
         document.querySelector('#modalTitle').innerHTML = (isLoginMode ? '<i class="fas fa-key"></i> ' : '<i class="fas fa-user-plus"></i> ') + (isLoginMode ? t.loginModalTitle : t.registerModalTitle);
         document.querySelector('#authSubmitBtn').textContent = isLoginMode ? t.loginSubmit : t.registerSubmit;
         document.querySelector('#switchFormBtn').textContent = isLoginMode ? t.switchToRegister : t.switchToLogin;
@@ -769,7 +802,7 @@
         currentLang = lang;
         localStorage.setItem('interfex_language', lang);
         updateUILang();
-        document.querySelectorAll('.lang-option').forEach(opt => {
+        document.querySelectorAll('.footer-lang-option').forEach(opt => {
             opt.classList.toggle('active', opt.getAttribute('data-lang') === lang);
         });
     }
@@ -777,14 +810,13 @@
     function detectLanguage() {
         const saved = localStorage.getItem('interfex_language');
         if (saved && ['ru','en','fr','jp'].includes(saved)) return saved;
-        const browserLang = navigator.language || navigator.userLanguage;
-        if (browserLang.startsWith('ru')) return 'ru';
-        if (browserLang.startsWith('fr')) return 'fr';
-        if (browserLang.startsWith('ja')) return 'jp';
+        const lang = navigator.language;
+        if (lang.startsWith('ru')) return 'ru';
+        if (lang.startsWith('fr')) return 'fr';
+        if (lang.startsWith('ja')) return 'jp';
         return 'en';
     }
 
-    // --- User System (unchanged, fully functional) ---
     const GAME = { trailerUrl: 'https://www.youtube.com/watch?v=wk-pG71oGyE' };
     const ACHIEVEMENTS = [
         { id: 'first', name: 'Первый шаг', icon: 'fa-user-plus', check: () => true },
@@ -908,7 +940,6 @@
         const loginVal = document.getElementById('authLogin').value.trim();
         const passVal = document.getElementById('authPassword').value.trim();
         const errorDiv = document.getElementById('authError');
-        const t = translations[currentLang];
         if (!loginVal || !passVal) { errorDiv.innerText = currentLang === 'ru' ? 'Заполните все поля' : (currentLang === 'en' ? 'Fill in all fields' : (currentLang === 'fr' ? 'Remplissez tous les champs' : 'すべての項目を入力してください')); return; }
         if (isLoginMode) {
             if (login(loginVal, passVal)) { closeModal('authModal'); errorDiv.innerText = ''; }
@@ -920,7 +951,7 @@
     };
 
     document.querySelectorAll('[data-page]').forEach(btn => btn.addEventListener('click', () => showPage(btn.getAttribute('data-page'))));
-    document.querySelectorAll('.lang-option').forEach(opt => opt.addEventListener('click', () => setLanguage(opt.getAttribute('data-lang'))));
+    document.querySelectorAll('.footer-lang-option').forEach(opt => opt.addEventListener('click', () => setLanguage(opt.getAttribute('data-lang'))));
     setLanguage(detectLanguage());
     updateUI();
 </script>
