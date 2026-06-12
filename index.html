@@ -10,7 +10,7 @@
 <meta name="apple-mobile-web-app-title" content="InterFexWebsite" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
-    <title>InterFex Games — SAMURAI | Official Site</title>
+    <title>InterFex Games</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&family=Orbitron:wght@400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <style>
@@ -25,6 +25,93 @@
             color: #eee;
             font-family: 'Inter', 'Noto Sans JP', sans-serif;
             overflow-x: hidden;
+        }
+
+        /* Прелоадер */
+        .loader {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #000;
+            z-index: 99999;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: opacity 0.5s, visibility 0.5s;
+        }
+        .loader.hide {
+            opacity: 0;
+            visibility: hidden;
+        }
+        .loader-spinner {
+            width: 60px;
+            height: 60px;
+            border: 4px solid rgba(255,0,51,0.2);
+            border-top-color: #ff0033;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+        .loader-text {
+            margin-top: 20px;
+            color: #ff0033;
+            font-family: 'Orbitron', monospace;
+            letter-spacing: 2px;
+            font-size: 0.8rem;
+        }
+        @keyframes spin { to { transform: rotate(360deg); } }
+
+        /* Cookie Consent */
+        .cookie-consent {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            background: rgba(0,0,0,0.95);
+            border-top: 2px solid #ff0033;
+            padding: 1rem;
+            z-index: 10000;
+            transform: translateY(100%);
+            transition: transform 0.3s;
+            text-align: center;
+            backdrop-filter: blur(10px);
+        }
+        .cookie-consent.active { transform: translateY(0); }
+        .cookie-consent p { margin-bottom: 10px; font-size: 0.85rem; }
+        .cookie-btn {
+            background: #ff0033;
+            color: white;
+            border: none;
+            padding: 8px 24px;
+            border-radius: 30px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: all 0.2s;
+        }
+        .cookie-btn:hover { transform: scale(1.02); box-shadow: 0 0 15px rgba(255,0,51,0.5); }
+
+        /* Lightbox */
+        .lightbox {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0,0,0,0.96);
+            z-index: 10001;
+            justify-content: center;
+            align-items: center;
+            cursor: pointer;
+        }
+        .lightbox.active { display: flex; }
+        .lightbox img {
+            max-width: 90%;
+            max-height: 90%;
+            border: 3px solid #ff0033;
+            border-radius: 10px;
+            box-shadow: 0 0 50px rgba(255,0,51,0.3);
         }
 
         .glow-bg {
@@ -248,6 +335,12 @@
         .switch-form { margin-top: 1rem; color: #aaa; cursor: pointer; transition: color 0.2s; }
         .switch-form:hover { color: #ff0033; }
 
+        .error-msg {
+            color: #ff6666;
+            font-size: 0.8rem;
+            margin: 0.5rem 0;
+        }
+
         .page { display: none; animation: pageFadeIn 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1); padding: 2rem 0 3rem; }
         .page.active { display: block; }
         @keyframes pageFadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
@@ -337,10 +430,11 @@
             font-weight: 600;
             transition: all 0.2s;
             font-size: 0.85rem;
+            text-decoration: none;
         }
         .trailer-btn:hover { background: #ff0033; color: #000; transform: scale(1.02); }
 
-        /* FOOTER - УМЕНЬШЕННЫЕ КНОПКИ ПЕРЕКЛЮЧЕНИЯ ЯЗЫКОВ */
+        /* FOOTER */
         .footer {
             margin-top: 3rem;
             background: #000000cc;
@@ -367,7 +461,6 @@
             display: inline-block;
         }
         
-        /* Language Switcher - УМЕНЬШЕННЫЕ КНОПКИ */
         .footer-lang-switch {
             display: flex;
             justify-content: center;
@@ -409,23 +502,117 @@
             position: fixed;
             bottom: 20px;
             right: 20px;
-            left: 20px;
-            padding: 10px 20px;
+            padding: 12px 24px;
             border-radius: 40px;
             z-index: 9999;
             font-weight: bold;
-            animation: fadeOut 3s forwards;
+            animation: slideInRight 0.3s ease, fadeOut 3s forwards 2.7s;
             text-align: center;
             font-size: 0.85rem;
+            max-width: 300px;
+            box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+        @keyframes slideInRight {
+            from { transform: translateX(100%); opacity: 0; }
+            to { transform: translateX(0); opacity: 1; }
         }
         .toast.success { background: #0033ff; color: #fff; }
         .toast.error { background: #ff0033; color: #fff; }
         .toast.info { background: #1a1a2e; color: #ff0033; border: 1px solid #ff0033; }
         @keyframes fadeOut {
-            0% { opacity: 1; transform: translateX(0); }
-            70% { opacity: 1; }
-            100% { opacity: 0; transform: translateX(100px); display: none; }
+            to { opacity: 0; visibility: hidden; }
         }
+
+        /* Прогресс-бар в профиле */
+        .progress-bar {
+            width: 100%;
+            height: 8px;
+            background: rgba(255,255,255,0.1);
+            border-radius: 4px;
+            overflow: hidden;
+            margin: 10px 0;
+        }
+        .progress-fill {
+            height: 100%;
+            background: linear-gradient(90deg, #ff0033, #0033ff);
+            width: 0%;
+            transition: width 0.3s;
+        }
+        .stats-grid {
+            display: flex;
+            justify-content: space-around;
+            margin: 1rem 0;
+        }
+        .stat-item {
+            text-align: center;
+        }
+        .stat-value {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #ff0033;
+        }
+        .info-row {
+            margin: 0.5rem 0;
+            font-size: 0.85rem;
+            text-align: left;
+            display: flex;
+            justify-content: space-between;
+        }
+        .achievements-grid {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 0.5rem;
+            margin: 1rem 0;
+            justify-content: center;
+        }
+        .achievement {
+            background: rgba(255,0,51,0.15);
+            border-radius: 20px;
+            padding: 0.3rem 0.8rem;
+            font-size: 0.7rem;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+        .dev-stats {
+            display: flex;
+            justify-content: space-around;
+            margin: 1rem 0;
+        }
+        .dev-stat-card {
+            text-align: center;
+            background: rgba(255,0,51,0.1);
+            padding: 0.8rem;
+            border-radius: 16px;
+            min-width: 80px;
+        }
+        .dev-stat-value {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ff0033;
+        }
+        .users-list {
+            max-height: 300px;
+            overflow-y: auto;
+            margin: 1rem 0;
+        }
+        .user-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0.5rem;
+            border-bottom: 1px solid rgba(255,0,51,0.2);
+        }
+        .delete-user-btn {
+            background: rgba(255,0,0,0.2);
+            border: 1px solid #ff0033;
+            color: #ff6666;
+            padding: 0.2rem 0.8rem;
+            border-radius: 20px;
+            cursor: pointer;
+            font-size: 0.7rem;
+        }
+        .delete-user-btn:hover { background: #ff0033; color: #000; }
 
         @media (max-width: 800px) {
             .container { padding: 0 1rem; }
@@ -471,14 +658,6 @@
             .modal-content h2 { font-size: 1.2rem; margin-bottom: 1rem; }
             .modal-content input { padding: 0.7rem; font-size: 0.9rem; }
             .modal-content button { padding: 0.7rem; font-size: 0.9rem; }
-            .stats-grid { gap: 1rem; }
-            .stat-item { min-width: 70px; padding: 0.5rem; }
-            .stat-value { font-size: 1.3rem; }
-            .info-row { font-size: 0.75rem; }
-            .achievement { padding: 0.3rem 0.7rem; font-size: 0.6rem; }
-            .dev-stats { grid-template-columns: repeat(2, 1fr); gap: 0.8rem; }
-            .dev-stat-card { padding: 0.7rem; }
-            .dev-stat-value { font-size: 1.3rem; }
         }
 
         @media (max-width: 480px) {
@@ -492,6 +671,20 @@
     </style>
 </head>
 <body>
+
+<!-- Прелоадер -->
+<div class="loader" id="loader">
+    <div style="text-align:center;">
+        <div class="loader-spinner"></div>
+    </div>
+</div>
+
+<!-- Cookie Consent -->
+<div class="cookie-consent" id="cookieConsent">
+    <p>🍪 Мы используем файлы cookie для улучшения работы сайта. Продолжая использовать сайт, вы соглашаетесь с этим.</p>
+    <button class="cookie-btn" id="acceptCookies">Принять</button>
+</div>
+
 <div class="glow-bg"></div>
 <div class="floating-neon"></div><div class="floating-neon"></div><div class="floating-neon"></div><div class="floating-neon"></div><div class="floating-neon"></div>
 <div class="scan-line"></div>
@@ -521,7 +714,9 @@
     </div>
 
     <div id="authModal" class="modal"><div class="modal-content"><h2 id="modalTitle"><i class="fas fa-key"></i> ВХОД</h2><input type="text" id="authLogin" placeholder="Логин"><input type="password" id="authPassword" placeholder="Пароль"><div id="authError" class="error-msg"></div><button id="authSubmitBtn">Войти</button><div class="switch-form" id="switchFormBtn">Нет аккаунта? Регистрация</div><div class="switch-form" id="closeModalBtn">Закрыть</div></div></div>
-    <div id="profileModal" class="modal"><div class="modal-content"><h2><i class="fas fa-user-circle"></i> <span class="profile-title">ПРОФИЛЬ</span></h2><div class="stats-grid"><div class="stat-item"><div class="stat-value" id="profileLevel">1</div><div class="stat-label-level">Уровень</div></div><div class="stat-item"><div class="stat-value" id="profileXp">0</div><div class="stat-label-xp">XP</div></div><div class="stat-item"><div class="stat-value" id="profileHours">0</div><div class="stat-label-hours">Часов</div></div></div><div class="info-row"><span class="info-reg-label">📅 Регистрация:</span><span id="profileRegDate"></span></div><div class="info-row"><span class="info-visit-label">🕐 Последний визит:</span><span id="profileLastVisit"></span></div><div class="info-row"><span class="info-logins-label">🔑 Входов:</span><span id="profileLogins"></span></div><div class="achievements-grid" id="achievementsList"></div><button id="closeProfileBtn">Закрыть</button></div></div>
+    
+    <div id="profileModal" class="modal"><div class="modal-content"><h2><i class="fas fa-user-circle"></i> <span class="profile-title">ПРОФИЛЬ</span></h2><div class="stats-grid"><div class="stat-item"><div class="stat-value" id="profileLevel">1</div><div class="stat-label-level">Уровень</div></div><div class="stat-item"><div class="stat-value" id="profileXp">0</div><div class="stat-label-xp">XP</div></div><div class="stat-item"><div class="stat-value" id="profileHours">0</div><div class="stat-label-hours">Часов</div></div></div><div class="progress-bar"><div class="progress-fill" id="profileProgress"></div></div><div id="xpToNext" style="text-align:center; font-size:0.7rem; margin-bottom:1rem; color:#888;"></div><div class="info-row"><span class="info-reg-label">📅 Регистрация:</span><span id="profileRegDate"></span></div><div class="info-row"><span class="info-visit-label">🕐 Последний визит:</span><span id="profileLastVisit"></span></div><div class="info-row"><span class="info-logins-label">🔑 Входов:</span><span id="profileLogins"></span></div><div class="achievements-grid" id="achievementsList"></div><button id="closeProfileBtn">Закрыть</button></div></div>
+    
     <div id="devModal" class="modal"><div class="modal-content"><h2><i class="fas fa-code"></i> <span class="dev-title">DEV ПАНЕЛЬ</span></h2><div class="dev-stats"><div class="dev-stat-card"><div class="dev-stat-value" id="devTotalUsers">0</div><div class="dev-stat-users-label">Пользователей</div></div><div class="dev-stat-card"><div class="dev-stat-value" id="devTotalLogins">0</div><div class="dev-stat-logins-label">Входов</div></div><div class="dev-stat-card"><div class="dev-stat-value" id="devAvgLevel">0</div><div class="dev-stat-avg-label">Ср. уровень</div></div></div><div class="users-list" id="usersList"></div><button id="closeDevBtn">Закрыть</button></div></div>
 
     <div id="home-page" class="page active">
@@ -547,7 +742,7 @@
             <div class="game-features"><div class="feature">⚔️ <span class="games-feature1">5+ уникальных боссов</span></div><div class="feature">🎮 <span class="games-feature2">Необычные механики</span></div><div class="feature">🎌 <span class="games-feature3">Имбовый сюжет</span></div><div class="feature">🎵 <span class="games-feature4">Крутой саундтрек</span></div><div class="feature">📖 <span class="games-feature5">3 концовки</span></div><div class="feature">🌆 <span class="games-feature6">Атмосфера японии</span></div></div>
             <div style="text-align:center;"><button class="trailer-btn" id="gameTrailerBtn"><i class="fab fa-youtube"></i> <span class="games-trailer-btn">СМОТРЕТЬ ТРЕЙЛЕР</span></button></div>
         </div>
-        <div class="gallery-section"><div class="gallery-title"><i class="fas fa-images"></i> <span class="gallery-title-text">ГАЛЕРЕЯ 🖼️</span></div><div class="screenshots-grid"><div class="screenshot-card"><img class="screenshot-img" src="https://s10.iimage.su/s/16/gXDRR9lxo3N5ybBG4YzqHiU6H7H7tAIuYlGDV0Dsm.png"><div class="screenshot-label screenshot-label1">Начало 🌅</div></div><div class="screenshot-card"><img class="screenshot-img" src="https://s10.iimage.su/s/16/gXJ7cmDxhdcTAMK4fbUyzBp2rPiVFA2CysEXDbaKS.png"><div class="screenshot-label screenshot-label2">Сено 🌾</div></div></div></div>
+        <div class="gallery-section"><div class="gallery-title"><i class="fas fa-images"></i> <span class="gallery-title-text">ГАЛЕРЕЯ 🖼️</span></div><div class="screenshots-grid"><div class="screenshot-card"><img class="screenshot-img" src="https://s10.iimage.su/s/16/gXDRR9lxo3N5ybBG4YzqHiU6H7H7tAIuYlGDV0Dsm.png" alt="Начало 🌅"><div class="screenshot-label screenshot-label1">Начало 🌅</div></div><div class="screenshot-card"><img class="screenshot-img" src="https://s10.iimage.su/s/16/gXJ7cmDxhdcTAMK4fbUyzBp2rPiVFA2CysEXDbaKS.png" alt="Сено 🌾"><div class="screenshot-label screenshot-label2">Сено 🌾</div></div></div></div>
     </div>
 
     <div id="news-page" class="page">
@@ -568,7 +763,6 @@
             <a href="#"><i class="fab fa-discord"></i></a>
         </div>
         
-        <!-- Language Switcher - УМЕНЬШЕННЫЕ КНОПКИ (ТОЛЬКО БУКВЫ) -->
         <div class="footer-lang-switch">
             <div class="footer-lang-option" data-lang="ru">RUS</div>
             <div class="footer-lang-option" data-lang="en">ENG</div>
@@ -577,7 +771,7 @@
         </div>
         
         <div class="footer-copyright">
-            <p>© 2026 InterFex Games | <span class="footer-emoji">⚔️🎮🌆</span> | <span class="footer-lang">侍</span></p>
+            <p>© 2026 InterFex Games | <span class="footer-emoji">⚔️🎮🌆</span></p>
         </div>
     </div>
 </div>
@@ -740,69 +934,270 @@
     };
 
     let currentLang = 'ru';
+    let currentUser = null;
+    let isLoginMode = true;
 
+    const GAME = { trailerUrl: 'https://www.youtube.com/watch?v=wk-pG71oGyE' };
+    const ACHIEVEMENTS = [
+        { id: 'first', name: 'Первый шаг', icon: 'fa-user-plus', ru: 'Первый шаг', en: 'First Step', fr: 'Premier pas', jp: '最初の一歩', check: () => true },
+        { id: 'veteran', name: 'Ветеран', icon: 'fa-star', ru: 'Ветеран', en: 'Veteran', fr: 'Vétéran', jp: 'ベテラン', check: (u) => (u.level || 1) >= 5 },
+        { id: 'legend', name: 'Легенда', icon: 'fa-crown', ru: 'Легенда', en: 'Legend', fr: 'Légende', jp: '伝説', check: (u) => (u.level || 1) >= 10 }
+    ];
+
+    // ==================== USER MANAGEMENT ====================
+    function loadUsers() {
+        const data = localStorage.getItem('interfex_users_v2');
+        if (data) return JSON.parse(data);
+        const now = new Date().toISOString();
+        return [
+            { login: 'admin', password: 'admin123', level: 10, xp: 850, totalHours: 120, isAdmin: true, registeredAt: now, lastVisit: now, loginCount: 1 },
+            { login: 'test', password: '123', level: 3, xp: 150, totalHours: 12, isAdmin: false, registeredAt: now, lastVisit: now, loginCount: 1 }
+        ];
+    }
+
+    function saveUsers(users) { localStorage.setItem('interfex_users_v2', JSON.stringify(users)); }
+
+    function showToast(msg, type = 'info') {
+        const existingToasts = document.querySelectorAll('.toast');
+        existingToasts.forEach(t => t.remove());
+        
+        const toast = document.createElement('div');
+        toast.className = `toast ${type}`;
+        toast.textContent = msg;
+        document.body.appendChild(toast);
+        setTimeout(() => toast.remove(), 3000);
+    }
+
+    function login(loginVal, passVal) {
+        let users = loadUsers();
+        const idx = users.findIndex(u => u.login === loginVal && u.password === passVal);
+        if (idx !== -1) {
+            users[idx].lastVisit = new Date().toISOString();
+            users[idx].loginCount = (users[idx].loginCount || 0) + 1;
+            saveUsers(users);
+            const forStorage = { ...users[idx] };
+            delete forStorage.password;
+            localStorage.setItem('interfex_current_user', JSON.stringify(forStorage));
+            currentUser = forStorage;
+            updateUI();
+            showToast(`Добро пожаловать, ${loginVal}!`, 'success');
+            return true;
+        }
+        return false;
+    }
+
+    function register(loginVal, passVal) {
+        let users = loadUsers();
+        if (users.find(u => u.login === loginVal)) return false;
+        const now = new Date().toISOString();
+        const newUser = { login: loginVal, password: passVal, level: 1, xp: 0, totalHours: 0, isAdmin: false, registeredAt: now, lastVisit: now, loginCount: 1 };
+        users.push(newUser);
+        saveUsers(users);
+        const forStorage = { ...newUser };
+        delete forStorage.password;
+        localStorage.setItem('interfex_current_user', JSON.stringify(forStorage));
+        currentUser = forStorage;
+        updateUI();
+        showToast(`Регистрация успешна! Добро пожаловать, ${loginVal}!`, 'success');
+        return true;
+    }
+
+    function logout() {
+        localStorage.removeItem('interfex_current_user');
+        currentUser = null;
+        updateUI();
+        showToast('Вы вышли из аккаунта', 'info');
+    }
+
+    function updateUI() {
+        const saved = localStorage.getItem('interfex_current_user');
+        if (saved) {
+            currentUser = JSON.parse(saved);
+            document.getElementById('authButtons').style.display = 'none';
+            document.getElementById('userPanel').style.display = 'flex';
+            document.getElementById('userGreeting').innerHTML = `<i class="fas fa-user-circle"></i> ${currentUser.login} (${currentUser.level || 1} lvl)`;
+            document.getElementById('devPanelBtn').style.display = currentUser.isAdmin ? 'flex' : 'none';
+        } else {
+            currentUser = null;
+            document.getElementById('authButtons').style.display = 'flex';
+            document.getElementById('userPanel').style.display = 'none';
+            document.getElementById('devPanelBtn').style.display = 'none';
+        }
+        updateUILang();
+    }
+
+    function showProfile() {
+        if (!currentUser) return;
+        const level = currentUser.level || 1;
+        const xp = currentUser.xp || 0;
+        const nextLevelXP = level * 100;
+        const progress = (xp / nextLevelXP) * 100;
+        
+        document.getElementById('profileLevel').innerText = level;
+        document.getElementById('profileXp').innerText = xp;
+        document.getElementById('profileHours').innerText = currentUser.totalHours || 0;
+        document.getElementById('profileRegDate').innerText = currentUser.registeredAt ? new Date(currentUser.registeredAt).toLocaleDateString() : '—';
+        document.getElementById('profileLastVisit').innerText = currentUser.lastVisit ? new Date(currentUser.lastVisit).toLocaleDateString() : '—';
+        document.getElementById('profileLogins').innerText = currentUser.loginCount || 0;
+        document.getElementById('profileProgress').style.width = `${Math.min(progress, 100)}%`;
+        document.getElementById('xpToNext').innerText = `${xp}/${nextLevelXP} XP до ${level + 1} уровня`;
+        
+        const t = translations[currentLang];
+        const achievementsList = ACHIEVEMENTS.map(ach => {
+            let name = ach[currentLang] || ach.ru;
+            return `<div class="achievement"><i class="fas ${ach.icon}"></i> ${name}</div>`;
+        }).join('');
+        document.getElementById('achievementsList').innerHTML = achievementsList;
+        
+        openModal('profileModal');
+    }
+
+    function showDevPanel() {
+        if (!currentUser || !currentUser.isAdmin) return;
+        const users = loadUsers();
+        document.getElementById('devTotalUsers').innerText = users.length;
+        let logins = 0, levels = 0;
+        users.forEach(u => { logins += (u.loginCount || 0); levels += (u.level || 1); });
+        document.getElementById('devTotalLogins').innerText = logins;
+        document.getElementById('devAvgLevel').innerText = (levels / users.length).toFixed(1);
+        document.getElementById('usersList').innerHTML = users.map(u => `<div class="user-item"><div><strong>${u.login}</strong><br><span style="font-size:0.7rem;">ур.${u.level || 1} | входов:${u.loginCount || 0}</span></div><button class="delete-user-btn" data-login="${u.login}" ${u.login === 'admin' ? 'disabled' : ''}>Удалить</button></div>`).join('');
+        document.querySelectorAll('.delete-user-btn').forEach(btn => { if (!btn.disabled) btn.onclick = () => { let newUsers = users.filter(u => u.login !== btn.dataset.login); saveUsers(newUsers); if (currentUser.login === btn.dataset.login) logout(); else showDevPanel(); showToast('Пользователь удалён', 'success'); }; });
+        openModal('devModal');
+    }
+
+    // ==================== MODAL FUNCTIONS ====================
+    function openModal(id) { document.getElementById(id).classList.add('active'); }
+    function closeModal(id) { document.getElementById(id).classList.remove('active'); }
+
+    // ==================== PAGE NAVIGATION ====================
+    const pages = { home: document.getElementById('home-page'), games: document.getElementById('games-page'), news: document.getElementById('news-page'), studio: document.getElementById('studio-page') };
+    function showPage(pageId) { Object.values(pages).forEach(p => p.classList.remove('active')); if (pages[pageId]) pages[pageId].classList.add('active'); document.querySelectorAll('.nav-btn[data-page]').forEach(btn => btn.classList.toggle('active', btn.getAttribute('data-page') === pageId)); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+
+    // ==================== MULTILINGUAL ====================
     function updateUILang() {
         const t = translations[currentLang];
-        document.querySelector('.nav-btn[data-page="home"] .nav-text').textContent = t.navHome;
-        document.querySelector('.nav-btn[data-page="games"] .nav-text').textContent = t.navGame;
-        document.querySelector('.nav-btn[data-page="news"] .nav-text').textContent = t.navNews;
-        document.querySelector('.nav-btn[data-page="studio"] .nav-text').textContent = t.navStudio;
+        const navHome = document.querySelector('.nav-btn[data-page="home"] .nav-text');
+        const navGame = document.querySelector('.nav-btn[data-page="games"] .nav-text');
+        const navNews = document.querySelector('.nav-btn[data-page="news"] .nav-text');
+        const navStudio = document.querySelector('.nav-btn[data-page="studio"] .nav-text');
+        if (navHome) navHome.textContent = t.navHome;
+        if (navGame) navGame.textContent = t.navGame;
+        if (navNews) navNews.textContent = t.navNews;
+        if (navStudio) navStudio.textContent = t.navStudio;
         const devSpan = document.querySelector('#devPanelBtn .nav-text');
         if (devSpan) devSpan.textContent = t.navDev;
-        document.querySelector('#loginBtn .nav-text').textContent = t.loginBtn;
-        document.querySelector('#registerBtn .nav-text').textContent = t.registerBtn;
-        document.querySelector('.tagline-text').textContent = t.tagline;
-        document.querySelector('.game-section-title').textContent = t.gameSection;
-        document.querySelector('.home-desc-text').textContent = t.homeDesc;
-        document.querySelector('.feature-boss').textContent = t.featureBoss;
-        document.querySelector('.feature-duel').textContent = t.featureDuel;
-        document.querySelector('.feature-ending').textContent = t.featureEnding;
-        document.querySelector('#mainTrailerBtn .trailer-btn-text').textContent = t.trailerBtn;
-        document.querySelector('.game-badge-text').textContent = t.gameBadge;
-        document.querySelector('.games-title').textContent = t.gamesTitle;
-        document.querySelector('.games-badge-text').textContent = t.gamesBadge;
-        document.querySelector('.games-desc-text').textContent = t.gamesDesc;
-        document.querySelector('.games-feature1').textContent = t.gamesFeature1;
-        document.querySelector('.games-feature2').textContent = t.gamesFeature2;
-        document.querySelector('.games-feature3').textContent = t.gamesFeature3;
-        document.querySelector('.games-feature4').textContent = t.gamesFeature4;
-        document.querySelector('.games-feature5').textContent = t.gamesFeature5;
-        document.querySelector('.games-feature6').textContent = t.gamesFeature6;
-        document.querySelector('#gameTrailerBtn .games-trailer-btn').textContent = t.gamesTrailerBtn;
-        document.querySelector('.gallery-title-text').textContent = t.galleryTitle;
-        document.querySelector('.screenshot-label1').textContent = t.screenshot1;
-        document.querySelector('.screenshot-label2').textContent = t.screenshot2;
-        document.querySelector('.news-title-text').textContent = t.newsTitle;
-        document.querySelector('.timeline-title1').textContent = t.newsTitle1;
-        document.querySelector('.timeline-text1').textContent = t.newsText1;
-        document.querySelector('.timeline-title2').textContent = t.newsTitle2;
-        document.querySelector('.timeline-text2').textContent = t.newsText2;
-        document.querySelector('.timeline-title3').textContent = t.newsTitle3;
-        document.querySelector('.timeline-text3').textContent = t.newsText3;
-        document.querySelector('.studio-title-text').textContent = t.studioTitle;
-        document.querySelector('.studio-desc1').innerHTML = t.studioDesc1;
-        document.querySelector('.studio-desc2').innerHTML = t.studioDesc2;
-        document.querySelector('.studio-desc3').innerHTML = t.studioDesc3;
-        document.querySelector('.stat-label-dev').textContent = t.studioStat1;
-        document.querySelector('.stat-label-project').textContent = t.studioStat2;
-        document.querySelector('.stat-label-year').textContent = t.studioStat3;
-        document.querySelector('#modalTitle').innerHTML = (isLoginMode ? '<i class="fas fa-key"></i> ' : '<i class="fas fa-user-plus"></i> ') + (isLoginMode ? t.loginModalTitle : t.registerModalTitle);
-        document.querySelector('#authSubmitBtn').textContent = isLoginMode ? t.loginSubmit : t.registerSubmit;
-        document.querySelector('#switchFormBtn').textContent = isLoginMode ? t.switchToRegister : t.switchToLogin;
-        document.querySelector('#closeModalBtn').textContent = t.closeModal;
-        document.querySelector('.profile-title').textContent = t.profile;
-        document.querySelector('.stat-label-level').textContent = t.level;
-        document.querySelector('.stat-label-xp').textContent = t.xp;
-        document.querySelector('.stat-label-hours').textContent = t.hours;
-        document.querySelector('.info-reg-label').textContent = t.regDate;
-        document.querySelector('.info-visit-label').textContent = t.lastVisit;
-        document.querySelector('.info-logins-label').textContent = t.loginsCount;
-        document.querySelector('#closeProfileBtn').textContent = t.closeProfile;
-        document.querySelector('.dev-title').textContent = t.devPanel;
-        document.querySelector('.dev-stat-users-label').textContent = t.totalUsers;
-        document.querySelector('.dev-stat-logins-label').textContent = t.totalLogins;
-        document.querySelector('.dev-stat-avg-label').textContent = t.avgLevel;
-        document.querySelector('#closeDevBtn').textContent = t.closeDev;
+        const loginBtnSpan = document.querySelector('#loginBtn .nav-text');
+        const registerBtnSpan = document.querySelector('#registerBtn .nav-text');
+        if (loginBtnSpan) loginBtnSpan.textContent = t.loginBtn;
+        if (registerBtnSpan) registerBtnSpan.textContent = t.registerBtn;
+        
+        const taglineEl = document.querySelector('.tagline-text');
+        if (taglineEl) taglineEl.textContent = t.tagline;
+        const gameSectionEl = document.querySelector('.game-section-title');
+        if (gameSectionEl) gameSectionEl.textContent = t.gameSection;
+        const homeDescEl = document.querySelector('.home-desc-text');
+        if (homeDescEl) homeDescEl.textContent = t.homeDesc;
+        const featureBossEl = document.querySelector('.feature-boss');
+        if (featureBossEl) featureBossEl.textContent = t.featureBoss;
+        const featureDuelEl = document.querySelector('.feature-duel');
+        if (featureDuelEl) featureDuelEl.textContent = t.featureDuel;
+        const featureEndingEl = document.querySelector('.feature-ending');
+        if (featureEndingEl) featureEndingEl.textContent = t.featureEnding;
+        const trailerBtnSpan = document.querySelector('#mainTrailerBtn .trailer-btn-text');
+        if (trailerBtnSpan) trailerBtnSpan.textContent = t.trailerBtn;
+        const gameBadgeEl = document.querySelector('.game-badge-text');
+        if (gameBadgeEl) gameBadgeEl.textContent = t.gameBadge;
+        const gamesTitleEl = document.querySelector('.games-title');
+        if (gamesTitleEl) gamesTitleEl.textContent = t.gamesTitle;
+        const gamesBadgeEl = document.querySelector('.games-badge-text');
+        if (gamesBadgeEl) gamesBadgeEl.textContent = t.gamesBadge;
+        const gamesDescEl = document.querySelector('.games-desc-text');
+        if (gamesDescEl) gamesDescEl.textContent = t.gamesDesc;
+        const gamesFeature1 = document.querySelector('.games-feature1');
+        if (gamesFeature1) gamesFeature1.textContent = t.gamesFeature1;
+        const gamesFeature2 = document.querySelector('.games-feature2');
+        if (gamesFeature2) gamesFeature2.textContent = t.gamesFeature2;
+        const gamesFeature3 = document.querySelector('.games-feature3');
+        if (gamesFeature3) gamesFeature3.textContent = t.gamesFeature3;
+        const gamesFeature4 = document.querySelector('.games-feature4');
+        if (gamesFeature4) gamesFeature4.textContent = t.gamesFeature4;
+        const gamesFeature5 = document.querySelector('.games-feature5');
+        if (gamesFeature5) gamesFeature5.textContent = t.gamesFeature5;
+        const gamesFeature6 = document.querySelector('.games-feature6');
+        if (gamesFeature6) gamesFeature6.textContent = t.gamesFeature6;
+        const gamesTrailerSpan = document.querySelector('#gameTrailerBtn .games-trailer-btn');
+        if (gamesTrailerSpan) gamesTrailerSpan.textContent = t.gamesTrailerBtn;
+        const galleryTitleEl = document.querySelector('.gallery-title-text');
+        if (galleryTitleEl) galleryTitleEl.textContent = t.galleryTitle;
+        const screenshotLabel1 = document.querySelector('.screenshot-label1');
+        if (screenshotLabel1) screenshotLabel1.textContent = t.screenshot1;
+        const screenshotLabel2 = document.querySelector('.screenshot-label2');
+        if (screenshotLabel2) screenshotLabel2.textContent = t.screenshot2;
+        const newsTitleEl = document.querySelector('.news-title-text');
+        if (newsTitleEl) newsTitleEl.textContent = t.newsTitle;
+        const timelineTitle1 = document.querySelector('.timeline-title1');
+        if (timelineTitle1) timelineTitle1.textContent = t.newsTitle1;
+        const timelineText1 = document.querySelector('.timeline-text1');
+        if (timelineText1) timelineText1.textContent = t.newsText1;
+        const timelineTitle2 = document.querySelector('.timeline-title2');
+        if (timelineTitle2) timelineTitle2.textContent = t.newsTitle2;
+        const timelineText2 = document.querySelector('.timeline-text2');
+        if (timelineText2) timelineText2.textContent = t.newsText2;
+        const timelineTitle3 = document.querySelector('.timeline-title3');
+        if (timelineTitle3) timelineTitle3.textContent = t.newsTitle3;
+        const timelineText3 = document.querySelector('.timeline-text3');
+        if (timelineText3) timelineText3.textContent = t.newsText3;
+        const studioTitleEl = document.querySelector('.studio-title-text');
+        if (studioTitleEl) studioTitleEl.textContent = t.studioTitle;
+        const studioDesc1 = document.querySelector('.studio-desc1');
+        if (studioDesc1) studioDesc1.innerHTML = t.studioDesc1;
+        const studioDesc2 = document.querySelector('.studio-desc2');
+        if (studioDesc2) studioDesc2.innerHTML = t.studioDesc2;
+        const studioDesc3 = document.querySelector('.studio-desc3');
+        if (studioDesc3) studioDesc3.innerHTML = t.studioDesc3;
+        const statLabelDev = document.querySelector('.stat-label-dev');
+        if (statLabelDev) statLabelDev.textContent = t.studioStat1;
+        const statLabelProject = document.querySelector('.stat-label-project');
+        if (statLabelProject) statLabelProject.textContent = t.studioStat2;
+        const statLabelYear = document.querySelector('.stat-label-year');
+        if (statLabelYear) statLabelYear.textContent = t.studioStat3;
+        
+        const modalTitle = document.getElementById('modalTitle');
+        if (modalTitle) modalTitle.innerHTML = (isLoginMode ? '<i class="fas fa-key"></i> ' : '<i class="fas fa-user-plus"></i> ') + (isLoginMode ? t.loginModalTitle : t.registerModalTitle);
+        const authSubmitBtn = document.getElementById('authSubmitBtn');
+        if (authSubmitBtn) authSubmitBtn.textContent = isLoginMode ? t.loginSubmit : t.registerSubmit;
+        const switchFormBtn = document.getElementById('switchFormBtn');
+        if (switchFormBtn) switchFormBtn.textContent = isLoginMode ? t.switchToRegister : t.switchToLogin;
+        const closeModalBtn = document.getElementById('closeModalBtn');
+        if (closeModalBtn) closeModalBtn.textContent = t.closeModal;
+        
+        const profileTitle = document.querySelector('.profile-title');
+        if (profileTitle) profileTitle.textContent = t.profile;
+        const statLabelLevel = document.querySelector('.stat-label-level');
+        if (statLabelLevel) statLabelLevel.textContent = t.level;
+        const statLabelXp = document.querySelector('.stat-label-xp');
+        if (statLabelXp) statLabelXp.textContent = t.xp;
+        const statLabelHours = document.querySelector('.stat-label-hours');
+        if (statLabelHours) statLabelHours.textContent = t.hours;
+        const infoRegLabel = document.querySelector('.info-reg-label');
+        if (infoRegLabel) infoRegLabel.textContent = t.regDate;
+        const infoVisitLabel = document.querySelector('.info-visit-label');
+        if (infoVisitLabel) infoVisitLabel.textContent = t.lastVisit;
+        const infoLoginsLabel = document.querySelector('.info-logins-label');
+        if (infoLoginsLabel) infoLoginsLabel.textContent = t.loginsCount;
+        const closeProfileBtn = document.getElementById('closeProfileBtn');
+        if (closeProfileBtn) closeProfileBtn.textContent = t.closeProfile;
+        
+        const devTitle = document.querySelector('.dev-title');
+        if (devTitle) devTitle.textContent = t.devPanel;
+        const devStatUsersLabel = document.querySelector('.dev-stat-users-label');
+        if (devStatUsersLabel) devStatUsersLabel.textContent = t.totalUsers;
+        const devStatLoginsLabel = document.querySelector('.dev-stat-logins-label');
+        if (devStatLoginsLabel) devStatLoginsLabel.textContent = t.totalLogins;
+        const devStatAvgLabel = document.querySelector('.dev-stat-avg-label');
+        if (devStatAvgLabel) devStatAvgLabel.textContent = t.avgLevel;
+        const closeDevBtn = document.getElementById('closeDevBtn');
+        if (closeDevBtn) closeDevBtn.textContent = t.closeDev;
     }
 
     function setLanguage(lang) {
@@ -824,114 +1219,7 @@
         return 'en';
     }
 
-    const GAME = { trailerUrl: 'https://www.youtube.com/watch?v=wk-pG71oGyE' };
-    const ACHIEVEMENTS = [
-        { id: 'first', name: 'Первый шаг', icon: 'fa-user-plus', check: () => true },
-        { id: 'veteran', name: 'Ветеран', icon: 'fa-star', check: (u) => (u.level || 1) >= 5 },
-        { id: 'legend', name: 'Легенда', icon: 'fa-crown', check: (u) => (u.level || 1) >= 10 }
-    ];
-
-    let currentUser = null;
-    function loadUsers() {
-        const data = localStorage.getItem('interfex_users_v2');
-        if (data) return JSON.parse(data);
-        const now = new Date().toISOString();
-        return [
-            { login: 'admin', password: 'admin123', level: 10, xp: 1000, totalHours: 120, isAdmin: true, registeredAt: now, lastVisit: now, loginCount: 1 },
-            { login: 'test', password: '123', level: 3, xp: 150, totalHours: 12, isAdmin: false, registeredAt: now, lastVisit: now, loginCount: 1 }
-        ];
-    }
-    function saveUsers(users) { localStorage.setItem('interfex_users_v2', JSON.stringify(users)); }
-    function showToast(msg, type = 'info') {
-        const toast = document.createElement('div');
-        toast.className = `toast ${type}`;
-        toast.textContent = msg;
-        document.body.appendChild(toast);
-        setTimeout(() => toast.remove(), 3000);
-    }
-    function login(loginVal, passVal) {
-        let users = loadUsers();
-        const idx = users.findIndex(u => u.login === loginVal && u.password === passVal);
-        if (idx !== -1) {
-            users[idx].lastVisit = new Date().toISOString();
-            users[idx].loginCount++;
-            saveUsers(users);
-            const forStorage = { ...users[idx] };
-            delete forStorage.password;
-            localStorage.setItem('interfex_current_user', JSON.stringify(forStorage));
-            currentUser = forStorage;
-            updateUI();
-            showToast(`Добро пожаловать, ${loginVal}!`, 'success');
-            return true;
-        }
-        return false;
-    }
-    function register(loginVal, passVal) {
-        let users = loadUsers();
-        if (users.find(u => u.login === loginVal)) return false;
-        const now = new Date().toISOString();
-        const newUser = { login: loginVal, password: passVal, level: 1, xp: 0, totalHours: 0, isAdmin: false, registeredAt: now, lastVisit: now, loginCount: 1 };
-        users.push(newUser);
-        saveUsers(users);
-        const forStorage = { ...newUser };
-        delete forStorage.password;
-        localStorage.setItem('interfex_current_user', JSON.stringify(forStorage));
-        currentUser = forStorage;
-        updateUI();
-        showToast(`Регистрация успешна! Добро пожаловать, ${loginVal}!`, 'success');
-        return true;
-    }
-    function logout() {
-        localStorage.removeItem('interfex_current_user');
-        currentUser = null;
-        updateUI();
-        showToast('Вы вышли из аккаунта', 'info');
-    }
-    function updateUI() {
-        const saved = localStorage.getItem('interfex_current_user');
-        if (saved) {
-            currentUser = JSON.parse(saved);
-            document.getElementById('authButtons').style.display = 'none';
-            document.getElementById('userPanel').style.display = 'flex';
-            document.getElementById('userGreeting').innerHTML = `<i class="fas fa-user-circle"></i> ${currentUser.login} (${currentUser.level || 1} lvl)`;
-            document.getElementById('devPanelBtn').style.display = currentUser.isAdmin ? 'flex' : 'none';
-        } else {
-            currentUser = null;
-            document.getElementById('authButtons').style.display = 'flex';
-            document.getElementById('userPanel').style.display = 'none';
-            document.getElementById('devPanelBtn').style.display = 'none';
-        }
-        updateUILang();
-    }
-    function showProfile() {
-        if (!currentUser) return;
-        document.getElementById('profileLevel').innerText = currentUser.level || 1;
-        document.getElementById('profileXp').innerText = currentUser.xp || 0;
-        document.getElementById('profileHours').innerText = currentUser.totalHours || 0;
-        document.getElementById('profileRegDate').innerText = currentUser.registeredAt ? new Date(currentUser.registeredAt).toLocaleDateString() : '—';
-        document.getElementById('profileLastVisit').innerText = currentUser.lastVisit ? new Date(currentUser.lastVisit).toLocaleDateString() : '—';
-        document.getElementById('profileLogins').innerText = currentUser.loginCount || 0;
-        document.getElementById('achievementsList').innerHTML = ACHIEVEMENTS.map(ach => `<div class="achievement"><i class="fas ${ach.icon}"></i> ${ach.name}</div>`).join('');
-        openModal('profileModal');
-    }
-    function showDevPanel() {
-        if (!currentUser || !currentUser.isAdmin) return;
-        const users = loadUsers();
-        document.getElementById('devTotalUsers').innerText = users.length;
-        let logins = 0, levels = 0;
-        users.forEach(u => { logins += (u.loginCount || 0); levels += (u.level || 1); });
-        document.getElementById('devTotalLogins').innerText = logins;
-        document.getElementById('devAvgLevel').innerText = (levels / users.length).toFixed(1);
-        document.getElementById('usersList').innerHTML = users.map(u => `<div class="user-item"><div><strong>${u.login}</strong><br><span style="font-size:0.7rem;">ур.${u.level || 1} | входов:${u.loginCount || 0}</span></div><button class="delete-user-btn" data-login="${u.login}" ${u.login === 'admin' ? 'disabled' : ''}>Удалить</button></div>`).join('');
-        document.querySelectorAll('.delete-user-btn').forEach(btn => { if (!btn.disabled) btn.onclick = () => { let newUsers = users.filter(u => u.login !== btn.dataset.login); saveUsers(newUsers); if (currentUser.login === btn.dataset.login) logout(); else showDevPanel(); showToast('Пользователь удалён', 'success'); }; });
-        openModal('devModal');
-    }
-    function openModal(id) { document.getElementById(id).classList.add('active'); }
-    function closeModal(id) { document.getElementById(id).classList.remove('active'); }
-    const pages = { home: document.getElementById('home-page'), games: document.getElementById('games-page'), news: document.getElementById('news-page'), studio: document.getElementById('studio-page') };
-    function showPage(pageId) { Object.values(pages).forEach(p => p.classList.remove('active')); if (pages[pageId]) pages[pageId].classList.add('active'); document.querySelectorAll('.nav-btn[data-page]').forEach(btn => btn.classList.toggle('active', btn.getAttribute('data-page') === pageId)); window.scrollTo({ top: 0, behavior: 'smooth' }); }
-
-    let isLoginMode = true;
+    // ==================== EVENT LISTENERS ====================
     document.getElementById('loginBtn').onclick = () => { isLoginMode = true; updateUILang(); openModal('authModal'); };
     document.getElementById('registerBtn').onclick = () => { isLoginMode = false; updateUILang(); openModal('authModal'); };
     document.getElementById('switchFormBtn').onclick = () => { isLoginMode = !isLoginMode; updateUILang(); };
@@ -942,6 +1230,8 @@
     document.getElementById('logoutBtn').onclick = logout;
     document.getElementById('devPanelBtn').onclick = showDevPanel;
     document.querySelectorAll('#mainTrailerBtn, #gameTrailerBtn').forEach(btn => btn && (btn.onclick = () => window.open(GAME.trailerUrl, '_blank')));
+    document.querySelectorAll('[data-page]').forEach(btn => btn.addEventListener('click', () => showPage(btn.getAttribute('data-page'))));
+    document.querySelectorAll('.footer-lang-option').forEach(opt => opt.addEventListener('click', () => setLanguage(opt.getAttribute('data-lang'))));
 
     document.getElementById('authSubmitBtn').onclick = () => {
         const loginVal = document.getElementById('authLogin').value.trim();
@@ -949,16 +1239,51 @@
         const errorDiv = document.getElementById('authError');
         if (!loginVal || !passVal) { errorDiv.innerText = currentLang === 'ru' ? 'Заполните все поля' : (currentLang === 'en' ? 'Fill in all fields' : (currentLang === 'fr' ? 'Remplissez tous les champs' : 'すべての項目を入力してください')); return; }
         if (isLoginMode) {
-            if (login(loginVal, passVal)) { closeModal('authModal'); errorDiv.innerText = ''; }
+            if (login(loginVal, passVal)) { closeModal('authModal'); errorDiv.innerText = ''; document.getElementById('authLogin').value = ''; document.getElementById('authPassword').value = ''; }
             else errorDiv.innerText = currentLang === 'ru' ? 'Неверный логин или пароль' : (currentLang === 'en' ? 'Invalid login or password' : (currentLang === 'fr' ? 'Identifiant ou mot de passe invalide' : 'ログイン名またはパスワードが無効です'));
         } else {
-            if (register(loginVal, passVal)) { closeModal('authModal'); errorDiv.innerText = ''; }
+            if (register(loginVal, passVal)) { closeModal('authModal'); errorDiv.innerText = ''; document.getElementById('authLogin').value = ''; document.getElementById('authPassword').value = ''; }
             else errorDiv.innerText = currentLang === 'ru' ? 'Пользователь с таким логином уже существует' : (currentLang === 'en' ? 'User with this login already exists' : (currentLang === 'fr' ? 'Cet utilisateur existe déjà' : 'このログイン名は既に使用されています'));
         }
     };
 
-    document.querySelectorAll('[data-page]').forEach(btn => btn.addEventListener('click', () => showPage(btn.getAttribute('data-page'))));
-    document.querySelectorAll('.footer-lang-option').forEach(opt => opt.addEventListener('click', () => setLanguage(opt.getAttribute('data-lang'))));
+    // Lightbox для галереи
+    document.querySelectorAll('.screenshot-img').forEach(img => {
+        img.style.cursor = 'pointer';
+        img.onclick = (e) => {
+            e.stopPropagation();
+            const lightbox = document.createElement('div');
+            lightbox.className = 'lightbox';
+            lightbox.innerHTML = `<img src="${img.src}" alt="${img.alt}">`;
+            document.body.appendChild(lightbox);
+            setTimeout(() => lightbox.classList.add('active'), 10);
+            lightbox.onclick = () => {
+                lightbox.classList.remove('active');
+                setTimeout(() => lightbox.remove(), 300);
+            };
+        };
+    });
+
+    // Cookie consent
+    const cookieConsent = document.getElementById('cookieConsent');
+    if (!localStorage.getItem('cookiesAccepted')) {
+        setTimeout(() => cookieConsent.classList.add('active'), 500);
+    }
+    document.getElementById('acceptCookies').onclick = () => {
+        localStorage.setItem('cookiesAccepted', 'true');
+        cookieConsent.classList.remove('active');
+    };
+
+    // Прелоадер
+    window.addEventListener('load', () => {
+        const loader = document.getElementById('loader');
+        if(loader) {
+            setTimeout(() => loader.classList.add('hide'), 800);
+            setTimeout(() => loader.remove(), 1300);
+        }
+    });
+
+    // Инициализация
     setLanguage(detectLanguage());
     updateUI();
 </script>
