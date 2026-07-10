@@ -1,13 +1,12 @@
 <!DOCTYPE html>
 <html lang="ru">
 <head>
-    
     <link rel="icon" type="image/png" href="/InterFexOfficialWebsite/favicon-96x96.png" sizes="96x96" />
-<link rel="icon" type="image/svg+xml" href="/InterFexOfficialWebsite/favicon.svg" />
-<link rel="shortcut icon" href="/InterFexOfficialWebsite/favicon.ico" />
-<link rel="apple-touch-icon" sizes="180x180" href="/InterFexOfficialWebsite/apple-touch-icon.png" />
-<link rel="manifest" href="/InterFexOfficialWebsite/site.webmanifest" />
-<meta name="apple-mobile-web-app-title" content="InterFexWebsite" />
+    <link rel="icon" type="image/svg+xml" href="/InterFexOfficialWebsite/favicon.svg" />
+    <link rel="shortcut icon" href="/InterFexOfficialWebsite/favicon.ico" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/InterFexOfficialWebsite/apple-touch-icon.png" />
+    <link rel="manifest" href="/InterFexOfficialWebsite/site.webmanifest" />
+    <meta name="apple-mobile-web-app-title" content="InterFexWebsite" />
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>InterFex Games</title>
@@ -21,8 +20,8 @@
         }
 
         body {
-            background: #000000;
-            color: #eee;
+            background: #0a0a0a;
+            color: #ddd;
             font-family: 'Inter', 'Noto Sans JP', sans-serif;
             overflow-x: hidden;
         }
@@ -52,13 +51,6 @@
             border-top-color: #ff0033;
             border-radius: 50%;
             animation: spin 1s linear infinite;
-        }
-        .loader-text {
-            margin-top: 20px;
-            color: #ff0033;
-            font-family: 'Orbitron', monospace;
-            letter-spacing: 2px;
-            font-size: 0.8rem;
         }
         @keyframes spin { to { transform: rotate(360deg); } }
 
@@ -144,14 +136,14 @@
             position: fixed;
             border-radius: 50%;
             filter: blur(100px);
-            opacity: 0.2;
+            opacity: 0.15;
             pointer-events: none;
             z-index: -1;
             animation: float 20s infinite alternate;
         }
         .floating-neon:nth-child(1) { width: 500px; height: 500px; background: #ff0033; top: 5%; left: -10%; animation-duration: 18s; }
         .floating-neon:nth-child(2) { width: 600px; height: 600px; background: #0033ff; bottom: -10%; right: -10%; animation-duration: 25s; }
-        .floating-neon:nth-child(3) { width: 350px; height: 350px; background: #ff00ff; top: 40%; left: 60%; animation-duration: 22s; opacity: 0.15; }
+        .floating-neon:nth-child(3) { width: 350px; height: 350px; background: #ff00ff; top: 40%; left: 60%; animation-duration: 22s; opacity: 0.1; }
         .floating-neon:nth-child(4) { width: 400px; height: 400px; background: #cc0000; bottom: 20%; left: 0%; animation-duration: 28s; }
         .floating-neon:nth-child(5) { width: 300px; height: 300px; background: #0044cc; top: 70%; left: 80%; animation-duration: 19s; }
 
@@ -166,11 +158,11 @@
             left: 0;
             width: 100%;
             height: 100%;
-            background: linear-gradient(to bottom, transparent 50%, rgba(255,0,0,0.05) 50%);
+            background: linear-gradient(to bottom, transparent 50%, rgba(255,0,0,0.03) 50%);
             background-size: 100% 4px;
             pointer-events: none;
             z-index: 999;
-            opacity: 0.4;
+            opacity: 0.3;
             animation: scan 6s linear infinite;
         }
 
@@ -185,6 +177,7 @@
             padding: 0 2rem;
         }
 
+        /* ===== НАВИГАЦИЯ ===== */
         .navbar {
             display: flex;
             justify-content: space-between;
@@ -211,7 +204,7 @@
             font-weight: 900;
             font-size: 1.8rem;
             letter-spacing: 4px;
-            background: linear-gradient(135deg, #fff, #ff0033, #0033ff);
+            background: linear-gradient(135deg, #fff, #ff0033);
             -webkit-background-clip: text;
             background-clip: text;
             color: transparent;
@@ -280,6 +273,7 @@
         }
         .logout-btn:hover { background: rgba(255,0,0,0.3); border-color: #ff0033; color: #ff0033; }
 
+        /* ===== МОДАЛЬНЫЕ ОКНА (скруглённые) ===== */
         .modal {
             display: none;
             position: fixed;
@@ -341,12 +335,76 @@
             margin: 0.5rem 0;
         }
 
+        /* ===== СТРАНИЦЫ ===== */
         .page { display: none; animation: pageFadeIn 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1); padding: 2rem 0 3rem; }
         .page.active { display: block; }
         @keyframes pageFadeIn { from { opacity: 0; transform: translateY(30px); } to { opacity: 1; transform: translateY(0); } }
+
+        /* ===== ГЕРОЙ ===== */
+        .hero-section {
+            text-align: center;
+            padding: 3rem 0 2rem;
+        }
+
+        .hero-content h1 {
+            font-family: 'Orbitron', monospace;
+            font-weight: 900;
+            font-size: 4.5rem;
+            letter-spacing: 4px;
+            background: linear-gradient(135deg, #fff, #ff0033);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: titlePulse 2s infinite alternate;
+        }
+        @keyframes titlePulse { 0% { filter: drop-shadow(0 0 0 rgba(255,0,51,0)); } 100% { filter: drop-shadow(0 0 25px rgba(255,0,51,0.5)); } }
+        .hero-content .hero-tagline { font-size: 1.1rem; color: #888; margin-top: 0.5rem; }
+        .hero-content .hero-badge {
+            display: inline-block;
+            background: rgba(255,0,51,0.2);
+            border: 1px solid #ff0033;
+            border-radius: 30px;
+            padding: 0.3rem 1.5rem;
+            font-size: 0.8rem;
+            color: #ff6666;
+            margin-top: 0.8rem;
+        }
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1.5rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+        .hero-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 600;
+            font-size: 0.9rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            border: none;
+        }
+        .hero-btn-primary {
+            background: linear-gradient(135deg, #ff0033, #0033ff);
+            color: #fff;
+        }
+        .hero-btn-primary:hover { transform: scale(1.02); box-shadow: 0 0 30px rgba(255,0,51,0.4); }
+        .hero-btn-secondary {
+            background: rgba(255,255,255,0.1);
+            color: #fff;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+        .hero-btn-secondary:hover { background: rgba(255,255,255,0.2); transform: scale(1.02); }
+
+        /* ===== КАРТОЧКИ ИГР ===== */
         .section-title {
             font-size: 2rem;
-            margin: 1rem 0 2rem;
+            margin: 1.5rem 0 2rem;
             border-left: 5px solid #ff0033;
             padding-left: 1.2rem;
             display: flex;
@@ -354,19 +412,13 @@
             gap: 15px;
             font-family: 'Orbitron', monospace;
         }
-        .hero { text-align: center; padding: 3rem 0 2rem; }
-        .hero h1 {
-            font-size: 4rem;
-            font-weight: 900;
-            background: linear-gradient(135deg, #fff, #ff0033, #0033ff);
-            -webkit-background-clip: text;
-            background-clip: text;
-            color: transparent;
-            animation: titlePulse 2s infinite alternate;
-            letter-spacing: -2px;
+
+        .games-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1rem;
         }
-        @keyframes titlePulse { 0% { filter: drop-shadow(0 0 0 rgba(255,0,51,0)); } 100% { filter: drop-shadow(0 0 25px rgba(255,0,51,0.5)); } }
-        .hero .tagline { font-size: 1.1rem; color: #888; margin-top: 1rem; }
 
         .game-card {
             background: rgba(0,0,0,0.85);
@@ -377,17 +429,28 @@
             transition: all 0.4s ease;
             position: relative;
             overflow: hidden;
+            text-align: center;
         }
         .game-card::before { content: ''; position: absolute; top: 0; left: -100%; width: 100%; height: 100%; background: linear-gradient(90deg, transparent, rgba(255,0,51,0.15), transparent); transition: 0.6s; }
         .game-card:hover::before { left: 100%; }
         .game-card:hover { transform: translateY(-10px); border-color: #ff0033; box-shadow: 0 0 45px rgba(255,0,51,0.4); }
-        .game-icon { font-size: 4rem; color: #ff0033; text-align: center; text-shadow: 0 0 20px rgba(255,0,51,0.5); }
-        .game-title { font-size: 2rem; font-weight: 800; text-align: center; font-family: 'Orbitron', monospace; background: linear-gradient(135deg, #fff, #ff0033); -webkit-background-clip: text; background-clip: text; color: transparent; margin: 0.5rem 0; }
-        .game-badge { display: inline-block; background: rgba(255,0,51,0.2); border: 1px solid #ff0033; border-radius: 30px; padding: 0.25rem 1.2rem; font-size: 0.8rem; font-weight: bold; color: #ff6666; margin: 0.5rem 0; }
-        .game-desc { color: #bbb; margin: 1rem 0; line-height: 1.6; font-size: 0.95rem; }
-        .game-features { display: flex; flex-wrap: wrap; gap: 0.8rem; justify-content: center; margin: 1rem 0; }
-        .feature { background: rgba(255,0,51,0.1); border-radius: 30px; padding: 0.4rem 1rem; font-size: 0.75rem; color: #ff8888; transition: all 0.2s; }
+        .game-card .game-icon { font-size: 4rem; }
+        .game-card .game-title { font-size: 2rem; font-weight: 800; font-family: 'Orbitron', monospace; margin: 0.5rem 0; }
+        .game-card .game-genre { color: #888; font-size: 0.8rem; letter-spacing: 1px; }
+        .game-card .game-desc { color: #bbb; margin: 1rem 0; line-height: 1.6; font-size: 0.95rem; }
+        .game-card .game-features { display: flex; flex-wrap: wrap; gap: 0.8rem; justify-content: center; margin: 0.5rem 0; }
+        .game-card .feature { background: rgba(255,0,51,0.1); border-radius: 30px; padding: 0.4rem 1rem; font-size: 0.75rem; color: #ff8888; border: 1px solid rgba(255,0,51,0.1); }
+        .game-card .game-badge-bottom { margin-top: 0.8rem; font-size: 0.7rem; color: #555; letter-spacing: 1px; }
 
+        /* Скрытая игра (доступна только авторизованным) */
+        .hidden-game {
+            display: none;
+        }
+        .hidden-game.visible {
+            display: block;
+        }
+
+        /* ===== ГАЛЕРЕЯ ===== */
         .gallery-section { margin: 2rem 0; }
         .gallery-title { font-size: 1.3rem; margin: 1rem 0; color: #ff0033; font-family: 'Orbitron', monospace; }
         .screenshots-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 1.5rem; margin: 1rem 0; }
@@ -397,6 +460,7 @@
         .screenshot-card:hover .screenshot-img { transform: scale(1.02); }
         .screenshot-label { padding: 0.8rem; text-align: center; font-size: 0.8rem; color: #ccc; background: rgba(0,0,0,0.5); }
 
+        /* ===== НОВОСТИ ===== */
         .timeline { position: relative; padding: 1rem 0; }
         .timeline::before { content: ''; position: absolute; left: 16px; top: 0; bottom: 0; width: 3px; background: linear-gradient(180deg, #ff0033, #0033ff); border-radius: 3px; }
         .timeline-item { position: relative; padding-left: 45px; margin-bottom: 1.5rem; animation: slideIn 0.5s ease forwards; opacity: 0; transform: translateX(-20px); }
@@ -411,30 +475,13 @@
         .timeline-title { font-size: 1.1rem; font-weight: 700; margin-bottom: 0.3rem; color: #fff; }
         .timeline-text { color: #bbb; font-size: 0.85rem; line-height: 1.4; }
 
+        /* ===== СТУДИЯ ===== */
         .studio-content { background: rgba(0,0,0,0.7); border-radius: 24px; padding: 1.5rem; line-height: 1.6; }
         .studio-stats { display: flex; justify-content: center; gap: 1rem; margin-top: 1.5rem; flex-wrap: wrap; }
         .stat-card { text-align: center; padding: 0.8rem; background: rgba(255,0,51,0.08); border-radius: 18px; min-width: 100px; border: 1px solid rgba(255,0,51,0.2); }
         .stat-number { font-size: 1.6rem; font-weight: 800; color: #ff0033; }
 
-        .trailer-btn {
-            display: inline-flex;
-            align-items: center;
-            gap: 8px;
-            background: rgba(255,0,0,0.2);
-            border: 1px solid #ff0033;
-            color: #ff6666;
-            padding: 0.6rem 1.5rem;
-            border-radius: 50px;
-            cursor: pointer;
-            margin-top: 1rem;
-            font-weight: 600;
-            transition: all 0.2s;
-            font-size: 0.85rem;
-            text-decoration: none;
-        }
-        .trailer-btn:hover { background: #ff0033; color: #000; transform: scale(1.02); }
-
-        /* FOOTER */
+        /* ===== FOOTER ===== */
         .footer {
             margin-top: 3rem;
             background: #000000cc;
@@ -455,12 +502,7 @@
             transition: all 0.2s;
             text-decoration: none;
         }
-        .footer-social a:hover {
-            color: #ff0033;
-            transform: translateY(-3px);
-            display: inline-block;
-        }
-        
+        .footer-social a:hover { color: #ff0033; transform: translateY(-3px); display: inline-block; }
         .footer-lang-switch {
             display: flex;
             justify-content: center;
@@ -478,7 +520,6 @@
             transition: all 0.2s;
             min-width: 40px;
             text-align: center;
-            letter-spacing: 0.5px;
         }
         .footer-lang-option.active {
             background: #ff0033;
@@ -487,17 +528,10 @@
             box-shadow: 0 0 8px rgba(255,0,51,0.5);
             transform: scale(1.02);
         }
-        .footer-lang-option:hover:not(.active) {
-            background: rgba(255,0,51,0.3);
-            transform: translateY(-2px);
-        }
-        
-        .footer-copyright {
-            font-size: 0.7rem;
-            color: #666;
-            margin-top: 0.5rem;
-        }
+        .footer-lang-option:hover:not(.active) { background: rgba(255,0,51,0.3); transform: translateY(-2px); }
+        .footer-copyright { font-size: 0.7rem; color: #666; margin-top: 0.5rem; }
 
+        /* ===== TOAST ===== */
         .toast {
             position: fixed;
             bottom: 20px;
@@ -523,7 +557,7 @@
             to { opacity: 0; visibility: hidden; }
         }
 
-        /* Прогресс-бар в профиле */
+        /* ===== ПРОФИЛЬ ===== */
         .progress-bar {
             width: 100%;
             height: 8px;
@@ -543,14 +577,8 @@
             justify-content: space-around;
             margin: 1rem 0;
         }
-        .stat-item {
-            text-align: center;
-        }
-        .stat-value {
-            font-size: 1.8rem;
-            font-weight: bold;
-            color: #ff0033;
-        }
+        .stat-item { text-align: center; }
+        .stat-value { font-size: 1.8rem; font-weight: bold; color: #ff0033; }
         .info-row {
             margin: 0.5rem 0;
             font-size: 0.85rem;
@@ -586,16 +614,8 @@
             border-radius: 16px;
             min-width: 80px;
         }
-        .dev-stat-value {
-            font-size: 1.5rem;
-            font-weight: bold;
-            color: #ff0033;
-        }
-        .users-list {
-            max-height: 300px;
-            overflow-y: auto;
-            margin: 1rem 0;
-        }
+        .dev-stat-value { font-size: 1.5rem; font-weight: bold; color: #ff0033; }
+        .users-list { max-height: 300px; overflow-y: auto; margin: 1rem 0; }
         .user-item {
             display: flex;
             justify-content: space-between;
@@ -603,22 +623,12 @@
             padding: 0.5rem;
             border-bottom: 1px solid rgba(255,0,51,0.2);
         }
-        .delete-user-btn {
-            background: rgba(255,0,0,0.2);
-            border: 1px solid #ff0033;
-            color: #ff6666;
-            padding: 0.2rem 0.8rem;
-            border-radius: 20px;
-            cursor: pointer;
-            font-size: 0.7rem;
-        }
-        .delete-user-btn:hover { background: #ff0033; color: #000; }
 
+        /* ===== АДАПТИВНОСТЬ ===== */
         @media (max-width: 800px) {
             .container { padding: 0 1rem; }
-            .hero h1 { font-size: 2.8rem; }
-            .hero { padding: 2rem 0 1rem; }
-            .hero .tagline { font-size: 1rem; }
+            .hero-content h1 { font-size: 3rem; }
+            .hero-section { padding: 2rem 0 1rem; }
             .navbar { flex-direction: column; gap: 0.8rem; }
             .nav-links { justify-content: center; width: 100%; }
             .nav-btn { padding: 0.5rem 0.9rem; font-size: 0.8rem; }
@@ -628,24 +638,11 @@
             .logout-btn { padding: 0.3rem 0.7rem; font-size: 0.65rem; }
             .section-title { font-size: 1.5rem; margin: 0.5rem 0 1rem; padding-left: 0.8rem; }
             .game-card { padding: 1.2rem; }
-            .game-icon { font-size: 3rem; }
-            .game-title { font-size: 1.6rem; }
-            .game-badge { font-size: 0.7rem; padding: 0.2rem 1rem; }
-            .game-desc { font-size: 0.85rem; margin: 0.8rem 0; }
-            .game-features { gap: 0.5rem; }
-            .feature { padding: 0.3rem 0.8rem; font-size: 0.65rem; }
-            .timeline::before { left: 12px; }
-            .timeline-item { padding-left: 35px; margin-bottom: 1rem; }
-            .timeline-dot { left: 6px; width: 12px; height: 12px; }
-            .timeline-content { padding: 0.8rem; }
-            .timeline-date { font-size: 0.65rem; }
-            .timeline-title { font-size: 0.95rem; }
-            .timeline-text { font-size: 0.8rem; }
-            .studio-content { padding: 1.2rem; }
-            .studio-stats { gap: 0.8rem; }
-            .stat-card { min-width: 80px; padding: 0.5rem; }
-            .stat-number { font-size: 1.3rem; }
-            .trailer-btn { padding: 0.5rem 1.2rem; font-size: 0.75rem; }
+            .game-card .game-icon { font-size: 3rem; }
+            .game-card .game-title { font-size: 1.6rem; }
+            .game-card .game-desc { font-size: 0.85rem; margin: 0.8rem 0; }
+            .game-card .feature { padding: 0.3rem 0.8rem; font-size: 0.65rem; }
+            .games-grid { grid-template-columns: 1fr; gap: 1rem; }
             .screenshots-grid { gap: 1rem; }
             .screenshot-img { height: 150px; }
             .screenshot-label { font-size: 0.7rem; padding: 0.5rem; }
@@ -661,11 +658,11 @@
         }
 
         @media (max-width: 480px) {
-            .hero h1 { font-size: 2.2rem; }
-            .game-title { font-size: 1.3rem; }
+            .hero-content h1 { font-size: 2.2rem; }
+            .game-card .game-title { font-size: 1.3rem; }
             .section-title { font-size: 1.2rem; }
             .nav-btn { padding: 0.4rem 0.7rem; font-size: 0.7rem; }
-            .feature { font-size: 0.6rem; padding: 0.2rem 0.6rem; }
+            .game-card .feature { font-size: 0.6rem; padding: 0.2rem 0.6rem; }
             .footer-lang-option { padding: 0.15rem 0.4rem; font-size: 0.6rem; min-width: 30px; }
         }
     </style>
@@ -696,7 +693,7 @@
         </div>
         <div class="nav-links">
             <button class="nav-btn" data-page="home"><i class="fas fa-home"></i> <span class="nav-text">ГЛАВНАЯ</span></button>
-            <button class="nav-btn" data-page="games"><i class="fas fa-gamepad"></i> <span class="nav-text">ИГРА</span></button>
+            <button class="nav-btn" data-page="games"><i class="fas fa-gamepad"></i> <span class="nav-text">ИГРЫ</span></button>
             <button class="nav-btn" data-page="news"><i class="fas fa-newspaper"></i> <span class="nav-text">НОВОСТИ</span></button>
             <button class="nav-btn" data-page="studio"><i class="fas fa-building"></i> <span class="nav-text">СТУДИЯ</span></button>
             <button class="nav-btn" id="devPanelBtn" style="display: none;"><i class="fas fa-code"></i> <span class="nav-text">DEV</span></button>
@@ -719,40 +716,126 @@
     
     <div id="devModal" class="modal"><div class="modal-content"><h2><i class="fas fa-code"></i> <span class="dev-title">DEV ПАНЕЛЬ</span></h2><div class="dev-stats"><div class="dev-stat-card"><div class="dev-stat-value" id="devTotalUsers">0</div><div class="dev-stat-users-label">Пользователей</div></div><div class="dev-stat-card"><div class="dev-stat-value" id="devTotalLogins">0</div><div class="dev-stat-logins-label">Входов</div></div><div class="dev-stat-card"><div class="dev-stat-value" id="devAvgLevel">0</div><div class="dev-stat-avg-label">Ср. уровень</div></div></div><div class="users-list" id="usersList"></div><button id="closeDevBtn">Закрыть</button></div></div>
 
+    <!-- ===== ГЛАВНАЯ ===== -->
     <div id="home-page" class="page active">
-        <div class="hero"><h1>SAMURAI</h1><div class="tagline tagline-text">Последний самурай. ⚔️</div></div>
-        <div class="section-title"><i class="fas fa-crown"></i> <span class="game-section-title">Игра</span></div>
-        <div class="game-card">
-            <div class="game-icon"><i class="fas fa-khanda"></i></div>
-            <div class="game-title">SAMURAI</div>
-            <div class="game-badge game-badge-text">В РАЗРАБОТКЕ | КОНЕЦ 2026 🚀</div>
-            <div class="game-desc home-desc-text">Ты — самурай, попавший в мир андров, где каждый выбор — последствия. Сражайся и отомсти за павших друзей, будь достойным самураем</div>
-            <div class="game-features"><div class="feature"><i class="fas fa-skull"></i> <span class="feature-boss">5+ боссов</span></div><div class="feature"><i class="fas fa-fist-raised"></i> <span class="feature-duel">Дуэль смерти</span></div><div class="feature"><i class="fas fa-theater-masks"></i> <span class="feature-ending">3 концовки</span></div></div>
-            <div style="text-align:center;"><button class="trailer-btn" id="mainTrailerBtn"><i class="fab fa-youtube"></i> <span class="trailer-btn-text">СМОТРЕТЬ ТИЗЕР-ТРЕЙЛЕР</span></button></div>
+        <div class="hero-section">
+            <div class="hero-content">
+                <h1>INTERFEX</h1>
+                <div class="hero-tagline tagline-text">Игры, которые остаются в памяти. 🎮</div>
+                <div class="hero-badge game-badge-text">В РАЗРАБОТКЕ | 2026</div>
+                <div class="hero-buttons">
+                    <button class="hero-btn hero-btn-primary" onclick="showPage('games')"><i class="fas fa-gamepad"></i> НАШИ ИГРЫ</button>
+                    <button class="hero-btn hero-btn-secondary" onclick="showPage('studio')"><i class="fas fa-building"></i> О СТУДИИ</button>
+                </div>
+            </div>
+        </div>
+
+        <div class="section-title"><i class="fas fa-crown"></i> <span class="games-title-main">НАШИ ИГРЫ</span></div>
+        <div class="games-grid">
+            <!-- SAMURAI (всегда видна) -->
+            <div class="game-card">
+                <div class="game-icon" style="color:#ff0033;"><i class="fas fa-khanda"></i></div>
+                <div class="game-title" style="background:linear-gradient(135deg, #fff, #ff0033); -webkit-background-clip:text; background-clip:text; color:transparent;">SAMURAI</div>
+                <div class="game-genre">Экшен / Приключения</div>
+                <div class="game-desc home-desc-text">Ты — самурай, попавший в мир андров, где каждый выбор — последствия. Сражайся и отомсти за павших друзей.</div>
+                <div class="game-features"><div class="feature">⚔️ 5+ боссов</div><div class="feature">🎭 3 концовки</div></div>
+                <div class="game-badge-bottom">В РАЗРАБОТКЕ • 2026</div>
+            </div>
+
+            <!-- SHADOW WARDEN (скрыта, пока не войдут) -->
+            <div id="shadowWardenCard" class="game-card hidden-game" style="border-color: rgba(100,0,0,0.3);">
+                <div class="game-icon" style="color:#660000;"><i class="fas fa-ghost"></i></div>
+                <div class="game-title" style="background:linear-gradient(135deg, #fff, #660000); -webkit-background-clip:text; background-clip:text; color:transparent;">SHADOW WARDEN</div>
+                <div class="game-genre">Психологический хоррор</div>
+                <div class="game-desc horror-home-desc">Вы — смотритель заброшенной психиатрической больницы. Ночью вы понимаете, что вы здесь не один.</div>
+                <div class="game-features"><div class="feature">🌀 Система рассудка</div><div class="feature">🔊 Реалистичный звук</div></div>
+                <div class="game-badge-bottom">СКОРО • 2027</div>
+            </div>
         </div>
     </div>
 
+    <!-- ===== СТРАНИЦА ИГР ===== -->
     <div id="games-page" class="page">
-        <div class="section-title"><i class="fas fa-gamepad"></i> <span class="games-title">SAMURAI</span></div>
-        <div class="game-card">
-            <div class="game-icon"><i class="fas fa-khanda"></i></div>
-            <div class="game-title">SAMURAI</div>
-            <div class="game-badge games-badge-text">В РАЗРАБОТКЕ | КОНЕЦ 2026 🔥</div>
+        <div class="section-title"><i class="fas fa-gamepad"></i> <span class="games-title">НАШИ ПРОЕКТЫ</span></div>
+        
+        <!-- SAMURAI -->
+        <div class="game-card" style="margin-bottom:1.5rem;">
+            <div class="game-icon" style="color:#ff0033;"><i class="fas fa-khanda"></i></div>
+            <div class="game-title" style="background:linear-gradient(135deg, #fff, #ff0033); -webkit-background-clip:text; background-clip:text; color:transparent;">SAMURAI</div>
+            <div class="game-genre">Экшен / Приключения</div>
             <div class="game-desc games-desc-text">Ты — последний самурай. Возьми катану и пройди путь мести через мир андров и стань легендой.</div>
-            <div class="game-features"><div class="feature">⚔️ <span class="games-feature1">5+ уникальных боссов</span></div><div class="feature">🎮 <span class="games-feature2">Необычные механики</span></div><div class="feature">🎌 <span class="games-feature3">Имбовый сюжет</span></div><div class="feature">🎵 <span class="games-feature4">Крутой саундтрек</span></div><div class="feature">📖 <span class="games-feature5">3 концовки</span></div><div class="feature">🌆 <span class="games-feature6">Атмосфера японии</span></div></div>
-            <div style="text-align:center;"><button class="trailer-btn" id="gameTrailerBtn"><i class="fab fa-youtube"></i> <span class="games-trailer-btn">СМОТРЕТЬ ТРЕЙЛЕР</span></button></div>
+            <div class="game-features">
+                <div class="feature">⚔️ <span class="games-feature1">5+ уникальных боссов</span></div>
+                <div class="feature">🎮 <span class="games-feature2">Необычные механики</span></div>
+                <div class="feature">🎌 <span class="games-feature3">Имбовый сюжет</span></div>
+                <div class="feature">🎵 <span class="games-feature4">Крутой саундтрек</span></div>
+                <div class="feature">📖 <span class="games-feature5">3 концовки</span></div>
+                <div class="feature">🌆 <span class="games-feature6">Атмосфера японии</span></div>
+            </div>
+            <div class="game-badge-bottom">В РАЗРАБОТКЕ • 2026</div>
         </div>
-        <div class="gallery-section"><div class="gallery-title"><i class="fas fa-images"></i> <span class="gallery-title-text">ГАЛЕРЕЯ 🖼️</span></div><div class="screenshots-grid"><div class="screenshot-card"><img class="screenshot-img" src="https://s10.iimage.su/s/16/gXDRR9lxo3N5ybBG4YzqHiU6H7H7tAIuYlGDV0Dsm.png" alt="Начало 🌅"><div class="screenshot-label screenshot-label1">Начало 🌅</div></div><div class="screenshot-card"><img class="screenshot-img" src="https://s10.iimage.su/s/16/gXJ7cmDxhdcTAMK4fbUyzBp2rPiVFA2CysEXDbaKS.png" alt="Сено 🌾"><div class="screenshot-label screenshot-label2">Сено 🌾</div></div></div></div>
+
+        <!-- SHADOW WARDEN (скрыта) -->
+        <div id="shadowWardenPage" class="game-card hidden-game" style="border-color: rgba(100,0,0,0.3); margin-bottom:1.5rem;">
+            <div class="game-icon" style="color:#660000;"><i class="fas fa-ghost"></i></div>
+            <div class="game-title" style="background:linear-gradient(135deg, #fff, #660000); -webkit-background-clip:text; background-clip:text; color:transparent;">SHADOW WARDEN</div>
+            <div class="game-genre">Психологический хоррор</div>
+            <div class="game-desc horror-desc-text">Вы — смотритель заброшенной психиатрической больницы "Блэквуд". Ваша первая ночная смена превращается в кошмар, когда вы понимаете, что пациенты никогда не уходили. Исследуйте темные коридоры, скрывайтесь от неведомого ужаса и сохраните рассудок до рассвета.</div>
+            <div class="game-features">
+                <div class="feature">🌀 <span class="horror-feature1">Система рассудка</span></div>
+                <div class="feature">🔊 <span class="horror-feature2">Реалистичный звук</span></div>
+                <div class="feature">👻 <span class="horror-feature3">Процедурный страх</span></div>
+                <div class="feature">📖 <span class="horror-feature4">3 концовки</span></div>
+                <div class="feature">🎮 <span class="horror-feature5">От первого лица</span></div>
+                <div class="feature">🏚️ <span class="horror-feature6">Атмосфера безысходности</span></div>
+            </div>
+            <div class="game-badge-bottom">СКОРО • 2027</div>
+        </div>
+
+        <!-- Галерея SAMURAI -->
+        <div class="gallery-section">
+            <div class="gallery-title"><i class="fas fa-images"></i> <span class="gallery-title-text">ГАЛЕРЕЯ SAMURAI</span></div>
+            <div class="screenshots-grid">
+                <div class="screenshot-card"><img class="screenshot-img" src="https://s10.iimage.su/s/16/gXDRR9lxo3N5ybBG4YzqHiU6H7H7tAIuYlGDV0Dsm.png" alt="Начало"><div class="screenshot-label screenshot-label1">Начало 🌅</div></div>
+                <div class="screenshot-card"><img class="screenshot-img" src="https://s10.iimage.su/s/16/gXJ7cmDxhdcTAMK4fbUyzBp2rPiVFA2CysEXDbaKS.png" alt="Сено"><div class="screenshot-label screenshot-label2">Сено 🌾</div></div>
+            </div>
+        </div>
+
+        <!-- Галерея SHADOW WARDEN (скрыта) -->
+        <div id="shadowGallery" class="gallery-section hidden-game">
+            <div class="gallery-title"><i class="fas fa-images"></i> <span class="gallery-title-horror">ГАЛЕРЕЯ SHADOW WARDEN</span></div>
+            <div class="screenshots-grid">
+                <div class="screenshot-card"><img class="screenshot-img" src="https://s10.iimage.su/s/16/cb0i6dJhqtx9lQgtueP3OXyIULh7JKO15KBVseQp3.jpg" alt="Пустой коридор"><div class="screenshot-label horror-screenshot1">Пустой коридор 🌑</div></div>
+                <div class="screenshot-card"><img class="screenshot-img" src="https://s10.iimage.su/s/16/ySYNqKzMM8k1NmKIKAY1ZgFcA1sPJgQIYgkQyxedE.jpg" alt="Комната с креслом"><div class="screenshot-label horror-screenshot2">Комната с креслом 🪑</div></div>
+            </div>
+        </div>
     </div>
 
+    <!-- ===== НОВОСТИ ===== -->
     <div id="news-page" class="page">
         <div class="section-title"><i class="fas fa-newspaper"></i> <span class="news-title-text">История</span></div>
-        <div class="timeline"><div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><div class="timeline-date">17 МАЯ 2026</div><div class="timeline-title timeline-title1">🚀 ЗАПУСК САЙТА INTERFEX</div><div class="timeline-text timeline-text1">Мы выпустили сайт InterFex!</div></div></div><div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><div class="timeline-date">12 МАРТА 2026</div><div class="timeline-title timeline-title2">🔥 НОВЫЕ СКРИНШОТЫ</div><div class="timeline-text timeline-text2">Опубликовали свежие скриншоты игры в разделе галереи.</div></div></div><div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><div class="timeline-date">22 НОЯБРЯ 2025</div><div class="timeline-title timeline-title3">⚔️ ВЫШЕЛ ТИЗЕР-ТРЕЙЛЕР SAMURAI</div><div class="timeline-text timeline-text3">Мы выпустили первый тизер-трейлер нашей игры! Ссылка на YouTube в разделе игры</div></div></div></div>
+        <div class="timeline">
+            <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><div class="timeline-date">17 МАЯ 2026</div><div class="timeline-title timeline-title1">🚀 ЗАПУСК САЙТА INTERFEX</div><div class="timeline-text timeline-text1">Мы выпустили сайт InterFex!</div></div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><div class="timeline-date">12 МАРТА 2026</div><div class="timeline-title timeline-title2">🔥 НОВЫЕ СКРИНШОТЫ</div><div class="timeline-text timeline-text2">Опубликовали свежие скриншоты игры в разделе галереи.</div></div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><div class="timeline-date">22 НОЯБРЯ 2025</div><div class="timeline-title timeline-title3">⚔️ АНОНС SAMURAI</div><div class="timeline-text timeline-text3">Мы анонсировали нашу первую игру — Samurai!</div></div></div>
+            <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><div class="timeline-date">10 ЯНВАРЯ 2025</div><div class="timeline-title timeline-title4">👻 АНОНС SHADOW WARDEN</div><div class="timeline-text timeline-text4">Мы анонсировали наш психологический хоррор от первого лица.</div></div></div>
+        </div>
     </div>
 
+    <!-- ===== СТУДИЯ ===== -->
     <div id="studio-page" class="page">
         <div class="section-title"><i class="fas fa-building"></i> <span class="studio-title-text">О СТУДИИ</span></div>
-        <div class="studio-content"><p class="studio-desc1"><strong>InterFex Games</strong> — независимая студия, основанная в 2025 году <strong style="color:#ff0033">двумя школьниками</strong>. Мы делаем игры с проработанным открытым миром и упором на сюжет и свободу действия. 🎮</p><p class="studio-desc2"><strong>Каждая игра</strong>  — новый, огромный мир. Мы делаем упор на сюжет, графику и интерес к прохождению.</p><p class="studio-desc3"><strong>Samurai</strong> — первая большая игра, которую вы увидите достаточно скоро ⚡</p><div class="studio-stats"><div class="stat-card"><div class="stat-number">4</div><div class="stat-label-dev">РАЗРАБОТЧИКА 👨‍💻</div></div><div class="stat-card"><div class="stat-number">1</div><div class="stat-label-project">ПРОЕКТ 🎯</div></div><div class="stat-card"><div class="stat-number">2026</div><div class="stat-label-year">ГОД РЕЛИЗА 📅</div></div></div></div>
+        <div class="studio-content">
+            <p class="studio-desc1"><strong>InterFex Games</strong> — независимая студия, основанная в 2025 году <strong style="color:#ff0033">двумя школьниками</strong>. Мы делаем игры с проработанным открытым миром и упором на сюжет и свободу действия. 🎮</p>
+            <p class="studio-desc2"><strong>Каждая игра</strong>  — новый, огромный мир. Мы делаем упор на сюжет, графику и интерес к прохождению.</p>
+            <p class="studio-desc3"><strong>Samurai</strong> — первая большая игра, которую вы увидите достаточно скоро ⚡</p>
+            <p class="studio-desc4"><strong>Shadow Warden</strong> — наш психологический хоррор, который заставит вас бояться темноты. 👻</p>
+            <div class="studio-stats">
+                <div class="stat-card"><div class="stat-number">4</div><div class="stat-label-dev">РАЗРАБОТЧИКА 👨‍💻</div></div>
+                <div class="stat-card"><div class="stat-number">2</div><div class="stat-label-project">ПРОЕКТА 🎯</div></div>
+                <div class="stat-card"><div class="stat-number">2026</div><div class="stat-label-year">ПЕРВЫЙ РЕЛИЗ 📅</div></div>
+            </div>
+        </div>
     </div>
 
     <div class="footer">
@@ -771,7 +854,7 @@
         </div>
         
         <div class="footer-copyright">
-            <p>© 2026 InterFex Games | <span class="footer-emoji">⚔️🎮🌆</span></p>
+            <p>© 2026 InterFex Games | <span class="footer-emoji">⚔️🎮👻</span></p>
         </div>
     </div>
 </div>
@@ -780,34 +863,39 @@
     // ==================== MULTILINGUAL TRANSLATIONS ====================
     const translations = {
         ru: {
-            navHome: "ГЛАВНАЯ", navGame: "ИГРА", navNews: "НОВОСТИ", navStudio: "СТУДИЯ", navDev: "DEV",
+            navHome: "ГЛАВНАЯ", navGames: "ИГРЫ", navNews: "НОВОСТИ", navStudio: "СТУДИЯ", navDev: "DEV",
             loginBtn: "ВХОД", registerBtn: "РЕГ",
-            tagline: "Последний самурай. ⚔️",
-            gameSection: "Игра",
-            homeDesc: "Ты — самурай, попавший в мир андров, где каждый выбор — последствия. Сражайся и отомсти за павших друзей, будь достойным самураем",
-            featureBoss: "5+ боссов", featureDuel: "Дуэль смерти", featureEnding: "3 концовки",
-            trailerBtn: "СМОТРЕТЬ ТИЗЕР-ТРЕЙЛЕР",
-            gameBadge: "В РАЗРАБОТКЕ | КОНЕЦ 2026 🚀",
-            gamesBadge: "В РАЗРАБОТКЕ | КОНЕЦ 2026 🔥",
-            gamesTitle: "SAMURAI",
+            tagline: "Игры, которые остаются в памяти. 🎮",
+            gamesTitleMain: "НАШИ ИГРЫ",
+            homeDesc: "Ты — самурай, попавший в мир андров, где каждый выбор — последствия.",
+            gameBadge: "В РАЗРАБОТКЕ | 2026",
+            gamesTitle: "НАШИ ПРОЕКТЫ",
             gamesDesc: "Ты — последний самурай. Возьми катану и пройди путь мести через мир андров и стань легендой.",
             gamesFeature1: "5+ уникальных боссов", gamesFeature2: "Необычные механики", gamesFeature3: "Имбовый сюжет",
-            gamesFeature4: "Крутой саундтрек", gamesFeature5: "3 концовки", gamesFeature6: "Крутая атмосфера",
-            gamesTrailerBtn: "СМОТРЕТЬ ТРЕЙЛЕР",
-            galleryTitle: "ГАЛЕРЕЯ 🖼️",
+            gamesFeature4: "Крутой саундтрек", gamesFeature5: "3 концовки", gamesFeature6: "Атмосфера японии",
+            galleryTitle: "ГАЛЕРЕЯ SAMURAI",
             screenshot1: "Начало 🌅", screenshot2: "Сено 🌾",
+            horrorHomeDesc: "Вы — смотритель заброшенной психиатрической больницы. Ночью вы понимаете, что вы здесь не один.",
+            horrorDesc: "Вы — смотритель заброшенной психиатрической больницы \"Блэквуд\". Ваша первая ночная смена превращается в кошмар, когда вы понимаете, что пациенты никогда не уходили. Исследуйте темные коридоры, скрывайтесь от неведомого ужаса и сохраните рассудок до рассвета.",
+            horrorFeature1: "Система рассудка", horrorFeature2: "Реалистичный звук", horrorFeature3: "Процедурный страх",
+            horrorFeature4: "3 концовки", horrorFeature5: "От первого лица", horrorFeature6: "Атмосфера безысходности",
+            galleryTitleHorror: "ГАЛЕРЕЯ SHADOW WARDEN",
+            horrorScreenshot1: "Пустой коридор 🌑", horrorScreenshot2: "Комната с креслом 🪑",
             newsTitle: "История",
             newsTitle1: "🚀 ЗАПУСК САЙТА INTERFEX",
             newsText1: "Мы выпустили сайт InterFex!",
             newsTitle2: "🔥 НОВЫЕ СКРИНШОТЫ",
             newsText2: "Опубликовали свежие скриншоты игры в разделе галереи.",
-            newsTitle3: "⚔️ ВЫШЕЛ ТИЗЕР-ТРЕЙЛЕР SAMURAI",
-            newsText3: "Мы выпустили первый тизер-трейлер нашей игры! Ссылка на YouTube в разделе игры",
+            newsTitle3: "⚔️ АНОНС SAMURAI",
+            newsText3: "Мы анонсировали нашу первую игру — Samurai!",
+            newsTitle4: "👻 АНОНС SHADOW WARDEN",
+            newsText4: "Мы анонсировали наш психологический хоррор от первого лица.",
             studioTitle: "О СТУДИИ",
             studioDesc1: "<strong>InterFex Games</strong> — независимая студия, основанная в 2025 году <strong style='color:#ff0033'>двумя школьниками</strong>. Мы делаем игры с проработанным открытым миром и упором на сюжет и свободу действия. 🎮",
             studioDesc2: "<strong>Каждая игра</strong>  — новый, огромный мир. Мы делаем упор на сюжет, графику и интерес к прохождению.",
             studioDesc3: "<strong>Samurai</strong> — первая большая игра, которую вы увидите достаточно скоро ⚡",
-            studioStat1: "РАЗРАБОТЧИКА 👨‍💻", studioStat2: "ПРОЕКТ 🎯", studioStat3: "ГОД РЕЛИЗА 📅",
+            studioDesc4: "<strong>Shadow Warden</strong> — наш психологический хоррор, который заставит вас бояться темноты. 👻",
+            studioStat1: "РАЗРАБОТЧИКА 👨‍💻", studioStat2: "ПРОЕКТА 🎯", studioStat3: "ПЕРВЫЙ РЕЛИЗ 📅",
             loginModalTitle: "ВХОД", registerModalTitle: "РЕГИСТРАЦИЯ",
             loginSubmit: "Войти", registerSubmit: "Зарегистрироваться",
             switchToRegister: "Нет аккаунта? Регистрация", switchToLogin: "Уже есть аккаунт? Вход",
@@ -815,37 +903,43 @@
             profile: "ПРОФИЛЬ", level: "Уровень", xp: "XP", hours: "Часов",
             regDate: "📅 Регистрация:", lastVisit: "🕐 Последний визит:", loginsCount: "🔑 Входов:",
             closeProfile: "Закрыть",
-            devPanel: "DEV ПАНЕЛЬ", totalUsers: "Пользователей", totalLogins: "Входов", avgLevel: "Ср. уровень", closeDev: "Закрыть"
+            devPanel: "DEV ПАНЕЛЬ", totalUsers: "Пользователей", totalLogins: "Входов", avgLevel: "Ср. уровень", closeDev: "Закрыть",
+            loginRequired: "Войдите в аккаунт, чтобы увидеть скрытую игру"
         },
         en: {
-            navHome: "HOME", navGame: "GAME", navNews: "NEWS", navStudio: "STUDIO", navDev: "DEV",
+            navHome: "HOME", navGames: "GAMES", navNews: "NEWS", navStudio: "STUDIO", navDev: "DEV",
             loginBtn: "LOGIN", registerBtn: "SIGN UP",
-            tagline: "The last samurai. ⚔️",
-            gameSection: "Game",
-            homeDesc: "You are a samurai who has fallen into a world of Androvs, where every choice has consequences. Fight and avenge your fallen friends, be a worthy samurai",
-            featureBoss: "5+ bosses", featureDuel: "Death duel", featureEnding: "3 endings",
-            trailerBtn: "WATCH TEASER TRAILER",
-            gameBadge: "IN DEVELOPMENT | END OF 2026 🚀",
-            gamesBadge: "IN DEVELOPMENT | END OF 2026 🔥",
-            gamesTitle: "SAMURAI",
+            tagline: "Games that stay in memory. 🎮",
+            gamesTitleMain: "OUR GAMES",
+            homeDesc: "You are a samurai who has fallen into a world of Androvs, where every choice has consequences.",
+            gameBadge: "IN DEVELOPMENT | 2026",
+            gamesTitle: "OUR PROJECTS",
             gamesDesc: "You are the last samurai. Take your katana and walk the path of revenge through the world of Androvs and become a legend.",
             gamesFeature1: "5+ unique bosses", gamesFeature2: "Unique mechanics", gamesFeature3: "Imba story",
             gamesFeature4: "Cool soundtrack", gamesFeature5: "3 endings", gamesFeature6: "Atmosphere of Japan",
-            gamesTrailerBtn: "WATCH TRAILER",
-            galleryTitle: "GALLERY 🖼️",
+            galleryTitle: "SAMURAI GALLERY",
             screenshot1: "Beginning 🌅", screenshot2: "Hay 🌾",
+            horrorHomeDesc: "You are the caretaker of an abandoned psychiatric hospital. At night, you realize you're not alone.",
+            horrorDesc: "You are the caretaker of the abandoned \"Blackwood\" psychiatric hospital. Your first night shift turns into a nightmare when you realize the patients never left. Explore the dark corridors, hide from the unknown horror, and keep your sanity until dawn.",
+            horrorFeature1: "Sanity system", horrorFeature2: "Realistic sound", horrorFeature3: "Procedural fear",
+            horrorFeature4: "3 endings", horrorFeature5: "First person", horrorFeature6: "Atmosphere of despair",
+            galleryTitleHorror: "SHADOW WARDEN GALLERY",
+            horrorScreenshot1: "Empty corridor 🌑", horrorScreenshot2: "Chair room 🪑",
             newsTitle: "History",
             newsTitle1: "🚀 INTERFEX SITE LAUNCH",
             newsText1: "We launched the InterFex website!",
             newsTitle2: "🔥 NEW SCREENSHOTS",
             newsText2: "Published fresh game screenshots in the gallery section.",
-            newsTitle3: "⚔️ SAMURAI TEASER TRAILER RELEASED",
-            newsText3: "We released the first teaser trailer for our game! Link to YouTube in the game section",
+            newsTitle3: "⚔️ SAMURAI ANNOUNCEMENT",
+            newsText3: "We announced our first game — Samurai!",
+            newsTitle4: "👻 SHADOW WARDEN ANNOUNCEMENT",
+            newsText4: "We announced our psychological first-person horror.",
             studioTitle: "ABOUT THE STUDIO",
             studioDesc1: "<strong>InterFex Games</strong> is an independent studio founded in 2025 by <strong style='color:#ff0033'>two school students</strong>. We create games with a developed open world and a focus on story and freedom of action. 🎮",
             studioDesc2: "<strong>Each game</strong> is a new, huge world. We focus on story, graphics, and engagement.",
             studioDesc3: "<strong>Samurai</strong> is the first big game you'll see soon ⚡",
-            studioStat1: "DEVELOPERS 👨‍💻", studioStat2: "PROJECT 🎯", studioStat3: "RELEASE YEAR 📅",
+            studioDesc4: "<strong>Shadow Warden</strong> is our psychological horror that will make you afraid of the dark. 👻",
+            studioStat1: "DEVELOPERS 👨‍💻", studioStat2: "PROJECTS 🎯", studioStat3: "FIRST RELEASE 📅",
             loginModalTitle: "LOGIN", registerModalTitle: "REGISTER",
             loginSubmit: "Login", registerSubmit: "Register",
             switchToRegister: "No account? Register", switchToLogin: "Already have an account? Login",
@@ -853,37 +947,43 @@
             profile: "PROFILE", level: "Level", xp: "XP", hours: "Hours",
             regDate: "📅 Registered:", lastVisit: "🕐 Last visit:", loginsCount: "🔑 Logins:",
             closeProfile: "Close",
-            devPanel: "DEV PANEL", totalUsers: "Users", totalLogins: "Logins", avgLevel: "Avg level", closeDev: "Close"
+            devPanel: "DEV PANEL", totalUsers: "Users", totalLogins: "Logins", avgLevel: "Avg level", closeDev: "Close",
+            loginRequired: "Log in to see the hidden game"
         },
         fr: {
-            navHome: "ACCUEIL", navGame: "JEU", navNews: "ACTUS", navStudio: "STUDIO", navDev: "DEV",
+            navHome: "ACCUEIL", navGames: "JEUX", navNews: "ACTUS", navStudio: "STUDIO", navDev: "DEV",
             loginBtn: "CONNEXION", registerBtn: "INSCRIPTION",
-            tagline: "Le dernier samouraï. ⚔️",
-            gameSection: "Jeu",
-            homeDesc: "Vous êtes un samouraï tombé dans un monde d'Androvs, où chaque choix a des conséquences. Combattez et vengez vos amis tombés, soyez un samouraï digne",
-            featureBoss: "5+ boss", featureDuel: "Duel mortel", featureEnding: "3 fins",
-            trailerBtn: "REGARDER LA BANDE-ANNONCE",
-            gameBadge: "EN DÉVELOPPEMENT | FIN 2026 🚀",
-            gamesBadge: "EN DÉVELOPPEMENT | FIN 2026 🔥",
-            gamesTitle: "SAMURAI",
+            tagline: "Des jeux qui restent en mémoire. 🎮",
+            gamesTitleMain: "NOS JEUX",
+            homeDesc: "Vous êtes un samouraï tombé dans un monde d'Androvs, où chaque choix a des conséquences.",
+            gameBadge: "EN DÉVELOPPEMENT | 2026",
+            gamesTitle: "NOS PROJETS",
             gamesDesc: "Vous êtes le dernier samouraï. Prenez votre katana et marchez sur le chemin de la vengeance à travers le monde des Androvs et devenez une légende.",
             gamesFeature1: "5+ boss uniques", gamesFeature2: "Mécaniques uniques", gamesFeature3: "Histoire imbattable",
             gamesFeature4: "Bande-son cool", gamesFeature5: "3 fins", gamesFeature6: "Ambiance du Japon",
-            gamesTrailerBtn: "REGARDER LA BANDE-ANNONCE",
-            galleryTitle: "GALERIE 🖼️",
+            galleryTitle: "GALERIE SAMURAI",
             screenshot1: "Début 🌅", screenshot2: "Foin 🌾",
+            horrorHomeDesc: "Vous êtes le gardien d'un hôpital psychiatrique abandonné. La nuit, vous réalisez que vous n'êtes pas seul.",
+            horrorDesc: "Vous êtes le gardien de l'hôpital psychiatrique abandonné \"Blackwood\". Votre premier quart de nuit se transforme en cauchemar lorsque vous réalisez que les patients ne sont jamais partis. Explorez les couloirs sombres, cachez-vous de l'horreur inconnue et gardez votre santé mentale jusqu'à l'aube.",
+            horrorFeature1: "Système de santé mentale", horrorFeature2: "Son réaliste", horrorFeature3: "Peur procédurale",
+            horrorFeature4: "3 fins", horrorFeature5: "Première personne", horrorFeature6: "Atmosphère de désespoir",
+            galleryTitleHorror: "GALERIE SHADOW WARDEN",
+            horrorScreenshot1: "Couloir vide 🌑", horrorScreenshot2: "Salle de chaise 🪑",
             newsTitle: "Histoire",
             newsTitle1: "🚀 LANCEMENT DU SITE INTERFEX",
             newsText1: "Nous avons lancé le site InterFex !",
             newsTitle2: "🔥 NOUVELLES CAPTURES D'ÉCRAN",
             newsText2: "Publication de nouvelles captures d'écran du jeu dans la section galerie.",
-            newsTitle3: "⚔️ BANDE-ANNONCE TEASER DE SAMURAI",
-            newsText3: "Nous avons publié la première bande-annonce teaser de notre jeu ! Lien YouTube dans la section jeu",
+            newsTitle3: "⚔️ ANNONCE DE SAMURAI",
+            newsText3: "Nous avons annoncé notre premier jeu — Samurai !",
+            newsTitle4: "👻 ANNONCE DE SHADOW WARDEN",
+            newsText4: "Nous avons annoncé notre horreur psychologique à la première personne.",
             studioTitle: "À PROPOS DU STUDIO",
             studioDesc1: "<strong>InterFex Games</strong> est un studio indépendant fondé en 2025 par <strong style='color:#ff0033'>deux étudiants</strong>. Nous créons des jeux avec un monde ouvert développé et un accent sur l'histoire et la liberté d'action. 🎮",
             studioDesc2: "<strong>Chaque jeu</strong> est un monde nouveau et immense. Nous mettons l'accent sur l'histoire, les graphismes et l'engagement.",
             studioDesc3: "<strong>Samurai</strong> est le premier grand jeu que vous verrez bientôt ⚡",
-            studioStat1: "DÉVELOPPEURS 👨‍💻", studioStat2: "PROJET 🎯", studioStat3: "ANNÉE DE SORTIE 📅",
+            studioDesc4: "<strong>Shadow Warden</strong> est notre horreur psychologique qui vous fera peur du noir. 👻",
+            studioStat1: "DÉVELOPPEURS 👨‍💻", studioStat2: "PROJETS 🎯", studioStat3: "PREMIÈRE SORTIE 📅",
             loginModalTitle: "CONNEXION", registerModalTitle: "INSCRIPTION",
             loginSubmit: "Se connecter", registerSubmit: "S'inscrire",
             switchToRegister: "Pas de compte ? S'inscrire", switchToLogin: "Déjà un compte ? Se connecter",
@@ -891,37 +991,43 @@
             profile: "PROFIL", level: "Niveau", xp: "XP", hours: "Heures",
             regDate: "📅 Inscription :", lastVisit: "🕐 Dernière visite :", loginsCount: "🔑 Connexions :",
             closeProfile: "Fermer",
-            devPanel: "PANEL DEV", totalUsers: "Utilisateurs", totalLogins: "Connexions", avgLevel: "Niveau moy.", closeDev: "Fermer"
+            devPanel: "PANEL DEV", totalUsers: "Utilisateurs", totalLogins: "Connexions", avgLevel: "Niveau moy.", closeDev: "Fermer",
+            loginRequired: "Connectez-vous pour voir le jeu caché"
         },
         jp: {
-            navHome: "ホーム", navGame: "ゲーム", navNews: "ニュース", navStudio: "スタジオ", navDev: "開発",
+            navHome: "ホーム", navGames: "ゲーム", navNews: "ニュース", navStudio: "スタジオ", navDev: "開発",
             loginBtn: "ログイン", registerBtn: "登録",
-            tagline: "最後の侍。⚔️",
-            gameSection: "ゲーム",
-            homeDesc: "あなたはアンドロフの世界に落ちた侍です。すべての選択には結果が伴います。戦い、倒れた友のために復讐し、誇り高き侍であれ",
-            featureBoss: "5+ ボス", featureDuel: "死の決闘", featureEnding: "3 つの結末",
-            trailerBtn: "ティーザー予告編を見る",
-            gameBadge: "開発中 | 2026年末 🚀",
-            gamesBadge: "開発中 | 2026年末 🔥",
-            gamesTitle: "侍",
+            tagline: "記憶に残るゲーム。🎮",
+            gamesTitleMain: "私たちのゲーム",
+            homeDesc: "あなたはアンドロフの世界に落ちた侍です。すべての選択には結果が伴います。",
+            gameBadge: "開発中 | 2026年",
+            gamesTitle: "私たちのプロジェクト",
             gamesDesc: "あなたは最後の侍です。刀を手に取り、アンドロフの世界で復讐の道を歩み、伝説となれ。",
             gamesFeature1: "5+ ユニークボス", gamesFeature2: "ユニークなメカニクス", gamesFeature3: "壮大なストーリー",
             gamesFeature4: "クールなサウンドトラック", gamesFeature5: "3 つの結末", gamesFeature6: "日本の雰囲気",
-            gamesTrailerBtn: "予告編を見る",
-            galleryTitle: "ギャラリー 🖼️",
+            galleryTitle: "侍 ギャラリー",
             screenshot1: "始まり 🌅", screenshot2: "干し草 🌾",
+            horrorHomeDesc: "あなたは廃墟となった精神病院の管理者です。夜、あなたは自分が一人ではないことに気づきます。",
+            horrorDesc: "あなたは廃墟となった精神病院「ブラックウッド」の管理者です。最初の夜勤は、患者たちが決して去っていなかったことに気づいたとき、悪夢と化します。暗い廊下を探索し、未知の恐怖から身を隠し、夜明けまで正気を保ちましょう。",
+            horrorFeature1: "正気度システム", horrorFeature2: "リアルな音響", horrorFeature3: "手続き的恐怖",
+            horrorFeature4: "3 つの結末", horrorFeature5: "一人称視点", horrorFeature6: "絶望の雰囲気",
+            galleryTitleHorror: "シャドウ・ウォーデン ギャラリー",
+            horrorScreenshot1: "空の廊下 🌑", horrorScreenshot2: "椅子のある部屋 🪑",
             newsTitle: "歴史",
             newsTitle1: "🚀 INTERFEX サイトローンチ",
             newsText1: "InterFexウェブサイトを公開しました！",
             newsTitle2: "🔥 新しいスクリーンショット",
             newsText2: "ギャラリーセクションでゲームの新しいスクリーンショットを公開しました。",
-            newsTitle3: "⚔️ 侍 ティーザー予告編公開",
-            newsText3: "ゲームの最初のティーザー予告編を公開しました！YouTubeリンクはゲームセクションにあります",
+            newsTitle3: "⚔️ 侍 発表",
+            newsText3: "最初のゲーム「Samurai」を発表しました！",
+            newsTitle4: "👻 シャドウ・ウォーデン 発表",
+            newsText4: "心理的ホラーゲームを発表しました。",
             studioTitle: "スタジオについて",
             studioDesc1: "<strong>InterFex Games</strong> は2025年に <strong style='color:#ff0033'>2人の学生</strong>によって設立された独立スタジオです。私たちは、ストーリーと自由な行動に重点を置いた、開発されたオープンワールドのゲームを作成しています。🎮",
             studioDesc2: "<strong>すべてのゲーム</strong>は新しく広大な世界です。私たちはストーリー、グラフィック、没入感に重点を置いています。",
             studioDesc3: "<strong>Samurai</strong> は、もうすぐお目見えする最初の大作ゲームです ⚡",
-            studioStat1: "開発者 👨‍💻", studioStat2: "プロジェクト 🎯", studioStat3: "リリース年 📅",
+            studioDesc4: "<strong>Shadow Warden</strong> は、暗闇を怖がらせる心理的ホラーです。👻",
+            studioStat1: "開発者 👨‍💻", studioStat2: "プロジェクト 🎯", studioStat3: "最初のリリース 📅",
             loginModalTitle: "ログイン", registerModalTitle: "登録",
             loginSubmit: "ログイン", registerSubmit: "登録",
             switchToRegister: "アカウントがない？登録", switchToLogin: "すでにアカウントをお持ちですか？ログイン",
@@ -929,7 +1035,8 @@
             profile: "プロフィール", level: "レベル", xp: "経験値", hours: "時間",
             regDate: "📅 登録日:", lastVisit: "🕐 最終訪問:", loginsCount: "🔑 ログイン数:",
             closeProfile: "閉じる",
-            devPanel: "開発パネル", totalUsers: "ユーザー数", totalLogins: "ログイン数", avgLevel: "平均レベル", closeDev: "閉じる"
+            devPanel: "開発パネル", totalUsers: "ユーザー数", totalLogins: "ログイン数", avgLevel: "平均レベル", closeDev: "閉じる",
+            loginRequired: "ログインして隠されたゲームを見る"
         }
     };
 
@@ -937,12 +1044,8 @@
     let currentUser = null;
     let isLoginMode = true;
 
-    const GAME = { trailerUrl: 'https://www.youtube.com/watch?v=wk-pG71oGyE' };
-    const ACHIEVEMENTS = [
-        { id: 'first', name: 'Первый шаг', icon: 'fa-user-plus', ru: 'Первый шаг', en: 'First Step', fr: 'Premier pas', jp: '最初の一歩', check: () => true },
-        { id: 'veteran', name: 'Ветеран', icon: 'fa-star', ru: 'Ветеран', en: 'Veteran', fr: 'Vétéran', jp: 'ベテラン', check: (u) => (u.level || 1) >= 5 },
-        { id: 'legend', name: 'Легенда', icon: 'fa-crown', ru: 'Легенда', en: 'Legend', fr: 'Légende', jp: '伝説', check: (u) => (u.level || 1) >= 10 }
-    ];
+    const VALID_LOGIN = 'InterFex';
+    const VALID_PASSWORD = '7503';
 
     // ==================== USER MANAGEMENT ====================
     function loadUsers() {
@@ -950,8 +1053,7 @@
         if (data) return JSON.parse(data);
         const now = new Date().toISOString();
         return [
-            { login: 'admin', password: 'admin123', level: 10, xp: 850, totalHours: 120, isAdmin: true, registeredAt: now, lastVisit: now, loginCount: 1 },
-            { login: 'test', password: '123', level: 3, xp: 150, totalHours: 12, isAdmin: false, registeredAt: now, lastVisit: now, loginCount: 1 }
+            { login: VALID_LOGIN, password: VALID_PASSWORD, level: 10, xp: 850, totalHours: 120, isAdmin: true, registeredAt: now, lastVisit: now, loginCount: 1 }
         ];
     }
 
@@ -969,13 +1071,18 @@
     }
 
     function login(loginVal, passVal) {
-        let users = loadUsers();
-        const idx = users.findIndex(u => u.login === loginVal && u.password === passVal);
-        if (idx !== -1) {
-            users[idx].lastVisit = new Date().toISOString();
-            users[idx].loginCount = (users[idx].loginCount || 0) + 1;
+        if (loginVal === VALID_LOGIN && passVal === VALID_PASSWORD) {
+            let users = loadUsers();
+            let user = users.find(u => u.login === loginVal);
+            if (!user) {
+                const now = new Date().toISOString();
+                user = { login: VALID_LOGIN, password: VALID_PASSWORD, level: 10, xp: 850, totalHours: 120, isAdmin: true, registeredAt: now, lastVisit: now, loginCount: 1 };
+                users.push(user);
+            }
+            user.lastVisit = new Date().toISOString();
+            user.loginCount = (user.loginCount || 0) + 1;
             saveUsers(users);
-            const forStorage = { ...users[idx] };
+            const forStorage = { ...user };
             delete forStorage.password;
             localStorage.setItem('interfex_current_user', JSON.stringify(forStorage));
             currentUser = forStorage;
@@ -1017,11 +1124,17 @@
             document.getElementById('userPanel').style.display = 'flex';
             document.getElementById('userGreeting').innerHTML = `<i class="fas fa-user-circle"></i> ${currentUser.login} (${currentUser.level || 1} lvl)`;
             document.getElementById('devPanelBtn').style.display = currentUser.isAdmin ? 'flex' : 'none';
+            
+            // Показываем Shadow Warden
+            document.querySelectorAll('.hidden-game').forEach(el => el.classList.add('visible'));
         } else {
             currentUser = null;
             document.getElementById('authButtons').style.display = 'flex';
             document.getElementById('userPanel').style.display = 'none';
             document.getElementById('devPanelBtn').style.display = 'none';
+            
+            // Скрываем Shadow Warden
+            document.querySelectorAll('.hidden-game').forEach(el => el.classList.remove('visible'));
         }
         updateUILang();
     }
@@ -1043,10 +1156,11 @@
         document.getElementById('xpToNext').innerText = `${xp}/${nextLevelXP} XP до ${level + 1} уровня`;
         
         const t = translations[currentLang];
-        const achievementsList = ACHIEVEMENTS.map(ach => {
-            let name = ach[currentLang] || ach.ru;
-            return `<div class="achievement"><i class="fas ${ach.icon}"></i> ${name}</div>`;
-        }).join('');
+        const achievementsList = [
+            { id: 'first', icon: 'fa-user-plus', name: 'Первый шаг' },
+            { id: 'veteran', icon: 'fa-star', name: 'Ветеран' },
+            { id: 'legend', icon: 'fa-crown', name: 'Легенда' }
+        ].map(ach => `<div class="achievement"><i class="fas ${ach.icon}"></i> ${ach.name}</div>`).join('');
         document.getElementById('achievementsList').innerHTML = achievementsList;
         
         openModal('profileModal');
@@ -1060,8 +1174,7 @@
         users.forEach(u => { logins += (u.loginCount || 0); levels += (u.level || 1); });
         document.getElementById('devTotalLogins').innerText = logins;
         document.getElementById('devAvgLevel').innerText = (levels / users.length).toFixed(1);
-        document.getElementById('usersList').innerHTML = users.map(u => `<div class="user-item"><div><strong>${u.login}</strong><br><span style="font-size:0.7rem;">ур.${u.level || 1} | входов:${u.loginCount || 0}</span></div><button class="delete-user-btn" data-login="${u.login}" ${u.login === 'admin' ? 'disabled' : ''}>Удалить</button></div>`).join('');
-        document.querySelectorAll('.delete-user-btn').forEach(btn => { if (!btn.disabled) btn.onclick = () => { let newUsers = users.filter(u => u.login !== btn.dataset.login); saveUsers(newUsers); if (currentUser.login === btn.dataset.login) logout(); else showDevPanel(); showToast('Пользователь удалён', 'success'); }; });
+        document.getElementById('usersList').innerHTML = users.map(u => `<div class="user-item"><div><strong>${u.login}</strong><br><span style="font-size:0.7rem;">ур.${u.level || 1} | входов:${u.loginCount || 0}</span></div></div>`).join('');
         openModal('devModal');
     }
 
@@ -1070,47 +1183,53 @@
     function closeModal(id) { document.getElementById(id).classList.remove('active'); }
 
     // ==================== PAGE NAVIGATION ====================
-    const pages = { home: document.getElementById('home-page'), games: document.getElementById('games-page'), news: document.getElementById('news-page'), studio: document.getElementById('studio-page') };
-    function showPage(pageId) { Object.values(pages).forEach(p => p.classList.remove('active')); if (pages[pageId]) pages[pageId].classList.add('active'); document.querySelectorAll('.nav-btn[data-page]').forEach(btn => btn.classList.toggle('active', btn.getAttribute('data-page') === pageId)); window.scrollTo({ top: 0, behavior: 'smooth' }); }
+    const pages = { 
+        home: document.getElementById('home-page'), 
+        games: document.getElementById('games-page'), 
+        news: document.getElementById('news-page'), 
+        studio: document.getElementById('studio-page') 
+    };
+    
+    function showPage(pageId) { 
+        Object.values(pages).forEach(p => { if(p) p.classList.remove('active'); }); 
+        if (pages[pageId]) pages[pageId].classList.add('active'); 
+        document.querySelectorAll('.nav-btn[data-page]').forEach(btn => btn.classList.toggle('active', btn.getAttribute('data-page') === pageId)); 
+        window.scrollTo({ top: 0, behavior: 'smooth' }); 
+    }
 
     // ==================== MULTILINGUAL ====================
     function updateUILang() {
         const t = translations[currentLang];
+        
         const navHome = document.querySelector('.nav-btn[data-page="home"] .nav-text');
-        const navGame = document.querySelector('.nav-btn[data-page="games"] .nav-text');
+        const navGames = document.querySelector('.nav-btn[data-page="games"] .nav-text');
         const navNews = document.querySelector('.nav-btn[data-page="news"] .nav-text');
         const navStudio = document.querySelector('.nav-btn[data-page="studio"] .nav-text');
         if (navHome) navHome.textContent = t.navHome;
-        if (navGame) navGame.textContent = t.navGame;
+        if (navGames) navGames.textContent = t.navGames;
         if (navNews) navNews.textContent = t.navNews;
         if (navStudio) navStudio.textContent = t.navStudio;
+        
         const devSpan = document.querySelector('#devPanelBtn .nav-text');
         if (devSpan) devSpan.textContent = t.navDev;
         const loginBtnSpan = document.querySelector('#loginBtn .nav-text');
-        const registerBtnSpan = document.querySelector('#registerBtn .nav-text');
         if (loginBtnSpan) loginBtnSpan.textContent = t.loginBtn;
+        const registerBtnSpan = document.querySelector('#registerBtn .nav-text');
         if (registerBtnSpan) registerBtnSpan.textContent = t.registerBtn;
         
         const taglineEl = document.querySelector('.tagline-text');
         if (taglineEl) taglineEl.textContent = t.tagline;
-        const gameSectionEl = document.querySelector('.game-section-title');
-        if (gameSectionEl) gameSectionEl.textContent = t.gameSection;
+        const gamesTitleMain = document.querySelector('.games-title-main');
+        if (gamesTitleMain) gamesTitleMain.textContent = t.gamesTitleMain;
         const homeDescEl = document.querySelector('.home-desc-text');
         if (homeDescEl) homeDescEl.textContent = t.homeDesc;
-        const featureBossEl = document.querySelector('.feature-boss');
-        if (featureBossEl) featureBossEl.textContent = t.featureBoss;
-        const featureDuelEl = document.querySelector('.feature-duel');
-        if (featureDuelEl) featureDuelEl.textContent = t.featureDuel;
-        const featureEndingEl = document.querySelector('.feature-ending');
-        if (featureEndingEl) featureEndingEl.textContent = t.featureEnding;
-        const trailerBtnSpan = document.querySelector('#mainTrailerBtn .trailer-btn-text');
-        if (trailerBtnSpan) trailerBtnSpan.textContent = t.trailerBtn;
         const gameBadgeEl = document.querySelector('.game-badge-text');
         if (gameBadgeEl) gameBadgeEl.textContent = t.gameBadge;
+        const horrorHomeDesc = document.querySelector('.horror-home-desc');
+        if (horrorHomeDesc) horrorHomeDesc.textContent = t.horrorHomeDesc;
+        
         const gamesTitleEl = document.querySelector('.games-title');
         if (gamesTitleEl) gamesTitleEl.textContent = t.gamesTitle;
-        const gamesBadgeEl = document.querySelector('.games-badge-text');
-        if (gamesBadgeEl) gamesBadgeEl.textContent = t.gamesBadge;
         const gamesDescEl = document.querySelector('.games-desc-text');
         if (gamesDescEl) gamesDescEl.textContent = t.gamesDesc;
         const gamesFeature1 = document.querySelector('.games-feature1');
@@ -1125,14 +1244,35 @@
         if (gamesFeature5) gamesFeature5.textContent = t.gamesFeature5;
         const gamesFeature6 = document.querySelector('.games-feature6');
         if (gamesFeature6) gamesFeature6.textContent = t.gamesFeature6;
-        const gamesTrailerSpan = document.querySelector('#gameTrailerBtn .games-trailer-btn');
-        if (gamesTrailerSpan) gamesTrailerSpan.textContent = t.gamesTrailerBtn;
         const galleryTitleEl = document.querySelector('.gallery-title-text');
         if (galleryTitleEl) galleryTitleEl.textContent = t.galleryTitle;
         const screenshotLabel1 = document.querySelector('.screenshot-label1');
         if (screenshotLabel1) screenshotLabel1.textContent = t.screenshot1;
         const screenshotLabel2 = document.querySelector('.screenshot-label2');
         if (screenshotLabel2) screenshotLabel2.textContent = t.screenshot2;
+        
+        // Horror translations
+        const horrorDesc = document.querySelector('.horror-desc-text');
+        if (horrorDesc) horrorDesc.textContent = t.horrorDesc;
+        const horrorFeature1 = document.querySelector('.horror-feature1');
+        if (horrorFeature1) horrorFeature1.textContent = t.horrorFeature1;
+        const horrorFeature2 = document.querySelector('.horror-feature2');
+        if (horrorFeature2) horrorFeature2.textContent = t.horrorFeature2;
+        const horrorFeature3 = document.querySelector('.horror-feature3');
+        if (horrorFeature3) horrorFeature3.textContent = t.horrorFeature3;
+        const horrorFeature4 = document.querySelector('.horror-feature4');
+        if (horrorFeature4) horrorFeature4.textContent = t.horrorFeature4;
+        const horrorFeature5 = document.querySelector('.horror-feature5');
+        if (horrorFeature5) horrorFeature5.textContent = t.horrorFeature5;
+        const horrorFeature6 = document.querySelector('.horror-feature6');
+        if (horrorFeature6) horrorFeature6.textContent = t.horrorFeature6;
+        const galleryTitleHorror = document.querySelector('.gallery-title-horror');
+        if (galleryTitleHorror) galleryTitleHorror.textContent = t.galleryTitleHorror;
+        const horrorScreenshot1 = document.querySelector('.horror-screenshot1');
+        if (horrorScreenshot1) horrorScreenshot1.textContent = t.horrorScreenshot1;
+        const horrorScreenshot2 = document.querySelector('.horror-screenshot2');
+        if (horrorScreenshot2) horrorScreenshot2.textContent = t.horrorScreenshot2;
+        
         const newsTitleEl = document.querySelector('.news-title-text');
         if (newsTitleEl) newsTitleEl.textContent = t.newsTitle;
         const timelineTitle1 = document.querySelector('.timeline-title1');
@@ -1147,6 +1287,11 @@
         if (timelineTitle3) timelineTitle3.textContent = t.newsTitle3;
         const timelineText3 = document.querySelector('.timeline-text3');
         if (timelineText3) timelineText3.textContent = t.newsText3;
+        const timelineTitle4 = document.querySelector('.timeline-title4');
+        if (timelineTitle4) timelineTitle4.textContent = t.newsTitle4;
+        const timelineText4 = document.querySelector('.timeline-text4');
+        if (timelineText4) timelineText4.textContent = t.newsText4;
+        
         const studioTitleEl = document.querySelector('.studio-title-text');
         if (studioTitleEl) studioTitleEl.textContent = t.studioTitle;
         const studioDesc1 = document.querySelector('.studio-desc1');
@@ -1155,6 +1300,8 @@
         if (studioDesc2) studioDesc2.innerHTML = t.studioDesc2;
         const studioDesc3 = document.querySelector('.studio-desc3');
         if (studioDesc3) studioDesc3.innerHTML = t.studioDesc3;
+        const studioDesc4 = document.querySelector('.studio-desc4');
+        if (studioDesc4) studioDesc4.innerHTML = t.studioDesc4;
         const statLabelDev = document.querySelector('.stat-label-dev');
         if (statLabelDev) statLabelDev.textContent = t.studioStat1;
         const statLabelProject = document.querySelector('.stat-label-project');
@@ -1229,7 +1376,6 @@
     document.getElementById('profileBtn').onclick = showProfile;
     document.getElementById('logoutBtn').onclick = logout;
     document.getElementById('devPanelBtn').onclick = showDevPanel;
-    document.querySelectorAll('#mainTrailerBtn, #gameTrailerBtn').forEach(btn => btn && (btn.onclick = () => window.open(GAME.trailerUrl, '_blank')));
     document.querySelectorAll('[data-page]').forEach(btn => btn.addEventListener('click', () => showPage(btn.getAttribute('data-page'))));
     document.querySelectorAll('.footer-lang-option').forEach(opt => opt.addEventListener('click', () => setLanguage(opt.getAttribute('data-lang'))));
 
