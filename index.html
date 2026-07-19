@@ -442,14 +442,6 @@
         .game-card .feature { background: rgba(255,0,51,0.1); border-radius: 30px; padding: 0.4rem 1rem; font-size: 0.75rem; color: #ff8888; border: 1px solid rgba(255,0,51,0.1); }
         .game-card .game-badge-bottom { margin-top: 0.8rem; font-size: 0.7rem; color: #555; letter-spacing: 1px; }
 
-        /* Скрытая игра (доступна только авторизованным) */
-        .hidden-game {
-            display: none;
-        }
-        .hidden-game.visible {
-            display: block;
-        }
-
         /* ===== ГАЛЕРЕЯ ===== */
         .gallery-section { margin: 2rem 0; }
         .gallery-title { font-size: 1.3rem; margin: 1rem 0; color: #ff0033; font-family: 'Orbitron', monospace; }
@@ -732,7 +724,7 @@
 
         <div class="section-title"><i class="fas fa-crown"></i> <span class="games-title-main">НАШИ ИГРЫ</span></div>
         <div class="games-grid">
-            <!-- SAMURAI (всегда видна) -->
+            <!-- SAMURAI -->
             <div class="game-card">
                 <div class="game-icon" style="color:#ff0033;"><i class="fas fa-khanda"></i></div>
                 <div class="game-title" style="background:linear-gradient(135deg, #fff, #ff0033); -webkit-background-clip:text; background-clip:text; color:transparent;">SAMURAI</div>
@@ -740,16 +732,6 @@
                 <div class="game-desc home-desc-text">Ты — самурай, попавший в мир андров, где каждый выбор — последствия. Сражайся и отомсти за павших друзей.</div>
                 <div class="game-features"><div class="feature">⚔️ 5+ боссов</div><div class="feature">🎭 3 концовки</div></div>
                 <div class="game-badge-bottom">В РАЗРАБОТКЕ • 2026</div>
-            </div>
-
-            <!-- SHADOW WARDEN (скрыта, пока не войдут) -->
-            <div id="shadowWardenCard" class="game-card hidden-game" style="border-color: rgba(100,0,0,0.3);">
-                <div class="game-icon" style="color:#660000;"><i class="fas fa-ghost"></i></div>
-                <div class="game-title" style="background:linear-gradient(135deg, #fff, #660000); -webkit-background-clip:text; background-clip:text; color:transparent;">SHADOW WARDEN</div>
-                <div class="game-genre">Психологический хоррор</div>
-                <div class="game-desc horror-home-desc">Вы — смотритель заброшенной психиатрической больницы. Ночью вы понимаете, что вы здесь не один.</div>
-                <div class="game-features"><div class="feature">🌀 Система рассудка</div><div class="feature">🔊 Реалистичный звук</div></div>
-                <div class="game-badge-bottom">СКОРО • 2027</div>
             </div>
         </div>
     </div>
@@ -772,24 +754,7 @@
                 <div class="feature">📖 <span class="games-feature5">3 концовки</span></div>
                 <div class="feature">🌆 <span class="games-feature6">Атмосфера японии</span></div>
             </div>
-            <div class="game-badge-bottom">В РАЗРАБОТКЕ • 2026</div>
-        </div>
-
-        <!-- SHADOW WARDEN (скрыта) -->
-        <div id="shadowWardenPage" class="game-card hidden-game" style="border-color: rgba(100,0,0,0.3); margin-bottom:1.5rem;">
-            <div class="game-icon" style="color:#660000;"><i class="fas fa-ghost"></i></div>
-            <div class="game-title" style="background:linear-gradient(135deg, #fff, #660000); -webkit-background-clip:text; background-clip:text; color:transparent;">SHADOW WARDEN</div>
-            <div class="game-genre">Психологический хоррор</div>
-            <div class="game-desc horror-desc-text">Вы — смотритель заброшенной психиатрической больницы "Блэквуд". Ваша первая ночная смена превращается в кошмар, когда вы понимаете, что пациенты никогда не уходили. Исследуйте темные коридоры, скрывайтесь от неведомого ужаса и сохраните рассудок до рассвета.</div>
-            <div class="game-features">
-                <div class="feature">🌀 <span class="horror-feature1">Система рассудка</span></div>
-                <div class="feature">🔊 <span class="horror-feature2">Реалистичный звук</span></div>
-                <div class="feature">👻 <span class="horror-feature3">Процедурный страх</span></div>
-                <div class="feature">📖 <span class="horror-feature4">3 концовки</span></div>
-                <div class="feature">🎮 <span class="horror-feature5">От первого лица</span></div>
-                <div class="feature">🏚️ <span class="horror-feature6">Атмосфера безысходности</span></div>
-            </div>
-            <div class="game-badge-bottom">СКОРО • 2027</div>
+            <div class="game-badge-bottom">В РАЗРАБОТКЕ • 2027</div>
         </div>
 
         <!-- Галерея SAMURAI -->
@@ -798,15 +763,6 @@
             <div class="screenshots-grid">
                 <div class="screenshot-card"><img class="screenshot-img" src="https://s10.iimage.su/s/16/gXDRR9lxo3N5ybBG4YzqHiU6H7H7tAIuYlGDV0Dsm.png" alt="Начало"><div class="screenshot-label screenshot-label1">Начало 🌅</div></div>
                 <div class="screenshot-card"><img class="screenshot-img" src="https://s10.iimage.su/s/16/gXJ7cmDxhdcTAMK4fbUyzBp2rPiVFA2CysEXDbaKS.png" alt="Сено"><div class="screenshot-label screenshot-label2">Сено 🌾</div></div>
-            </div>
-        </div>
-
-        <!-- Галерея SHADOW WARDEN (скрыта) -->
-        <div id="shadowGallery" class="gallery-section hidden-game">
-            <div class="gallery-title"><i class="fas fa-images"></i> <span class="gallery-title-horror">ГАЛЕРЕЯ SHADOW WARDEN</span></div>
-            <div class="screenshots-grid">
-                <div class="screenshot-card"><img class="screenshot-img" src="https://s10.iimage.su/s/16/cb0i6dJhqtx9lQgtueP3OXyIULh7JKO15KBVseQp3.jpg" alt="Пустой коридор"><div class="screenshot-label horror-screenshot1">Пустой коридор 🌑</div></div>
-                <div class="screenshot-card"><img class="screenshot-img" src="https://s10.iimage.su/s/16/ySYNqKzMM8k1NmKIKAY1ZgFcA1sPJgQIYgkQyxedE.jpg" alt="Комната с креслом"><div class="screenshot-label horror-screenshot2">Комната с креслом 🪑</div></div>
             </div>
         </div>
     </div>
@@ -818,7 +774,6 @@
             <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><div class="timeline-date">17 МАЯ 2026</div><div class="timeline-title timeline-title1">🚀 ЗАПУСК САЙТА INTERFEX</div><div class="timeline-text timeline-text1">Мы выпустили сайт InterFex!</div></div></div>
             <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><div class="timeline-date">12 МАРТА 2026</div><div class="timeline-title timeline-title2">🔥 НОВЫЕ СКРИНШОТЫ</div><div class="timeline-text timeline-text2">Опубликовали свежие скриншоты игры в разделе галереи.</div></div></div>
             <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><div class="timeline-date">22 НОЯБРЯ 2025</div><div class="timeline-title timeline-title3">⚔️ АНОНС SAMURAI</div><div class="timeline-text timeline-text3">Мы анонсировали нашу первую игру — Samurai!</div></div></div>
-            <div class="timeline-item"><div class="timeline-dot"></div><div class="timeline-content"><div class="timeline-date">10 ЯНВАРЯ 2025</div><div class="timeline-title timeline-title4">👻 АНОНС SHADOW WARDEN</div><div class="timeline-text timeline-text4">Мы анонсировали наш психологический хоррор от первого лица.</div></div></div>
         </div>
     </div>
 
@@ -829,10 +784,9 @@
             <p class="studio-desc1"><strong>InterFex Games</strong> — независимая студия, основанная в 2025 году <strong style="color:#ff0033">двумя школьниками</strong>. Мы делаем игры с проработанным открытым миром и упором на сюжет и свободу действия. 🎮</p>
             <p class="studio-desc2"><strong>Каждая игра</strong>  — новый, огромный мир. Мы делаем упор на сюжет, графику и интерес к прохождению.</p>
             <p class="studio-desc3"><strong>Samurai</strong> — первая большая игра, которую вы увидите достаточно скоро ⚡</p>
-            <p class="studio-desc4"><strong>Shadow Warden</strong> — наш психологический хоррор, который заставит вас бояться темноты. 👻</p>
             <div class="studio-stats">
                 <div class="stat-card"><div class="stat-number">4</div><div class="stat-label-dev">РАЗРАБОТЧИКА 👨‍💻</div></div>
-                <div class="stat-card"><div class="stat-number">2</div><div class="stat-label-project">ПРОЕКТА 🎯</div></div>
+                <div class="stat-card"><div class="stat-number">1</div><div class="stat-label-project">ПРОЕКТЫ 🎯</div></div>
                 <div class="stat-card"><div class="stat-number">2026</div><div class="stat-label-year">ПЕРВЫЙ РЕЛИЗ 📅</div></div>
             </div>
         </div>
@@ -849,12 +803,10 @@
         <div class="footer-lang-switch">
             <div class="footer-lang-option" data-lang="ru">RUS</div>
             <div class="footer-lang-option" data-lang="en">ENG</div>
-            <div class="footer-lang-option" data-lang="fr">FRA</div>
-            <div class="footer-lang-option" data-lang="jp">JPN</div>
         </div>
         
         <div class="footer-copyright">
-            <p>© 2026 InterFex Games | <span class="footer-emoji">⚔️🎮👻</span></p>
+            <p>© 2026 InterFex Games | <span class="footer-emoji">⚔️🎮</span></p>
         </div>
     </div>
 </div>
@@ -868,19 +820,13 @@
             tagline: "Игры, которые остаются в памяти. 🎮",
             gamesTitleMain: "НАШИ ИГРЫ",
             homeDesc: "Ты — самурай, попавший в мир андров, где каждый выбор — последствия.",
-            gameBadge: "В РАЗРАБОТКЕ | 2026",
+            gameBadge: "В РАЗРАБОТКЕ | 2027",
             gamesTitle: "НАШИ ПРОЕКТЫ",
             gamesDesc: "Ты — последний самурай. Возьми катану и пройди путь мести через мир андров и стань легендой.",
             gamesFeature1: "5+ уникальных боссов", gamesFeature2: "Необычные механики", gamesFeature3: "Имбовый сюжет",
             gamesFeature4: "Крутой саундтрек", gamesFeature5: "3 концовки", gamesFeature6: "Атмосфера японии",
             galleryTitle: "ГАЛЕРЕЯ SAMURAI",
             screenshot1: "Начало 🌅", screenshot2: "Сено 🌾",
-            horrorHomeDesc: "Вы — смотритель заброшенной психиатрической больницы. Ночью вы понимаете, что вы здесь не один.",
-            horrorDesc: "Вы — смотритель заброшенной психиатрической больницы \"Блэквуд\". Ваша первая ночная смена превращается в кошмар, когда вы понимаете, что пациенты никогда не уходили. Исследуйте темные коридоры, скрывайтесь от неведомого ужаса и сохраните рассудок до рассвета.",
-            horrorFeature1: "Система рассудка", horrorFeature2: "Реалистичный звук", horrorFeature3: "Процедурный страх",
-            horrorFeature4: "3 концовки", horrorFeature5: "От первого лица", horrorFeature6: "Атмосфера безысходности",
-            galleryTitleHorror: "ГАЛЕРЕЯ SHADOW WARDEN",
-            horrorScreenshot1: "Пустой коридор 🌑", horrorScreenshot2: "Комната с креслом 🪑",
             newsTitle: "История",
             newsTitle1: "🚀 ЗАПУСК САЙТА INTERFEX",
             newsText1: "Мы выпустили сайт InterFex!",
@@ -888,14 +834,11 @@
             newsText2: "Опубликовали свежие скриншоты игры в разделе галереи.",
             newsTitle3: "⚔️ АНОНС SAMURAI",
             newsText3: "Мы анонсировали нашу первую игру — Samurai!",
-            newsTitle4: "👻 АНОНС SHADOW WARDEN",
-            newsText4: "Мы анонсировали наш психологический хоррор от первого лица.",
             studioTitle: "О СТУДИИ",
             studioDesc1: "<strong>InterFex Games</strong> — независимая студия, основанная в 2025 году <strong style='color:#ff0033'>двумя школьниками</strong>. Мы делаем игры с проработанным открытым миром и упором на сюжет и свободу действия. 🎮",
             studioDesc2: "<strong>Каждая игра</strong>  — новый, огромный мир. Мы делаем упор на сюжет, графику и интерес к прохождению.",
             studioDesc3: "<strong>Samurai</strong> — первая большая игра, которую вы увидите достаточно скоро ⚡",
-            studioDesc4: "<strong>Shadow Warden</strong> — наш психологический хоррор, который заставит вас бояться темноты. 👻",
-            studioStat1: "РАЗРАБОТЧИКА 👨‍💻", studioStat2: "ПРОЕКТА 🎯", studioStat3: "ПЕРВЫЙ РЕЛИЗ 📅",
+            studioStat1: "РАЗРАБОТЧИКА 👨‍💻", studioStat2: "ПРОЕКТ 🎯", studioStat3: "ПЕРВЫЙ РЕЛИЗ 📅",
             loginModalTitle: "ВХОД", registerModalTitle: "РЕГИСТРАЦИЯ",
             loginSubmit: "Войти", registerSubmit: "Зарегистрироваться",
             switchToRegister: "Нет аккаунта? Регистрация", switchToLogin: "Уже есть аккаунт? Вход",
@@ -903,8 +846,7 @@
             profile: "ПРОФИЛЬ", level: "Уровень", xp: "XP", hours: "Часов",
             regDate: "📅 Регистрация:", lastVisit: "🕐 Последний визит:", loginsCount: "🔑 Входов:",
             closeProfile: "Закрыть",
-            devPanel: "DEV ПАНЕЛЬ", totalUsers: "Пользователей", totalLogins: "Входов", avgLevel: "Ср. уровень", closeDev: "Закрыть",
-            loginRequired: "Войдите в аккаунт, чтобы увидеть скрытую игру"
+            devPanel: "DEV ПАНЕЛЬ", totalUsers: "Пользователей", totalLogins: "Входов", avgLevel: "Ср. уровень", closeDev: "Закрыть"
         },
         en: {
             navHome: "HOME", navGames: "GAMES", navNews: "NEWS", navStudio: "STUDIO", navDev: "DEV",
@@ -912,19 +854,13 @@
             tagline: "Games that stay in memory. 🎮",
             gamesTitleMain: "OUR GAMES",
             homeDesc: "You are a samurai who has fallen into a world of Androvs, where every choice has consequences.",
-            gameBadge: "IN DEVELOPMENT | 2026",
+            gameBadge: "IN DEVELOPMENT | 2027",
             gamesTitle: "OUR PROJECTS",
             gamesDesc: "You are the last samurai. Take your katana and walk the path of revenge through the world of Androvs and become a legend.",
             gamesFeature1: "5+ unique bosses", gamesFeature2: "Unique mechanics", gamesFeature3: "Imba story",
             gamesFeature4: "Cool soundtrack", gamesFeature5: "3 endings", gamesFeature6: "Atmosphere of Japan",
             galleryTitle: "SAMURAI GALLERY",
             screenshot1: "Beginning 🌅", screenshot2: "Hay 🌾",
-            horrorHomeDesc: "You are the caretaker of an abandoned psychiatric hospital. At night, you realize you're not alone.",
-            horrorDesc: "You are the caretaker of the abandoned \"Blackwood\" psychiatric hospital. Your first night shift turns into a nightmare when you realize the patients never left. Explore the dark corridors, hide from the unknown horror, and keep your sanity until dawn.",
-            horrorFeature1: "Sanity system", horrorFeature2: "Realistic sound", horrorFeature3: "Procedural fear",
-            horrorFeature4: "3 endings", horrorFeature5: "First person", horrorFeature6: "Atmosphere of despair",
-            galleryTitleHorror: "SHADOW WARDEN GALLERY",
-            horrorScreenshot1: "Empty corridor 🌑", horrorScreenshot2: "Chair room 🪑",
             newsTitle: "History",
             newsTitle1: "🚀 INTERFEX SITE LAUNCH",
             newsText1: "We launched the InterFex website!",
@@ -932,13 +868,10 @@
             newsText2: "Published fresh game screenshots in the gallery section.",
             newsTitle3: "⚔️ SAMURAI ANNOUNCEMENT",
             newsText3: "We announced our first game — Samurai!",
-            newsTitle4: "👻 SHADOW WARDEN ANNOUNCEMENT",
-            newsText4: "We announced our psychological first-person horror.",
             studioTitle: "ABOUT THE STUDIO",
             studioDesc1: "<strong>InterFex Games</strong> is an independent studio founded in 2025 by <strong style='color:#ff0033'>two school students</strong>. We create games with a developed open world and a focus on story and freedom of action. 🎮",
             studioDesc2: "<strong>Each game</strong> is a new, huge world. We focus on story, graphics, and engagement.",
             studioDesc3: "<strong>Samurai</strong> is the first big game you'll see soon ⚡",
-            studioDesc4: "<strong>Shadow Warden</strong> is our psychological horror that will make you afraid of the dark. 👻",
             studioStat1: "DEVELOPERS 👨‍💻", studioStat2: "PROJECTS 🎯", studioStat3: "FIRST RELEASE 📅",
             loginModalTitle: "LOGIN", registerModalTitle: "REGISTER",
             loginSubmit: "Login", registerSubmit: "Register",
@@ -947,96 +880,7 @@
             profile: "PROFILE", level: "Level", xp: "XP", hours: "Hours",
             regDate: "📅 Registered:", lastVisit: "🕐 Last visit:", loginsCount: "🔑 Logins:",
             closeProfile: "Close",
-            devPanel: "DEV PANEL", totalUsers: "Users", totalLogins: "Logins", avgLevel: "Avg level", closeDev: "Close",
-            loginRequired: "Log in to see the hidden game"
-        },
-        fr: {
-            navHome: "ACCUEIL", navGames: "JEUX", navNews: "ACTUS", navStudio: "STUDIO", navDev: "DEV",
-            loginBtn: "CONNEXION", registerBtn: "INSCRIPTION",
-            tagline: "Des jeux qui restent en mémoire. 🎮",
-            gamesTitleMain: "NOS JEUX",
-            homeDesc: "Vous êtes un samouraï tombé dans un monde d'Androvs, où chaque choix a des conséquences.",
-            gameBadge: "EN DÉVELOPPEMENT | 2026",
-            gamesTitle: "NOS PROJETS",
-            gamesDesc: "Vous êtes le dernier samouraï. Prenez votre katana et marchez sur le chemin de la vengeance à travers le monde des Androvs et devenez une légende.",
-            gamesFeature1: "5+ boss uniques", gamesFeature2: "Mécaniques uniques", gamesFeature3: "Histoire imbattable",
-            gamesFeature4: "Bande-son cool", gamesFeature5: "3 fins", gamesFeature6: "Ambiance du Japon",
-            galleryTitle: "GALERIE SAMURAI",
-            screenshot1: "Début 🌅", screenshot2: "Foin 🌾",
-            horrorHomeDesc: "Vous êtes le gardien d'un hôpital psychiatrique abandonné. La nuit, vous réalisez que vous n'êtes pas seul.",
-            horrorDesc: "Vous êtes le gardien de l'hôpital psychiatrique abandonné \"Blackwood\". Votre premier quart de nuit se transforme en cauchemar lorsque vous réalisez que les patients ne sont jamais partis. Explorez les couloirs sombres, cachez-vous de l'horreur inconnue et gardez votre santé mentale jusqu'à l'aube.",
-            horrorFeature1: "Système de santé mentale", horrorFeature2: "Son réaliste", horrorFeature3: "Peur procédurale",
-            horrorFeature4: "3 fins", horrorFeature5: "Première personne", horrorFeature6: "Atmosphère de désespoir",
-            galleryTitleHorror: "GALERIE SHADOW WARDEN",
-            horrorScreenshot1: "Couloir vide 🌑", horrorScreenshot2: "Salle de chaise 🪑",
-            newsTitle: "Histoire",
-            newsTitle1: "🚀 LANCEMENT DU SITE INTERFEX",
-            newsText1: "Nous avons lancé le site InterFex !",
-            newsTitle2: "🔥 NOUVELLES CAPTURES D'ÉCRAN",
-            newsText2: "Publication de nouvelles captures d'écran du jeu dans la section galerie.",
-            newsTitle3: "⚔️ ANNONCE DE SAMURAI",
-            newsText3: "Nous avons annoncé notre premier jeu — Samurai !",
-            newsTitle4: "👻 ANNONCE DE SHADOW WARDEN",
-            newsText4: "Nous avons annoncé notre horreur psychologique à la première personne.",
-            studioTitle: "À PROPOS DU STUDIO",
-            studioDesc1: "<strong>InterFex Games</strong> est un studio indépendant fondé en 2025 par <strong style='color:#ff0033'>deux étudiants</strong>. Nous créons des jeux avec un monde ouvert développé et un accent sur l'histoire et la liberté d'action. 🎮",
-            studioDesc2: "<strong>Chaque jeu</strong> est un monde nouveau et immense. Nous mettons l'accent sur l'histoire, les graphismes et l'engagement.",
-            studioDesc3: "<strong>Samurai</strong> est le premier grand jeu que vous verrez bientôt ⚡",
-            studioDesc4: "<strong>Shadow Warden</strong> est notre horreur psychologique qui vous fera peur du noir. 👻",
-            studioStat1: "DÉVELOPPEURS 👨‍💻", studioStat2: "PROJETS 🎯", studioStat3: "PREMIÈRE SORTIE 📅",
-            loginModalTitle: "CONNEXION", registerModalTitle: "INSCRIPTION",
-            loginSubmit: "Se connecter", registerSubmit: "S'inscrire",
-            switchToRegister: "Pas de compte ? S'inscrire", switchToLogin: "Déjà un compte ? Se connecter",
-            closeModal: "Fermer",
-            profile: "PROFIL", level: "Niveau", xp: "XP", hours: "Heures",
-            regDate: "📅 Inscription :", lastVisit: "🕐 Dernière visite :", loginsCount: "🔑 Connexions :",
-            closeProfile: "Fermer",
-            devPanel: "PANEL DEV", totalUsers: "Utilisateurs", totalLogins: "Connexions", avgLevel: "Niveau moy.", closeDev: "Fermer",
-            loginRequired: "Connectez-vous pour voir le jeu caché"
-        },
-        jp: {
-            navHome: "ホーム", navGames: "ゲーム", navNews: "ニュース", navStudio: "スタジオ", navDev: "開発",
-            loginBtn: "ログイン", registerBtn: "登録",
-            tagline: "記憶に残るゲーム。🎮",
-            gamesTitleMain: "私たちのゲーム",
-            homeDesc: "あなたはアンドロフの世界に落ちた侍です。すべての選択には結果が伴います。",
-            gameBadge: "開発中 | 2026年",
-            gamesTitle: "私たちのプロジェクト",
-            gamesDesc: "あなたは最後の侍です。刀を手に取り、アンドロフの世界で復讐の道を歩み、伝説となれ。",
-            gamesFeature1: "5+ ユニークボス", gamesFeature2: "ユニークなメカニクス", gamesFeature3: "壮大なストーリー",
-            gamesFeature4: "クールなサウンドトラック", gamesFeature5: "3 つの結末", gamesFeature6: "日本の雰囲気",
-            galleryTitle: "侍 ギャラリー",
-            screenshot1: "始まり 🌅", screenshot2: "干し草 🌾",
-            horrorHomeDesc: "あなたは廃墟となった精神病院の管理者です。夜、あなたは自分が一人ではないことに気づきます。",
-            horrorDesc: "あなたは廃墟となった精神病院「ブラックウッド」の管理者です。最初の夜勤は、患者たちが決して去っていなかったことに気づいたとき、悪夢と化します。暗い廊下を探索し、未知の恐怖から身を隠し、夜明けまで正気を保ちましょう。",
-            horrorFeature1: "正気度システム", horrorFeature2: "リアルな音響", horrorFeature3: "手続き的恐怖",
-            horrorFeature4: "3 つの結末", horrorFeature5: "一人称視点", horrorFeature6: "絶望の雰囲気",
-            galleryTitleHorror: "シャドウ・ウォーデン ギャラリー",
-            horrorScreenshot1: "空の廊下 🌑", horrorScreenshot2: "椅子のある部屋 🪑",
-            newsTitle: "歴史",
-            newsTitle1: "🚀 INTERFEX サイトローンチ",
-            newsText1: "InterFexウェブサイトを公開しました！",
-            newsTitle2: "🔥 新しいスクリーンショット",
-            newsText2: "ギャラリーセクションでゲームの新しいスクリーンショットを公開しました。",
-            newsTitle3: "⚔️ 侍 発表",
-            newsText3: "最初のゲーム「Samurai」を発表しました！",
-            newsTitle4: "👻 シャドウ・ウォーデン 発表",
-            newsText4: "心理的ホラーゲームを発表しました。",
-            studioTitle: "スタジオについて",
-            studioDesc1: "<strong>InterFex Games</strong> は2025年に <strong style='color:#ff0033'>2人の学生</strong>によって設立された独立スタジオです。私たちは、ストーリーと自由な行動に重点を置いた、開発されたオープンワールドのゲームを作成しています。🎮",
-            studioDesc2: "<strong>すべてのゲーム</strong>は新しく広大な世界です。私たちはストーリー、グラフィック、没入感に重点を置いています。",
-            studioDesc3: "<strong>Samurai</strong> は、もうすぐお目見えする最初の大作ゲームです ⚡",
-            studioDesc4: "<strong>Shadow Warden</strong> は、暗闇を怖がらせる心理的ホラーです。👻",
-            studioStat1: "開発者 👨‍💻", studioStat2: "プロジェクト 🎯", studioStat3: "最初のリリース 📅",
-            loginModalTitle: "ログイン", registerModalTitle: "登録",
-            loginSubmit: "ログイン", registerSubmit: "登録",
-            switchToRegister: "アカウントがない？登録", switchToLogin: "すでにアカウントをお持ちですか？ログイン",
-            closeModal: "閉じる",
-            profile: "プロフィール", level: "レベル", xp: "経験値", hours: "時間",
-            regDate: "📅 登録日:", lastVisit: "🕐 最終訪問:", loginsCount: "🔑 ログイン数:",
-            closeProfile: "閉じる",
-            devPanel: "開発パネル", totalUsers: "ユーザー数", totalLogins: "ログイン数", avgLevel: "平均レベル", closeDev: "閉じる",
-            loginRequired: "ログインして隠されたゲームを見る"
+            devPanel: "DEV PANEL", totalUsers: "Users", totalLogins: "Logins", avgLevel: "Avg level", closeDev: "Close"
         }
     };
 
@@ -1124,17 +968,11 @@
             document.getElementById('userPanel').style.display = 'flex';
             document.getElementById('userGreeting').innerHTML = `<i class="fas fa-user-circle"></i> ${currentUser.login} (${currentUser.level || 1} lvl)`;
             document.getElementById('devPanelBtn').style.display = currentUser.isAdmin ? 'flex' : 'none';
-            
-            // Показываем Shadow Warden
-            document.querySelectorAll('.hidden-game').forEach(el => el.classList.add('visible'));
         } else {
             currentUser = null;
             document.getElementById('authButtons').style.display = 'flex';
             document.getElementById('userPanel').style.display = 'none';
             document.getElementById('devPanelBtn').style.display = 'none';
-            
-            // Скрываем Shadow Warden
-            document.querySelectorAll('.hidden-game').forEach(el => el.classList.remove('visible'));
         }
         updateUILang();
     }
@@ -1225,8 +1063,6 @@
         if (homeDescEl) homeDescEl.textContent = t.homeDesc;
         const gameBadgeEl = document.querySelector('.game-badge-text');
         if (gameBadgeEl) gameBadgeEl.textContent = t.gameBadge;
-        const horrorHomeDesc = document.querySelector('.horror-home-desc');
-        if (horrorHomeDesc) horrorHomeDesc.textContent = t.horrorHomeDesc;
         
         const gamesTitleEl = document.querySelector('.games-title');
         if (gamesTitleEl) gamesTitleEl.textContent = t.gamesTitle;
@@ -1251,28 +1087,6 @@
         const screenshotLabel2 = document.querySelector('.screenshot-label2');
         if (screenshotLabel2) screenshotLabel2.textContent = t.screenshot2;
         
-        // Horror translations
-        const horrorDesc = document.querySelector('.horror-desc-text');
-        if (horrorDesc) horrorDesc.textContent = t.horrorDesc;
-        const horrorFeature1 = document.querySelector('.horror-feature1');
-        if (horrorFeature1) horrorFeature1.textContent = t.horrorFeature1;
-        const horrorFeature2 = document.querySelector('.horror-feature2');
-        if (horrorFeature2) horrorFeature2.textContent = t.horrorFeature2;
-        const horrorFeature3 = document.querySelector('.horror-feature3');
-        if (horrorFeature3) horrorFeature3.textContent = t.horrorFeature3;
-        const horrorFeature4 = document.querySelector('.horror-feature4');
-        if (horrorFeature4) horrorFeature4.textContent = t.horrorFeature4;
-        const horrorFeature5 = document.querySelector('.horror-feature5');
-        if (horrorFeature5) horrorFeature5.textContent = t.horrorFeature5;
-        const horrorFeature6 = document.querySelector('.horror-feature6');
-        if (horrorFeature6) horrorFeature6.textContent = t.horrorFeature6;
-        const galleryTitleHorror = document.querySelector('.gallery-title-horror');
-        if (galleryTitleHorror) galleryTitleHorror.textContent = t.galleryTitleHorror;
-        const horrorScreenshot1 = document.querySelector('.horror-screenshot1');
-        if (horrorScreenshot1) horrorScreenshot1.textContent = t.horrorScreenshot1;
-        const horrorScreenshot2 = document.querySelector('.horror-screenshot2');
-        if (horrorScreenshot2) horrorScreenshot2.textContent = t.horrorScreenshot2;
-        
         const newsTitleEl = document.querySelector('.news-title-text');
         if (newsTitleEl) newsTitleEl.textContent = t.newsTitle;
         const timelineTitle1 = document.querySelector('.timeline-title1');
@@ -1287,10 +1101,6 @@
         if (timelineTitle3) timelineTitle3.textContent = t.newsTitle3;
         const timelineText3 = document.querySelector('.timeline-text3');
         if (timelineText3) timelineText3.textContent = t.newsText3;
-        const timelineTitle4 = document.querySelector('.timeline-title4');
-        if (timelineTitle4) timelineTitle4.textContent = t.newsTitle4;
-        const timelineText4 = document.querySelector('.timeline-text4');
-        if (timelineText4) timelineText4.textContent = t.newsText4;
         
         const studioTitleEl = document.querySelector('.studio-title-text');
         if (studioTitleEl) studioTitleEl.textContent = t.studioTitle;
@@ -1300,8 +1110,6 @@
         if (studioDesc2) studioDesc2.innerHTML = t.studioDesc2;
         const studioDesc3 = document.querySelector('.studio-desc3');
         if (studioDesc3) studioDesc3.innerHTML = t.studioDesc3;
-        const studioDesc4 = document.querySelector('.studio-desc4');
-        if (studioDesc4) studioDesc4.innerHTML = t.studioDesc4;
         const statLabelDev = document.querySelector('.stat-label-dev');
         if (statLabelDev) statLabelDev.textContent = t.studioStat1;
         const statLabelProject = document.querySelector('.stat-label-project');
@@ -1358,11 +1166,9 @@
 
     function detectLanguage() {
         const saved = localStorage.getItem('interfex_language');
-        if (saved && ['ru','en','fr','jp'].includes(saved)) return saved;
+        if (saved && ['ru','en'].includes(saved)) return saved;
         const lang = navigator.language;
         if (lang.startsWith('ru')) return 'ru';
-        if (lang.startsWith('fr')) return 'fr';
-        if (lang.startsWith('ja')) return 'jp';
         return 'en';
     }
 
@@ -1383,13 +1189,13 @@
         const loginVal = document.getElementById('authLogin').value.trim();
         const passVal = document.getElementById('authPassword').value.trim();
         const errorDiv = document.getElementById('authError');
-        if (!loginVal || !passVal) { errorDiv.innerText = currentLang === 'ru' ? 'Заполните все поля' : (currentLang === 'en' ? 'Fill in all fields' : (currentLang === 'fr' ? 'Remplissez tous les champs' : 'すべての項目を入力してください')); return; }
+        if (!loginVal || !passVal) { errorDiv.innerText = currentLang === 'ru' ? 'Заполните все поля' : 'Fill in all fields'; return; }
         if (isLoginMode) {
             if (login(loginVal, passVal)) { closeModal('authModal'); errorDiv.innerText = ''; document.getElementById('authLogin').value = ''; document.getElementById('authPassword').value = ''; }
-            else errorDiv.innerText = currentLang === 'ru' ? 'Неверный логин или пароль' : (currentLang === 'en' ? 'Invalid login or password' : (currentLang === 'fr' ? 'Identifiant ou mot de passe invalide' : 'ログイン名またはパスワードが無効です'));
+            else errorDiv.innerText = currentLang === 'ru' ? 'Неверный логин или пароль' : 'Invalid login or password';
         } else {
             if (register(loginVal, passVal)) { closeModal('authModal'); errorDiv.innerText = ''; document.getElementById('authLogin').value = ''; document.getElementById('authPassword').value = ''; }
-            else errorDiv.innerText = currentLang === 'ru' ? 'Пользователь с таким логином уже существует' : (currentLang === 'en' ? 'User with this login already exists' : (currentLang === 'fr' ? 'Cet utilisateur existe déjà' : 'このログイン名は既に使用されています'));
+            else errorDiv.innerText = currentLang === 'ru' ? 'Пользователь с таким логином уже существует' : 'User with this login already exists';
         }
     };
 
