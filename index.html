@@ -875,14 +875,14 @@
 
 <script>
     // ==================== КОНФИГУРАЦИЯ SUPABASE ====================
-    const SUPABASE_URL = "//jkpuvzbnhfrtvfogcqsx.supabase.co";
+    const SUPABASE_URL = "https://jkpuvzbnhfrtvfogcqsx.supabase.co";
     const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImprcHV2emJuaGZydHZmb2djcXN4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTIxOTcwNzIsImV4cCI6MjEwNzc3MzA3Mn0.9SKB-PWDEW3rcLiBqNDlIZ1DRvnAAUb9EOUSbW-IF1w";
 
     // Логин, который считается аккаунтом разработчика
     const DEV_USERNAME = "InterFex";
 
     let supabaseClient = null;
-    if (window.supabase && SUPABASE_URL !== "https://ВАШ_ПРОЕКТ.supabase.co") {
+    if (window.supabase && SUPABASE_URL !== "https://jkpuvzbnhfrtvfogcqsx.supabase.co") {
         supabaseClient = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
     }
 
