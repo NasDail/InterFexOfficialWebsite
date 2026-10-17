@@ -12,6 +12,10 @@
     <title>InterFex Games</title>
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,300;14..32,400;14..32,500;14..32,600;14..32,700;14..32,800;14..32,900&family=Orbitron:wght@400;500;600;700;800;900&family=Noto+Sans+JP:wght@400;500;700;900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <!-- Supabase JS Client SDK -->
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
     <style>
         * {
             margin: 0;
@@ -273,7 +277,7 @@
         }
         .logout-btn:hover { background: rgba(255,0,0,0.3); border-color: #ff0033; color: #ff0033; }
 
-        /* ===== МОДАЛЬНЫЕ ОКНА (скруглённые) ===== */
+        /* ===== МОДАЛЬНЫЕ ОКНА ===== */
         .modal {
             display: none;
             position: fixed;
@@ -326,6 +330,7 @@
             transition: all 0.2s;
         }
         .modal-content button:hover { transform: scale(1.02); box-shadow: 0 0 20px rgba(255,0,51,0.5); }
+        .modal-content button:disabled { opacity: 0.5; cursor: not-allowed; }
         .switch-form { margin-top: 1rem; color: #aaa; cursor: pointer; transition: color 0.2s; }
         .switch-form:hover { color: #ff0033; }
 
@@ -359,16 +364,6 @@
         }
         @keyframes titlePulse { 0% { filter: drop-shadow(0 0 0 rgba(255,0,51,0)); } 100% { filter: drop-shadow(0 0 25px rgba(255,0,51,0.5)); } }
         .hero-content .hero-tagline { font-size: 1.1rem; color: #888; margin-top: 0.5rem; }
-        .hero-content .hero-badge {
-            display: inline-block;
-            background: rgba(255,0,51,0.2);
-            border: 1px solid #ff0033;
-            border-radius: 30px;
-            padding: 0.3rem 1.5rem;
-            font-size: 0.8rem;
-            color: #ff6666;
-            margin-top: 0.8rem;
-        }
         .hero-buttons {
             display: flex;
             gap: 1rem;
@@ -440,7 +435,7 @@
         .game-card .game-desc { color: #bbb; margin: 1rem 0; line-height: 1.6; font-size: 0.95rem; }
         .game-card .game-features { display: flex; flex-wrap: wrap; gap: 0.8rem; justify-content: center; margin: 0.5rem 0; }
         .game-card .feature { background: rgba(255,0,51,0.1); border-radius: 30px; padding: 0.4rem 1rem; font-size: 0.75rem; color: #ff8888; border: 1px solid rgba(255,0,51,0.1); }
-        .game-card .game-badge-bottom { margin-top: 0.8rem; font-size: 0.7rem; color: #555; letter-spacing: 1px; }
+        .game-badge-bottom { margin-top: 0.8rem; font-size: 0.7rem; color: #555; letter-spacing: 1px; }
 
         /* ===== ГАЛЕРЕЯ ===== */
         .gallery-section { margin: 2rem 0; }
@@ -594,27 +589,6 @@
             align-items: center;
             gap: 5px;
         }
-        .dev-stats {
-            display: flex;
-            justify-content: space-around;
-            margin: 1rem 0;
-        }
-        .dev-stat-card {
-            text-align: center;
-            background: rgba(255,0,51,0.1);
-            padding: 0.8rem;
-            border-radius: 16px;
-            min-width: 80px;
-        }
-        .dev-stat-value { font-size: 1.5rem; font-weight: bold; color: #ff0033; }
-        .users-list { max-height: 300px; overflow-y: auto; margin: 1rem 0; }
-        .user-item {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 0.5rem;
-            border-bottom: 1px solid rgba(255,0,51,0.2);
-        }
 
         /* ===== АДАПТИВНОСТЬ ===== */
         @media (max-width: 800px) {
@@ -688,7 +662,6 @@
             <button class="nav-btn" data-page="games"><i class="fas fa-gamepad"></i> <span class="nav-text">ИГРЫ</span></button>
             <button class="nav-btn" data-page="news"><i class="fas fa-newspaper"></i> <span class="nav-text">НОВОСТИ</span></button>
             <button class="nav-btn" data-page="studio"><i class="fas fa-building"></i> <span class="nav-text">СТУДИЯ</span></button>
-            <button class="nav-btn" id="devPanelBtn" style="display: none;"><i class="fas fa-code"></i> <span class="nav-text">DEV</span></button>
             
             <div id="authButtons" class="user-panel">
                 <button id="loginBtn" class="nav-btn"><i class="fas fa-sign-in-alt"></i> <span class="nav-text">ВХОД</span></button>
@@ -702,11 +675,36 @@
         </div>
     </div>
 
-    <div id="authModal" class="modal"><div class="modal-content"><h2 id="modalTitle"><i class="fas fa-key"></i> ВХОД</h2><input type="text" id="authLogin" placeholder="Логин"><input type="password" id="authPassword" placeholder="Пароль"><div id="authError" class="error-msg"></div><button id="authSubmitBtn">Войти</button><div class="switch-form" id="switchFormBtn">Нет аккаунта? Регистрация</div><div class="switch-form" id="closeModalBtn">Закрыть</div></div></div>
+    <!-- Модальное окно Авторизации -->
+    <div id="authModal" class="modal">
+        <div class="modal-content">
+            <h2 id="modalTitle"><i class="fas fa-key"></i> ВХОД</h2>
+            <input type="text" id="authLogin" placeholder="Логин (никнейм)">
+            <input type="password" id="authPassword" placeholder="Пароль (мин. 6 симв.)">
+            <div id="authError" class="error-msg"></div>
+            <button id="authSubmitBtn">Войти</button>
+            <div class="switch-form" id="switchFormBtn">Нет аккаунта? Регистрация</div>
+            <div class="switch-form" id="closeModalBtn">Закрыть</div>
+        </div>
+    </div>
     
-    <div id="profileModal" class="modal"><div class="modal-content"><h2><i class="fas fa-user-circle"></i> <span class="profile-title">ПРОФИЛЬ</span></h2><div class="stats-grid"><div class="stat-item"><div class="stat-value" id="profileLevel">1</div><div class="stat-label-level">Уровень</div></div><div class="stat-item"><div class="stat-value" id="profileXp">0</div><div class="stat-label-xp">XP</div></div><div class="stat-item"><div class="stat-value" id="profileHours">0</div><div class="stat-label-hours">Часов</div></div></div><div class="progress-bar"><div class="progress-fill" id="profileProgress"></div></div><div id="xpToNext" style="text-align:center; font-size:0.7rem; margin-bottom:1rem; color:#888;"></div><div class="info-row"><span class="info-reg-label">📅 Регистрация:</span><span id="profileRegDate"></span></div><div class="info-row"><span class="info-visit-label">🕐 Последний визит:</span><span id="profileLastVisit"></span></div><div class="info-row"><span class="info-logins-label">🔑 Входов:</span><span id="profileLogins"></span></div><div class="achievements-grid" id="achievementsList"></div><button id="closeProfileBtn">Закрыть</button></div></div>
-    
-    <div id="devModal" class="modal"><div class="modal-content"><h2><i class="fas fa-code"></i> <span class="dev-title">DEV ПАНЕЛЬ</span></h2><div class="dev-stats"><div class="dev-stat-card"><div class="dev-stat-value" id="devTotalUsers">0</div><div class="dev-stat-users-label">Пользователей</div></div><div class="dev-stat-card"><div class="dev-stat-value" id="devTotalLogins">0</div><div class="dev-stat-logins-label">Входов</div></div><div class="dev-stat-card"><div class="dev-stat-value" id="devAvgLevel">0</div><div class="dev-stat-avg-label">Ср. уровень</div></div></div><div class="users-list" id="usersList"></div><button id="closeDevBtn">Закрыть</button></div></div>
+    <!-- Модальное окно Профиля -->
+    <div id="profileModal" class="modal">
+        <div class="modal-content">
+            <h2><i class="fas fa-user-circle"></i> <span class="profile-title">ПРОФИЛЬ</span></h2>
+            <div class="stats-grid">
+                <div class="stat-item"><div class="stat-value" id="profileLevel">1</div><div class="stat-label-level">Уровень</div></div>
+                <div class="stat-item"><div class="stat-value" id="profileXp">0</div><div class="stat-label-xp">XP</div></div>
+                <div class="stat-item"><div class="stat-value" id="profileHours">0</div><div class="stat-label-hours">Часов</div></div>
+            </div>
+            <div class="progress-bar"><div class="progress-fill" id="profileProgress"></div></div>
+            <div id="xpToNext" style="text-align:center; font-size:0.7rem; margin-bottom:1rem; color:#888;"></div>
+            <div class="info-row"><span class="info-reg-label">📅 Регистрация:</span><span id="profileRegDate"></span></div>
+            <div class="info-row"><span class="info-visit-label">🕐 Последний визит:</span><span id="profileLastVisit"></span></div>
+            <div class="achievements-grid" id="achievementsList"></div>
+            <button id="closeProfileBtn">Закрыть</button>
+        </div>
+    </div>
 
     <!-- ===== ГЛАВНАЯ ===== -->
     <div id="home-page" class="page active">
@@ -723,7 +721,6 @@
 
         <div class="section-title"><i class="fas fa-crown"></i> <span class="games-title-main">НАШИ ИГРЫ</span></div>
         <div class="games-grid">
-            <!-- SAMURAI -->
             <div class="game-card">
                 <div class="game-icon" style="color:#ff0033;"><i class="fas fa-khanda"></i></div>
                 <div class="game-title" style="background:linear-gradient(135deg, #fff, #ff0033); -webkit-background-clip:text; background-clip:text; color:transparent;">SAMURAI</div>
@@ -739,7 +736,6 @@
     <div id="games-page" class="page">
         <div class="section-title"><i class="fas fa-gamepad"></i> <span class="games-title">НАШИ ПРОЕКТЫ</span></div>
         
-        <!-- SAMURAI -->
         <div class="game-card" style="margin-bottom:1.5rem;">
             <div class="game-icon" style="color:#ff0033;"><i class="fas fa-khanda"></i></div>
             <div class="game-title" style="background:linear-gradient(135deg, #fff, #ff0033); -webkit-background-clip:text; background-clip:text; color:transparent;">SAMURAI</div>
@@ -751,12 +747,10 @@
                 <div class="feature">🎌 <span class="games-feature3">Имбовый сюжет</span></div>
                 <div class="feature">🎵 <span class="games-feature4">Крутой саундтрек</span></div>
                 <div class="feature">📖 <span class="games-feature5">3 концовки</span></div>
-                <div class="feature">🌆 <span class="games-feature6">Атмосфера японии</span></div>
             </div>
             <div class="game-badge-bottom">В РАЗРАБОТКЕ • 2027</div>
         </div>
 
-        <!-- Галерея SAMURAI -->
         <div class="gallery-section">
             <div class="gallery-title"><i class="fas fa-images"></i> <span class="gallery-title-text">ГАЛЕРЕЯ SAMURAI</span></div>
             <div class="screenshots-grid">
@@ -783,11 +777,6 @@
             <p class="studio-desc1"><strong>InterFex Games</strong> — независимая студия, основанная в 2025 году <strong style="color:#ff0033">двумя школьниками</strong>. Мы делаем игры с проработанным открытым миром и упором на сюжет и свободу действия. 🎮</p>
             <p class="studio-desc2"><strong>Каждая игра</strong>  — новый, огромный мир. Мы делаем упор на сюжет, графику и интерес к прохождению.</p>
             <p class="studio-desc3"><strong>Samurai</strong> — первая большая игра, которую вы увидите достаточно скоро ⚡</p>
-            <div class="studio-stats">
-                <div class="stat-card"><div class="stat-number">4</div><div class="stat-label-dev">РАЗРАБОТЧИКА 👨‍💻</div></div>
-                <div class="stat-card"><div class="stat-number">2</div><div class="stat-label-project">ПРОЕКТЫ 🎯</div></div>
-                <div class="stat-card"><div class="stat-number">2026</div><div class="stat-label-year">ПЕРВЫЙ РЕЛИЗ 📅</div></div>
-            </div>
         </div>
     </div>
 
@@ -811,10 +800,20 @@
 </div>
 
 <script>
-    // ==================== MULTILINGUAL TRANSLATIONS ====================
+    // ==================== SUPABASE КОНФИГУРАЦИЯ ====================
+    // Замените эти значения на ваши ключи из панели Supabase: Settings -> API
+    const SUPABASE_URL = "https://jkpuvzbnhfrtvfogcqsx.supabase.co";
+    const SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImprcHV2emJuaGZydHZmb2djcXN4Iiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTIxOTcwNzIsImV4cCI6MjEwNzc3MzA3Mn0.9SKB-PWDEW3rcLiBqNDlIZ1DRvnAAUb9EOUSbW-IF1w";
+
+    let supabase = null;
+    if (window.supabase && SUPABASE_URL !== "https://ВАШ_ПРОЕКТ.supabase.co") {
+        supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+    }
+
+    // ==================== МНОГОЯЗЫЧНОСТЬ ====================
     const translations = {
         ru: {
-            navHome: "ГЛАВНАЯ", navGames: "ИГРЫ", navNews: "НОВОСТИ", navStudio: "СТУДИЯ", navDev: "DEV",
+            navHome: "ГЛАВНАЯ", navGames: "ИГРЫ", navNews: "НОВОСТИ", navStudio: "СТУДИЯ",
             loginBtn: "ВХОД", registerBtn: "РЕГ",
             tagline: "Игры, которые остаются в памяти. 🎮",
             gamesTitleMain: "НАШИ ИГРЫ",
@@ -843,12 +842,11 @@
             switchToRegister: "Нет аккаунта? Регистрация", switchToLogin: "Уже есть аккаунт? Вход",
             closeModal: "Закрыть",
             profile: "ПРОФИЛЬ", level: "Уровень", xp: "XP", hours: "Часов",
-            regDate: "📅 Регистрация:", lastVisit: "🕐 Последний визит:", loginsCount: "🔑 Входов:",
-            closeProfile: "Закрыть",
-            devPanel: "DEV ПАНЕЛЬ", totalUsers: "Пользователей", totalLogins: "Входов", avgLevel: "Ср. уровень", closeDev: "Закрыть"
+            regDate: "📅 Регистрация:", lastVisit: "🕐 Последний визит:",
+            closeProfile: "Закрыть"
         },
         en: {
-            navHome: "HOME", navGames: "GAMES", navNews: "NEWS", navStudio: "STUDIO", navDev: "DEV",
+            navHome: "HOME", navGames: "GAMES", navNews: "NEWS", navStudio: "STUDIO",
             loginBtn: "LOGIN", registerBtn: "SIGN UP",
             tagline: "Games that stay in memory. 🎮",
             gamesTitleMain: "OUR GAMES",
@@ -877,9 +875,8 @@
             switchToRegister: "No account? Register", switchToLogin: "Already have an account? Login",
             closeModal: "Close",
             profile: "PROFILE", level: "Level", xp: "XP", hours: "Hours",
-            regDate: "📅 Registered:", lastVisit: "🕐 Last visit:", loginsCount: "🔑 Logins:",
-            closeProfile: "Close",
-            devPanel: "DEV PANEL", totalUsers: "Users", totalLogins: "Logins", avgLevel: "Avg level", closeDev: "Close"
+            regDate: "📅 Registered:", lastVisit: "🕐 Last visit:",
+            closeProfile: "Close"
         }
     };
 
@@ -887,20 +884,10 @@
     let currentUser = null;
     let isLoginMode = true;
 
-    const VALID_LOGIN = 'InterFex';
-    const VALID_PASSWORD = '7503';
-
-    // ==================== USER MANAGEMENT ====================
-    function loadUsers() {
-        const data = localStorage.getItem('interfex_users_v2');
-        if (data) return JSON.parse(data);
-        const now = new Date().toISOString();
-        return [
-            { login: VALID_LOGIN, password: VALID_PASSWORD, level: 10, xp: 850, totalHours: 120, isAdmin: true, registeredAt: now, lastVisit: now, loginCount: 1 }
-        ];
+    // Вспомогательная функция формирования логина под формат Supabase Auth
+    function formatAuthEmail(username) {
+        return `${username.toLowerCase().replace(/[^a-z0-9_]/g, '')}@interfex.app`;
     }
-
-    function saveUsers(users) { localStorage.setItem('interfex_users_v2', JSON.stringify(users)); }
 
     function showToast(msg, type = 'info') {
         const existingToasts = document.querySelectorAll('.toast');
@@ -910,68 +897,112 @@
         toast.className = `toast ${type}`;
         toast.textContent = msg;
         document.body.appendChild(toast);
-        setTimeout(() => toast.remove(), 3000);
+        setTimeout(() => toast.remove(), 3500);
     }
 
-    function login(loginVal, passVal) {
-        if (loginVal === VALID_LOGIN && passVal === VALID_PASSWORD) {
-            let users = loadUsers();
-            let user = users.find(u => u.login === loginVal);
-            if (!user) {
-                const now = new Date().toISOString();
-                user = { login: VALID_LOGIN, password: VALID_PASSWORD, level: 10, xp: 850, totalHours: 120, isAdmin: true, registeredAt: now, lastVisit: now, loginCount: 1 };
-                users.push(user);
-            }
-            user.lastVisit = new Date().toISOString();
-            user.loginCount = (user.loginCount || 0) + 1;
-            saveUsers(users);
-            const forStorage = { ...user };
-            delete forStorage.password;
-            localStorage.setItem('interfex_current_user', JSON.stringify(forStorage));
-            currentUser = forStorage;
-            updateUI();
-            showToast(`Добро пожаловать, ${loginVal}!`, 'success');
-            return true;
+    // ==================== SUPABASE АВТОРИЗАЦИЯ ====================
+    async function initAuth() {
+        if (!supabase) {
+            console.warn("Supabase не инициализирован. Вставьте URL и ANON KEY.");
+            return;
         }
-        return false;
+
+        const { data: { session } } = await supabase.auth.getSession();
+        if (session && session.user) {
+            setCurrentUserFromSupabase(session.user);
+        }
+
+        supabase.auth.onAuthStateChange((_event, session) => {
+            if (session && session.user) {
+                setCurrentUserFromSupabase(session.user);
+            } else {
+                currentUser = null;
+                updateUI();
+            }
+        });
     }
 
-    function register(loginVal, passVal) {
-        let users = loadUsers();
-        if (users.find(u => u.login === loginVal)) return false;
-        const now = new Date().toISOString();
-        const newUser = { login: loginVal, password: passVal, level: 1, xp: 0, totalHours: 0, isAdmin: false, registeredAt: now, lastVisit: now, loginCount: 1 };
-        users.push(newUser);
-        saveUsers(users);
-        const forStorage = { ...newUser };
-        delete forStorage.password;
-        localStorage.setItem('interfex_current_user', JSON.stringify(forStorage));
-        currentUser = forStorage;
+    function setCurrentUserFromSupabase(user) {
+        currentUser = {
+            id: user.id,
+            login: user.user_metadata?.username || user.email.split('@')[0],
+            email: user.email,
+            level: user.user_metadata?.level || 1,
+            xp: user.user_metadata?.xp || 0,
+            totalHours: user.user_metadata?.totalHours || 0,
+            registeredAt: user.created_at,
+            lastVisit: new Date().toISOString()
+        };
         updateUI();
-        showToast(`Регистрация успешна! Добро пожаловать, ${loginVal}!`, 'success');
+    }
+
+    async function login(username, password) {
+        if (!supabase) {
+            showToast('Укажите ключи Supabase в коде!', 'error');
+            return false;
+        }
+
+        const email = formatAuthEmail(username);
+        const { data, error } = await supabase.auth.signInWithPassword({
+            email: email,
+            password: password
+        });
+
+        if (error) {
+            showToast(error.message, 'error');
+            return false;
+        }
+
+        showToast(`Добро пожаловать, ${data.user.user_metadata?.username || username}!`, 'success');
         return true;
     }
 
-    function logout() {
-        localStorage.removeItem('interfex_current_user');
+    async function register(username, password) {
+        if (!supabase) {
+            showToast('Укажите ключи Supabase в коде!', 'error');
+            return false;
+        }
+
+        const email = formatAuthEmail(username);
+        const { data, error } = await supabase.auth.signUp({
+            email: email,
+            password: password,
+            options: {
+                data: {
+                    username: username,
+                    level: 1,
+                    xp: 0,
+                    totalHours: 0
+                }
+            }
+        });
+
+        if (error) {
+            showToast(error.message, 'error');
+            return false;
+        }
+
+        showToast(`Аккаунт создан! Добро пожаловать, ${username}!`, 'success');
+        return true;
+    }
+
+    async function logout() {
+        if (supabase) {
+            await supabase.auth.signOut();
+        }
         currentUser = null;
         updateUI();
         showToast('Вы вышли из аккаунта', 'info');
     }
 
     function updateUI() {
-        const saved = localStorage.getItem('interfex_current_user');
-        if (saved) {
-            currentUser = JSON.parse(saved);
+        if (currentUser) {
             document.getElementById('authButtons').style.display = 'none';
             document.getElementById('userPanel').style.display = 'flex';
             document.getElementById('userGreeting').innerHTML = `<i class="fas fa-user-circle"></i> ${currentUser.login} (${currentUser.level || 1} lvl)`;
-            document.getElementById('devPanelBtn').style.display = currentUser.isAdmin ? 'flex' : 'none';
         } else {
-            currentUser = null;
             document.getElementById('authButtons').style.display = 'flex';
             document.getElementById('userPanel').style.display = 'none';
-            document.getElementById('devPanelBtn').style.display = 'none';
         }
         updateUILang();
     }
@@ -988,11 +1019,9 @@
         document.getElementById('profileHours').innerText = currentUser.totalHours || 0;
         document.getElementById('profileRegDate').innerText = currentUser.registeredAt ? new Date(currentUser.registeredAt).toLocaleDateString() : '—';
         document.getElementById('profileLastVisit').innerText = currentUser.lastVisit ? new Date(currentUser.lastVisit).toLocaleDateString() : '—';
-        document.getElementById('profileLogins').innerText = currentUser.loginCount || 0;
         document.getElementById('profileProgress').style.width = `${Math.min(progress, 100)}%`;
         document.getElementById('xpToNext').innerText = `${xp}/${nextLevelXP} XP до ${level + 1} уровня`;
         
-        const t = translations[currentLang];
         const achievementsList = [
             { id: 'first', icon: 'fa-user-plus', name: 'Первый шаг' },
             { id: 'veteran', icon: 'fa-star', name: 'Ветеран' },
@@ -1003,23 +1032,11 @@
         openModal('profileModal');
     }
 
-    function showDevPanel() {
-        if (!currentUser || !currentUser.isAdmin) return;
-        const users = loadUsers();
-        document.getElementById('devTotalUsers').innerText = users.length;
-        let logins = 0, levels = 0;
-        users.forEach(u => { logins += (u.loginCount || 0); levels += (u.level || 1); });
-        document.getElementById('devTotalLogins').innerText = logins;
-        document.getElementById('devAvgLevel').innerText = (levels / users.length).toFixed(1);
-        document.getElementById('usersList').innerHTML = users.map(u => `<div class="user-item"><div><strong>${u.login}</strong><br><span style="font-size:0.7rem;">ур.${u.level || 1} | входов:${u.loginCount || 0}</span></div></div>`).join('');
-        openModal('devModal');
-    }
-
-    // ==================== MODAL FUNCTIONS ====================
+    // ==================== МОДАЛЬНЫЕ ОКНА ====================
     function openModal(id) { document.getElementById(id).classList.add('active'); }
     function closeModal(id) { document.getElementById(id).classList.remove('active'); }
 
-    // ==================== PAGE NAVIGATION ====================
+    // ==================== НАВИГАЦИЯ СТРАНИЦ ====================
     const pages = { 
         home: document.getElementById('home-page'), 
         games: document.getElementById('games-page'), 
@@ -1034,7 +1051,6 @@
         window.scrollTo({ top: 0, behavior: 'smooth' }); 
     }
 
-    // ==================== MULTILINGUAL ====================
     function updateUILang() {
         const t = translations[currentLang];
         
@@ -1047,8 +1063,6 @@
         if (navNews) navNews.textContent = t.navNews;
         if (navStudio) navStudio.textContent = t.navStudio;
         
-        const devSpan = document.querySelector('#devPanelBtn .nav-text');
-        if (devSpan) devSpan.textContent = t.navDev;
         const loginBtnSpan = document.querySelector('#loginBtn .nav-text');
         if (loginBtnSpan) loginBtnSpan.textContent = t.loginBtn;
         const registerBtnSpan = document.querySelector('#registerBtn .nav-text');
@@ -1060,8 +1074,6 @@
         if (gamesTitleMain) gamesTitleMain.textContent = t.gamesTitleMain;
         const homeDescEl = document.querySelector('.home-desc-text');
         if (homeDescEl) homeDescEl.textContent = t.homeDesc;
-        const gameBadgeEl = document.querySelector('.game-badge-text');
-        if (gameBadgeEl) gameBadgeEl.textContent = t.gameBadge;
         
         const gamesTitleEl = document.querySelector('.games-title');
         if (gamesTitleEl) gamesTitleEl.textContent = t.gamesTitle;
@@ -1137,21 +1149,8 @@
         if (infoRegLabel) infoRegLabel.textContent = t.regDate;
         const infoVisitLabel = document.querySelector('.info-visit-label');
         if (infoVisitLabel) infoVisitLabel.textContent = t.lastVisit;
-        const infoLoginsLabel = document.querySelector('.info-logins-label');
-        if (infoLoginsLabel) infoLoginsLabel.textContent = t.loginsCount;
         const closeProfileBtn = document.getElementById('closeProfileBtn');
         if (closeProfileBtn) closeProfileBtn.textContent = t.closeProfile;
-        
-        const devTitle = document.querySelector('.dev-title');
-        if (devTitle) devTitle.textContent = t.devPanel;
-        const devStatUsersLabel = document.querySelector('.dev-stat-users-label');
-        if (devStatUsersLabel) devStatUsersLabel.textContent = t.totalUsers;
-        const devStatLoginsLabel = document.querySelector('.dev-stat-logins-label');
-        if (devStatLoginsLabel) devStatLoginsLabel.textContent = t.totalLogins;
-        const devStatAvgLabel = document.querySelector('.dev-stat-avg-label');
-        if (devStatAvgLabel) devStatAvgLabel.textContent = t.avgLevel;
-        const closeDevBtn = document.getElementById('closeDevBtn');
-        if (closeDevBtn) closeDevBtn.textContent = t.closeDev;
     }
 
     function setLanguage(lang) {
@@ -1166,35 +1165,59 @@
     function detectLanguage() {
         const saved = localStorage.getItem('interfex_language');
         if (saved && ['ru','en'].includes(saved)) return saved;
-        const lang = navigator.language;
-        if (lang.startsWith('ru')) return 'ru';
-        return 'en';
+        return navigator.language.startsWith('ru') ? 'ru' : 'en';
     }
 
-    // ==================== EVENT LISTENERS ====================
+    // ==================== ОБРАБОТЧИКИ СОБЫТИЙ ====================
     document.getElementById('loginBtn').onclick = () => { isLoginMode = true; updateUILang(); openModal('authModal'); };
     document.getElementById('registerBtn').onclick = () => { isLoginMode = false; updateUILang(); openModal('authModal'); };
     document.getElementById('switchFormBtn').onclick = () => { isLoginMode = !isLoginMode; updateUILang(); };
     document.getElementById('closeModalBtn').onclick = () => closeModal('authModal');
     document.getElementById('closeProfileBtn').onclick = () => closeModal('profileModal');
-    document.getElementById('closeDevBtn').onclick = () => closeModal('devModal');
     document.getElementById('profileBtn').onclick = showProfile;
     document.getElementById('logoutBtn').onclick = logout;
-    document.getElementById('devPanelBtn').onclick = showDevPanel;
     document.querySelectorAll('[data-page]').forEach(btn => btn.addEventListener('click', () => showPage(btn.getAttribute('data-page'))));
     document.querySelectorAll('.footer-lang-option').forEach(opt => opt.addEventListener('click', () => setLanguage(opt.getAttribute('data-lang'))));
 
-    document.getElementById('authSubmitBtn').onclick = () => {
+    document.getElementById('authSubmitBtn').onclick = async () => {
         const loginVal = document.getElementById('authLogin').value.trim();
         const passVal = document.getElementById('authPassword').value.trim();
         const errorDiv = document.getElementById('authError');
-        if (!loginVal || !passVal) { errorDiv.innerText = currentLang === 'ru' ? 'Заполните все поля' : 'Fill in all fields'; return; }
-        if (isLoginMode) {
-            if (login(loginVal, passVal)) { closeModal('authModal'); errorDiv.innerText = ''; document.getElementById('authLogin').value = ''; document.getElementById('authPassword').value = ''; }
-            else errorDiv.innerText = currentLang === 'ru' ? 'Неверный логин или пароль' : 'Invalid login or password';
-        } else {
-            if (register(loginVal, passVal)) { closeModal('authModal'); errorDiv.innerText = ''; document.getElementById('authLogin').value = ''; document.getElementById('authPassword').value = ''; }
-            else errorDiv.innerText = currentLang === 'ru' ? 'Пользователь с таким логином уже существует' : 'User with this login already exists';
+        const submitBtn = document.getElementById('authSubmitBtn');
+
+        if (!loginVal || !passVal) { 
+            errorDiv.innerText = currentLang === 'ru' ? 'Заполните все поля' : 'Fill in all fields'; 
+            return; 
+        }
+
+        if (passVal.length < 6) {
+            errorDiv.innerText = currentLang === 'ru' ? 'Пароль должен содержать минимум 6 символов' : 'Password must be at least 6 characters';
+            return;
+        }
+
+        submitBtn.disabled = true;
+        errorDiv.innerText = '';
+
+        try {
+            if (isLoginMode) {
+                const ok = await login(loginVal, passVal);
+                if (ok) {
+                    closeModal('authModal');
+                    document.getElementById('authLogin').value = '';
+                    document.getElementById('authPassword').value = '';
+                }
+            } else {
+                const ok = await register(loginVal, passVal);
+                if (ok) {
+                    closeModal('authModal');
+                    document.getElementById('authLogin').value = '';
+                    document.getElementById('authPassword').value = '';
+                }
+            }
+        } catch (err) {
+            errorDiv.innerText = err.message || 'Ошибка соединения';
+        } finally {
+            submitBtn.disabled = false;
         }
     };
 
@@ -1236,6 +1259,7 @@
 
     // Инициализация
     setLanguage(detectLanguage());
+    initAuth();
     updateUI();
 </script>
 </body>
